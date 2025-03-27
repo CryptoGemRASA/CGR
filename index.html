@@ -17,6 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
         .container {
             max-width: 800px;
@@ -28,11 +29,29 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+            position: relative;
+        }
+        .language-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        select {
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+            animation-delay: 0.5s;
         }
         .icon-wrapper {
             margin-bottom: 30px;
             opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
+            animation: sparkle 1.5s ease-in forwards;
         }
         .icon {
             width: 120px;
@@ -40,10 +59,11 @@
             display: block;
             margin: 0 auto;
             filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
-            transition: transform 0.3s;
+            border-radius: 50%; /* تبدیل فرم لوگو به دایره */
+            object-fit: cover; /* برای جلوگیری از اعوجاج تصویر */
         }
         .icon:hover {
-            transform: scale(1.1) rotate(10deg);
+            animation: pulse 0.5s ease-in-out;
         }
         h1 {
             font-size: 2.5rem;
@@ -51,70 +71,50 @@
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
             margin: 10px 0;
             opacity: 0;
-            animation: slideUp 1s ease-in forwards 0.5s;
+            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
+            animation-delay: 1s;
         }
         p {
             font-size: 1.2rem;
             color: #00eaff;
             margin: 20px 0;
             opacity: 0;
-            animation: slideUp 1s ease-in forwards 0.7s;
+            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
+            animation-delay: 1.5s;
         }
-        select {
-            width: 100%;
-            max-width: 200px;
-            padding: 10px;
-            margin: 10px auto;
-            border-radius: 10px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            display: block;
-            opacity: 0;
-            animation: slideUp 1s ease-in forwards 0.3s;
+        @keyframes sparkle {
+            0% { opacity: 0; filter: brightness(0.5); }
+            50% { opacity: 1; filter: brightness(1.5); }
+            100% { opacity: 1; filter: brightness(1); }
         }
-        .social-buttons {
-            margin-top: 20px;
-        }
-        .social-buttons a {
-            display: inline-block;
-            margin: 0 10px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #fff;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-        .social-buttons a:hover {
-            background: rgba(255, 255, 255, 0.3);
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
+            to { text-shadow: 0 0 20px rgba(255, 215, 0, 1); }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="language-menu">
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
         <div class="icon-wrapper">
             <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.onerror=null; this.src='https://via.placeholder.com/120?text=Logo+Not+Found'; console.log('Failed to load logo at https://i.imgur.com/kxU98Ni.jpeg');">
         </div>
-        <select id="language" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-        </select>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
-        <div class="social-buttons">
-            <a href="https://t.me/yourgroup" target="_blank">Join our Telegram</a>
-            <a href="https://twitter.com/youraccount" target="_blank">Follow us on Twitter</a>
-        </div>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
