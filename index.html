@@ -31,6 +31,8 @@
         }
         .icon-wrapper {
             margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
         }
         .icon {
             width: 120px;
@@ -41,18 +43,22 @@
             transition: transform 0.3s;
         }
         .icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(10deg);
         }
         h1 {
             font-size: 2.5rem;
             color: #ffd700;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
             margin: 10px 0;
+            opacity: 0;
+            animation: slideUp 1s ease-in forwards 0.5s;
         }
         p {
             font-size: 1.2rem;
             color: #00eaff;
             margin: 20px 0;
+            opacity: 0;
+            animation: slideUp 1s ease-in forwards 0.7s;
         }
         select {
             width: 100%;
@@ -65,6 +71,32 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: #fff;
             display: block;
+            opacity: 0;
+            animation: slideUp 1s ease-in forwards 0.3s;
+        }
+        .social-buttons {
+            margin-top: 20px;
+        }
+        .social-buttons a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .social-buttons a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -79,6 +111,10 @@
         </select>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
+        <div class="social-buttons">
+            <a href="https://t.me/yourgroup" target="_blank">Join our Telegram</a>
+            <a href="https://twitter.com/youraccount" target="_blank">Follow us on Twitter</a>
+        </div>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
