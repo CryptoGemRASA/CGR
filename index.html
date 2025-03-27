@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto GEM RASA</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
-    <!-- تغییر فونت به Great Vibes -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -33,70 +31,6 @@
             max-width: 800px;
             margin: 20px;
         }
-        @media (max-width: 768px) {
-            .container {
-                width: calc(100% - 20px);
-                height: calc(100vh - 20px);
-                margin: 10px;
-                border-radius: 15px;
-                padding: 15px;
-                box-sizing: border-box;
-            }
-        }
-        .language-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        select {
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            cursor: pointer;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
-            animation-delay: 0.5s;
-        }
-        .icon-wrapper {
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: sparkle 1.5s ease-in forwards;
-        }
-        .icon {
-            width: 120px;
-            height: 120px;
-            display: block;
-            margin: 0 auto;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .icon:hover {
-            animation: pulse 0.5s ease-in-out;
-        }
-        h1 {
-            font-family: 'Great Vibes', cursive; /* فونت جدید */
-            font-size: 3rem;
-            background: linear-gradient(45deg, #ffd700, #ff4500); /* گرادیانت زرد-قرمز */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
-            margin: 10px 0;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
-            animation-delay: 1s;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #00eaff;
-            margin: 20px 0;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
-            animation-delay: 1.5s;
-        }
         .panel-button {
             position: fixed;
             bottom: 20px;
@@ -117,51 +51,26 @@
             background: rgba(255, 215, 0, 1);
         }
         .social-panel {
+            display: none;
             position: fixed;
-            bottom: -50%;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            padding: 20px;
-            box-sizing: border-box;
-            transition: bottom 0.3s ease-in-out;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
             z-index: 1000;
         }
-        .social-panel.active {
-            bottom: 0;
-        }
-        .social-panel-content h2 {
-            color: #ffd700;
-            margin-bottom: 20px;
+        .social-panel-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
             text-align: center;
-        }
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .social-links a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #00eaff;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-        .social-links a:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
-        .social-links img {
-            width: 24px;
-            height: 24px;
+            width: 80%;
+            max-width: 400px;
+            position: relative;
         }
         .close-button {
             position: absolute;
@@ -173,39 +82,12 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-        @keyframes sparkle {
-            0% { opacity: 0; filter: brightness(0.5); }
-            50% { opacity: 1; filter: brightness(1.5); }
-            100% { opacity: 1; filter: brightness(1); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
-            to { text-shadow: 0 0 20px rgba(255, 215, 0, 1); }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="language-menu">
-            <select id="language" onchange="changeLanguage()">
-                <option value="en">English</option>
-                <option value="ru">Русский</option>
-            </select>
-        </div>
-        <div class="icon-wrapper">
-            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.onerror=null; this.src='https://via.placeholder.com/120?text=Logo+Not+Found'; console.log('Failed to load logo at https://i.imgur.com/kxU98Ni.jpeg');">
-        </div>
-        <h1 data-lang="title">Crypto GEM RASA</h1>
-        <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
+        <h1>Crypto GEM RASA</h1>
+        <p>Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
     </div>
 
     <button class="panel-button" onclick="openSocialPanel()">Social Links</button>
@@ -215,50 +97,38 @@
             <button class="close-button" onclick="closeSocialPanel()">✖</button>
             <h2>Follow Us</h2>
             <div class="social-links">
-                <a href="social.html" target="_blank">View All Social Links</a>
+                <a href="https://t.me/Crypto_GEM_RASA" target="_blank">Telegram Channel</a>
+                <a href="https://www.instagram.com/crypto_gem_rasa" target="_blank">Instagram Page</a>
+                <a href="https://www.reddit.com/u/RASA_TEAM" target="_blank">Reddit Community</a>
+                <a href="https://www.threads.net/@crypto_gem_rasa" target="_blank">Threads Profile</a>
+                <a href="https://x.com/Crypto_GEM_RASA" target="_blank">Twitter Profile</a>
             </div>
         </div>
     </div>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js" onerror="handleScriptError()"></script>
     <script>
-        const translations = {
-            en: {
-                title: "Crypto GEM RASA",
-                welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates."
-            },
-            ru: {
-                title: "Crypto GEM RASA",
-                welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями."
-            }
-        };
-
-        let currentLang = "en";
-
-        function changeLanguage() {
-            currentLang = document.getElementById("language").value;
-            document.querySelectorAll("[data-lang]").forEach(el => {
-                const key = el.getAttribute("data-lang");
-                el.innerText = translations[currentLang][key];
-            });
+        function handleScriptError() {
+            console.error("Failed to load Telegram WebApp script. Check your network or try using a VPN.");
         }
 
         function openSocialPanel() {
-            document.getElementById("socialPanel").classList.add("active");
+            document.getElementById("socialPanel").style.display = "flex";
         }
 
         function closeSocialPanel() {
-            document.getElementById("socialPanel").classList.remove("active");
+            document.getElementById("socialPanel").style.display = "none";
         }
 
         window.onload = function() {
-            console.log("Mini app loaded");
-            if (typeof Telegram !== "undefined" && Telegram.WebApp) {
-                Telegram.WebApp.ready();
-            } else {
-                console.log("Telegram WebApp is not available");
-            }
-            changeLanguage();
+            setTimeout(() => {
+                if (typeof Telegram !== "undefined" && Telegram.WebApp) {
+                    Telegram.WebApp.ready();
+                    console.log("Telegram WebApp is available");
+                } else {
+                    console.warn("Telegram WebApp is not available. Make sure you are opening this in Telegram.");
+                }
+            }, 1000); // تأخیر برای لود بهتر
         };
     </script>
 </body>
