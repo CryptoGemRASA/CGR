@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto GEM RASA - Social Links</title>
+    <title>Crypto GEM RASA</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
-    <!-- اضافه کردن فونت Dancing Script از Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <!-- تغییر فونت به Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -43,13 +43,99 @@
                 box-sizing: border-box;
             }
         }
-        h2 {
-            font-family: 'Dancing Script', cursive; /* فونت تحریری */
-            font-size: 2.5rem; /* اندازه فونت */
-            background: linear-gradient(45deg, #ffd700, #ffaa00); /* گرادیانت زرد-نارنجی */
+        .language-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        select {
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+            animation-delay: 0.5s;
+        }
+        .icon-wrapper {
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: sparkle 1.5s ease-in forwards;
+        }
+        .icon {
+            width: 120px;
+            height: 120px;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .icon:hover {
+            animation: pulse 0.5s ease-in-out;
+        }
+        h1 {
+            font-family: 'Great Vibes', cursive; /* فونت جدید */
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ffd700, #ff4500); /* گرادیانت زرد-قرمز */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 170, 0, 0.8); /* سایه قوی‌تر */
+            text-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+            margin: 10px 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
+            animation-delay: 1s;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #00eaff;
+            margin: 20px 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
+            animation-delay: 1.5s;
+        }
+        .panel-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 215, 0, 0.8);
+            color: #1e1e2f;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s;
+        }
+        .panel-button:hover {
+            background: rgba(255, 215, 0, 1);
+        }
+        .social-panel {
+            position: fixed;
+            bottom: -50%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: bottom 0.3s ease-in-out;
+            z-index: 1000;
+        }
+        .social-panel.active {
+            bottom: 0;
+        }
+        .social-panel-content h2 {
+            color: #ffd700;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -77,51 +163,103 @@
             width: 24px;
             height: 24px;
         }
-        .back-button {
+        .close-button {
             position: absolute;
             top: 10px;
-            left: 10px;
-            background: rgba(255, 215, 0, 0.8);
-            color: #1e1e2f;
-            padding: 8px 15px;
-            border-radius: 10px;
+            right: 10px;
+            background: none;
             border: none;
+            color: #fff;
+            font-size: 1.5rem;
             cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: background 0.3s;
         }
-        .back-button:hover {
-            background: rgba(255, 215, 0, 1);
+        @keyframes sparkle {
+            0% { opacity: 0; filter: brightness(0.5); }
+            50% { opacity: 1; filter: brightness(1.5); }
+            100% { opacity: 1; filter: brightness(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
+            to { text-shadow: 0 0 20px rgba(255, 215, 0, 1); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <button class="back-button" onclick="window.location.href='index.html'">Back</button>
-        <h2>Follow Us</h2>
-        <div class="social-links">
-            <a href="https://t.me/Crypto_GEM_RASA" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-                Telegram Channel
-            </a>
-            <a href="https://www.instagram.com/crypto_gem_rasa?igsh=dDBneTRpNWt6OHNk" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-                Instagram Page
-            </a>
-            <a href="https://www.reddit.com/u/RASA_TEAM/s/VjWS27u1P4" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Reddit_logo.svg" alt="Reddit">
-                Reddit Community
-            </a>
-            <a href="https://www.threads.net/@crypto_gem_rasa" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Threads_%28app%29_logo.svg" alt="Threads">
-                Threads Profile
-            </a>
-            <a href="https://x.com/Crypto_GEM_RASA?t=oiR1MbXSMKHk9NzIOmmecw&s=09" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter">
-                Twitter Profile
-            </a>
+        <div class="language-menu">
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
+        <div class="icon-wrapper">
+            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.onerror=null; this.src='https://via.placeholder.com/120?text=Logo+Not+Found'; console.log('Failed to load logo at https://i.imgur.com/kxU98Ni.jpeg');">
+        </div>
+        <h1 data-lang="title">Crypto GEM RASA</h1>
+        <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
+    </div>
+
+    <button class="panel-button" onclick="openSocialPanel()">Social Links</button>
+
+    <div class="social-panel" id="socialPanel">
+        <div class="social-panel-content">
+            <button class="close-button" onclick="closeSocialPanel()">✖</button>
+            <h2>Follow Us</h2>
+            <div class="social-links">
+                <a href="social.html" target="_blank">View All Social Links</a>
+            </div>
         </div>
     </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        const translations = {
+            en: {
+                title: "Crypto GEM RASA",
+                welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates."
+            },
+            ru: {
+                title: "Crypto GEM RASA",
+                welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями."
+            }
+        };
+
+        let currentLang = "en";
+
+        function changeLanguage() {
+            currentLang = document.getElementById("language").value;
+            document.querySelectorAll("[data-lang]").forEach(el => {
+                const key = el.getAttribute("data-lang");
+                el.innerText = translations[currentLang][key];
+            });
+        }
+
+        function openSocialPanel() {
+            document.getElementById("socialPanel").classList.add("active");
+        }
+
+        function closeSocialPanel() {
+            document.getElementById("socialPanel").classList.remove("active");
+        }
+
+        window.onload = function() {
+            console.log("Mini app loaded");
+            if (typeof Telegram !== "undefined" && Telegram.WebApp) {
+                Telegram.WebApp.ready();
+            } else {
+                console.log("Telegram WebApp is not available");
+            }
+            changeLanguage();
+        };
+    </script>
 </body>
 </html>
