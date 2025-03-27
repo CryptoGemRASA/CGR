@@ -9,7 +9,7 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0; /* padding کلی body رو صفر می‌کنیم */
             background: url('https://i.imgur.com/nq2jGI2.jpeg') no-repeat center center fixed, linear-gradient(135deg, #1e1e2f, #3b3b5e);
             background-size: cover;
             color: #fff;
@@ -20,16 +20,28 @@
             position: relative;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
             border-radius: 20px;
-            padding: 30px;
+            padding: 20px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             position: relative;
+            /* تنظیمات پیش‌فرض برای دسکتاپ */
+            max-width: 800px;
+            margin: 20px;
+        }
+        /* تنظیمات برای موبایل */
+        @media (max-width: 768px) {
+            .container {
+                width: calc(100% - 20px); /* عرض تمام‌صفحه با 10px حاشیه از هر طرف */
+                height: calc(100vh - 20px); /* ارتفاع تمام‌صفحه با 10px حاشیه از بالا و پایین */
+                margin: 10px; /* حاشیه باریک دور container */
+                border-radius: 15px; /* گوشه‌های کمی نرم‌تر برای موبایل */
+                padding: 15px; /* padding کمتر برای موبایل */
+                box-sizing: border-box; /* مطمئن می‌شیم padding توی ابعاد حساب بشه */
+            }
         }
         .language-menu {
             position: absolute;
@@ -59,8 +71,8 @@
             display: block;
             margin: 0 auto;
             filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
-            border-radius: 50%; /* تبدیل فرم لوگو به دایره */
-            object-fit: cover; /* برای جلوگیری از اعوجاج تصویر */
+            border-radius: 50%; /* لوگو دایره‌ای */
+            object-fit: cover;
         }
         .icon:hover {
             animation: pulse 0.5s ease-in-out;
