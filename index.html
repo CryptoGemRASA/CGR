@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto GEM RASA</title>
+    <title>Crypto GEM RASA - Social Links</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
+    <!-- تغییر فونت به Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -31,105 +33,99 @@
             max-width: 800px;
             margin: 20px;
         }
-        .panel-button {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 215, 0, 0.8);
-            color: #1e1e2f;
-            padding: 10px 20px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
+        @media (max-width: 768px) {
+            .container {
+                width: calc(100% - 20px);
+                height: calc(100vh - 20px);
+                margin: 10px;
+                border-radius: 15px;
+                padding: 15px;
+                box-sizing: border-box;
+            }
+        }
+        h2 {
+            font-family: 'Great Vibes', cursive; /* فونت جدید */
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ffd700, #ff4500); /* گرادیانت زرد-قرمز */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #00eaff;
+            text-decoration: none;
             font-size: 1rem;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: background 0.3s;
         }
-        .panel-button:hover {
-            background: rgba(255, 215, 0, 1);
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.4);
         }
-        .social-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+        .social-links img {
+            width: 24px;
+            height: 24px;
         }
-        .social-panel-content {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            width: 80%;
-            max-width: 400px;
-            position: relative;
-        }
-        .close-button {
+        .back-button {
             position: absolute;
             top: 10px;
-            right: 10px;
-            background: none;
+            left: 10px;
+            background: rgba(255, 215, 0, 0.8);
+            color: #1e1e2f;
+            padding: 8px 15px;
+            border-radius: 10px;
             border: none;
-            color: #fff;
-            font-size: 1.5rem;
             cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: rgba(255, 215, 0, 1);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Crypto GEM RASA</h1>
-        <p>Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
-    </div>
-
-    <button class="panel-button" onclick="openSocialPanel()">Social Links</button>
-
-    <div class="social-panel" id="socialPanel">
-        <div class="social-panel-content">
-            <button class="close-button" onclick="closeSocialPanel()">✖</button>
-            <h2>Follow Us</h2>
-            <div class="social-links">
-                <a href="https://t.me/Crypto_GEM_RASA" target="_blank">Telegram Channel</a>
-                <a href="https://www.instagram.com/crypto_gem_rasa" target="_blank">Instagram Page</a>
-                <a href="https://www.reddit.com/u/RASA_TEAM" target="_blank">Reddit Community</a>
-                <a href="https://www.threads.net/@crypto_gem_rasa" target="_blank">Threads Profile</a>
-                <a href="https://x.com/Crypto_GEM_RASA" target="_blank">Twitter Profile</a>
-            </div>
+        <button class="back-button" onclick="window.location.href='index.html'">Back</button>
+        <h2>Follow Us</h2>
+        <div class="social-links">
+            <a href="https://t.me/Crypto_GEM_RASA" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+                Telegram Channel
+            </a>
+            <a href="https://www.instagram.com/crypto_gem_rasa?igsh=dDBneTRpNWt6OHNk" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                Instagram Page
+            </a>
+            <a href="https://www.reddit.com/u/RASA_TEAM/s/VjWS27u1P4" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/en/b/bd/Reddit_logo.svg" alt="Reddit">
+                Reddit Community
+            </a>
+            <a href="https://www.threads.net/@crypto_gem_rasa" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Threads_%28app%29_logo.svg" alt="Threads">
+                Threads Profile
+            </a>
+            <a href="https://x.com/Crypto_GEM_RASA?t=oiR1MbXSMKHk9NzIOmmecw&s=09" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter">
+                Twitter Profile
+            </a>
+            <a href="https://youtube.com/@crypto_gem_rasa?si=cGVJVywO_wsGaDBX" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
+                YouTube Channel
+            </a>
         </div>
     </div>
-
-    <script src="https://telegram.org/js/telegram-web-app.js" onerror="handleScriptError()"></script>
-    <script>
-        function handleScriptError() {
-            console.error("Failed to load Telegram WebApp script. Check your network or try using a VPN.");
-        }
-
-        function openSocialPanel() {
-            document.getElementById("socialPanel").style.display = "flex";
-        }
-
-        function closeSocialPanel() {
-            document.getElementById("socialPanel").style.display = "none";
-        }
-
-        window.onload = function() {
-            setTimeout(() => {
-                if (typeof Telegram !== "undefined" && Telegram.WebApp) {
-                    Telegram.WebApp.ready();
-                    console.log("Telegram WebApp is available");
-                } else {
-                    console.warn("Telegram WebApp is not available. Make sure you are opening this in Telegram.");
-                }
-            }, 1000); // تأخیر برای لود بهتر
-        };
-    </script>
 </body>
 </html>
