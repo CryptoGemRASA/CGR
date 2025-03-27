@@ -1,114 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crypto GEM RASA</title>
-<link rel="icon" type="image/png" href="https://cryptogemrasa.github.io/CGR/assets/icon.png">
-<style>
-body {
-font-family: 'Segoe UI', sans-serif;
-margin: 0;
-padding: 20px;
-background: url('https://cryptogemrasa.github.io/CGR/assets/background.jpg') no-repeat center center fixed, linear-gradient(135deg, #1e1e2f, #3b3b5e);
-background-size: cover;
-color: #fff;
-min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-}
-.container {
-max-width: 800px;
-margin: 0 auto;
-background: rgba(255, 255, 255, 0.05);
-backdrop-filter: blur(15px);
-border-radius: 20px;
-padding: 30px;
-box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-border: 1px solid rgba(255, 255, 255, 0.1);
-text-align: center;
-}
-.icon-wrapper {
-margin-bottom: 30px;
-}
-.icon {
-width: 120px;
-height: 120px;
-display: block;
-margin: 0 auto;
-filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
-transition: transform 0.3s;
-}
-.icon:hover {
-transform: scale(1.1);
-}
-h1 {
-font-size: 2.5rem;
-color: #ffd700;
-text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-margin: 10px 0;
-}
-p {
-font-size: 1.2rem;
-color: #00eaff;
-margin: 20px 0;
-}
-select {
-width: 100%;
-max-width: 200px;
-padding: 10px;
-margin: 10px auto;
-border-radius: 10px;
-font-size: 1rem;
-background: rgba(255, 255, 255, 0.1);
-border: 1px solid rgba(255, 255, 255, 0.3);
-color: #fff;
-display: block;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto GEM RASA</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url('https://i.imgur.com/nq2jGI2.jpeg') no-repeat center center fixed, linear-gradient(135deg, #1e1e2f, #3b3b5e);
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        .icon-wrapper {
+            margin-bottom: 30px;
+        }
+        .icon {
+            width: 120px;
+            height: 120px;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
+            transition: transform 0.3s;
+        }
+        .icon:hover {
+            transform: scale(1.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            margin: 10px 0;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #00eaff;
+            margin: 20px 0;
+        }
+        select {
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            margin: 10px auto;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            display: block;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<div class="icon-wrapper">
-<img src="https://cryptogemrasa.github.io/CGR/assets/icon.png" alt="Crypto GEM RASA Icon" class="icon" onerror="this.onerror=null; this.src='https://via.placeholder.com/120?text=Logo+Not+Found'; console.log('Failed to load logo at https://cryptogemrasa.github.io/CGR/assets/icon.png');">
-</div>
-<select id="language" onchange="changeLanguage()">
-<option value="en">English</option>
-<option value="ru">Русский</option>
-</select>
-<h1 data-lang="title">Crypto GEM RASA</h1>
-<p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
-</div>
+    <div class="container">
+        <div class="icon-wrapper">
+            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.onerror=null; this.src='https://via.placeholder.com/120?text=Logo+Not+Found'; console.log('Failed to load logo at https://i.imgur.com/kxU98Ni.jpeg');">
+        </div>
+        <select id="language" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
+        <h1 data-lang="title">Crypto GEM RASA</h1>
+        <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
+    </div>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script>
-const translations = {
-en: {
-title: "Crypto GEM RASA",
-welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates."
-},
-ru: {
-title: "Crypto GEM RASA",
-welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями."
-}
-};
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        const translations = {
+            en: {
+                title: "Crypto GEM RASA",
+                welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates."
+            },
+            ru: {
+                title: "Crypto GEM RASA",
+                welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями."
+            }
+        };
 
-let currentLang = "en";
+        let currentLang = "en";
 
-function changeLanguage() {
-currentLang = document.getElementById("language").value;
-document.querySelectorAll("[data-lang]").forEach(el => {
-const key = el.getAttribute("data-lang");
-el.innerText = translations[currentLang][key];
-});
-}
+        function changeLanguage() {
+            currentLang = document.getElementById("language").value;
+            document.querySelectorAll("[data-lang]").forEach(el => {
+                const key = el.getAttribute("data-lang");
+                el.innerText = translations[currentLang][key];
+            });
+        }
 
-window.onload = function() {
-console.log("Mini app loaded");
-Telegram.WebApp.ready();
-changeLanguage();
-};
-</script>
+        window.onload = function() {
+            console.log("Mini app loaded");
+            if (typeof Telegram !== "undefined" && Telegram.WebApp) {
+                Telegram.WebApp.ready();
+            } else {
+                console.log("Telegram WebApp is not available");
+            }
+            changeLanguage();
+        };
+    </script>
 </body>
 </html>
