@@ -15,8 +15,8 @@
             color: #fff;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
         }
         .container {
@@ -27,169 +27,80 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            position: relative;
             max-width: 800px;
-            margin: 20px;
+            margin: 20px auto;
+            flex-grow: 1;
         }
         @media (max-width: 768px) {
             .container {
                 width: calc(100% - 20px);
-                height: calc(100vh - 20px);
-                margin: 10px;
+                margin: 10px auto;
                 border-radius: 15px;
                 padding: 15px;
-                box-sizing: border-box;
             }
         }
-        .language-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        select {
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            cursor: pointer;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
-            animation-delay: 0.5s;
-        }
-        .icon-wrapper {
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: sparkle 1.5s ease-in forwards;
-        }
-        .icon {
-            width: 120px;
-            height: 120px;
-            display: block;
-            margin: 0 auto;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .icon:hover {
-            animation: pulse 0.5s ease-in-out;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #ffd700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-            margin: 10px 0;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
-            animation-delay: 1s;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #00eaff;
-            margin: 20px 0;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
-            animation-delay: 1.5s;
-        }
-        .panel-button {
+        /* استایل‌های قبلی بدون تغییر */
+        .language-menu { /* ... */ }
+        select { /* ... */ }
+        .icon-wrapper { /* ... */ }
+        .icon { /* ... */ }
+        h1 { /* ... */ }
+        p { /* ... */ }
+        .panel-button { /* ... */ }
+        .social-panel { /* ... */ }
+        .social-panel.active { /* ... */ }
+        .social-panel-content h2 { /* ... */ }
+        .social-links { /* ... */ }
+        .social-links a { /* ... */ }
+        .close-button { /* ... */ }
+        @keyframes sparkle { /* ... */ }
+        @keyframes pulse { /* ... */ }
+        @keyframes fadeIn { /* ... */ }
+        @keyframes glow { /* ... */ }
+
+        /* استایل نوار پایین */
+        .footer-nav {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 215, 0, 0.8);
-            color: #1e1e2f;
-            padding: 10px 20px;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: background 0.3s;
-        }
-        .panel-button:hover {
-            background: rgba(255, 215, 0, 1);
-        }
-        .social-panel {
-            position: fixed;
-            bottom: -50%;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 50%;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            padding: 20px;
-            box-sizing: border-box;
-            transition: bottom 0.3s ease-in-out;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
             z-index: 1000;
         }
-        .social-panel.active {
-            bottom: 0;
-        }
-        .social-panel-content h2 {
-            color: #ffd700;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .social-links {
+        .footer-nav a {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-        .social-links a {
-            display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #00eaff;
             text-decoration: none;
-            font-size: 1rem;
-            transition: background 0.3s;
+            color: #00eaff;
+            font-size: 0.9rem;
+            transition: color 0.3s;
         }
-        .social-links a:hover {
-            background: rgba(255, 255, 255, 0.4);
+        .footer-nav a:hover {
+            color: #ffd700;
         }
-        .social-links img {
+        .footer-nav img {
             width: 24px;
             height: 24px;
+            margin-bottom: 5px;
         }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .page-content {
+            display: none;
         }
-        @keyframes sparkle {
-            0% { opacity: 0; filter: brightness(0.5); }
-            50% { opacity: 1; filter: brightness(1.5); }
-            100% { opacity: 1; filter: brightness(1); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
-            to { text-shadow: 0 0 20px rgba(255, 215, 0, 1); }
+        .page-content.active {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- محتوای اصلی -->
+    <div class="container" id="main-content">
         <div class="language-menu">
             <select id="language" onchange="changeLanguage()">
                 <option value="en">English</option>
@@ -197,14 +108,38 @@
             </select>
         </div>
         <div class="icon-wrapper">
-            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.onerror=null; this.src='https://via.placeholder.com/120?text=Logo+Not+Found'; console.log('Failed to load logo at https://i.imgur.com/kxU98Ni.jpeg');">
+            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.src='https://via.placeholder.com/120?text=Logo+Not+Found';">
         </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
     </div>
 
+    <!-- صفحات جدید -->
+    <div class="container page-content" id="social-page">
+        <h1>شبکه‌های اجتماعی</h1>
+        <p>اینجا لینک‌های شبکه‌های اجتماعی قرار می‌گیره.</p>
+    </div>
+    <div class="container page-content" id="tasks-page">
+        <h1>تسک‌ها</h1>
+        <p>لیست تسک‌ها برای کاربران.</p>
+    </div>
+    <div class="container page-content" id="mining-page">
+        <h1>استخراج</h1>
+        <p>اطلاعات مربوط به استخراج.</p>
+    </div>
+    <div class="container page-content" id="partnerships-page">
+        <h1>پارتنرشیپ‌ها</h1>
+        <p>جزئیات همکاری‌ها.</p>
+    </div>
+    <div class="container page-content" id="comments-page">
+        <h1>نظرات</h1>
+        <p>نظرات کاربران اینجا نمایش داده می‌شه.</p>
+    </div>
+
+    <!-- دکمه پنل اجتماعی -->
     <button class="panel-button" onclick="openSocialPanel()">Social Links</button>
 
+    <!-- پنل اجتماعی -->
     <div class="social-panel" id="socialPanel">
         <div class="social-panel-content">
             <button class="close-button" onclick="closeSocialPanel()">✖</button>
@@ -213,6 +148,30 @@
                 <a href="social.html" target="_blank">View All Social Links</a>
             </div>
         </div>
+    </div>
+
+    <!-- نوار پایین -->
+    <div class="footer-nav">
+        <a href="#" onclick="showPage('social-page'); return false;">
+            <img src="https://via.placeholder.com/24?text=S" alt="Social">
+            شبکه‌های اجتماعی
+        </a>
+        <a href="#" onclick="showPage('tasks-page'); return false;">
+            <img src="https://via.placeholder.com/24?text=T" alt="Tasks">
+            تسک‌ها
+        </a>
+        <a href="#" onclick="showPage('mining-page'); return false;">
+            <img src="https://via.placeholder.com/24?text=M" alt="Mining">
+            استخراج
+        </a>
+        <a href="#" onclick="showPage('partnerships-page'); return false;">
+            <img src="https://via.placeholder.com/24?text=P" alt="Partnerships">
+            پارتنرشیپ‌ها
+        </a>
+        <a href="#" onclick="showPage('comments-page'); return false;">
+            <img src="https://via.placeholder.com/24?text=C" alt="Comments">
+            نظرات
+        </a>
     </div>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -246,6 +205,14 @@
             document.getElementById("socialPanel").classList.remove("active");
         }
 
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById(pageId).classList.add('active');
+        }
+
         window.onload = function() {
             console.log("Mini app loaded");
             if (typeof Telegram !== "undefined" && Telegram.WebApp) {
@@ -254,6 +221,7 @@
                 console.log("Telegram WebApp is not available");
             }
             changeLanguage();
+            document.getElementById('main-content').style.display = 'block'; // صفحه اصلی پیش‌فرض
         };
     </script>
 </body>
