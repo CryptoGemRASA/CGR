@@ -39,26 +39,40 @@
                 padding: 15px;
             }
         }
-        /* استایل‌های قبلی بدون تغییر */
-        .language-menu { /* ... */ }
-        select { /* ... */ }
-        .icon-wrapper { /* ... */ }
-        .icon { /* ... */ }
-        h1 { /* ... */ }
-        p { /* ... */ }
-        .panel-button { /* ... */ }
-        .social-panel { /* ... */ }
-        .social-panel.active { /* ... */ }
-        .social-panel-content h2 { /* ... */ }
-        .social-links { /* ... */ }
-        .social-links a { /* ... */ }
-        .close-button { /* ... */ }
-        @keyframes sparkle { /* ... */ }
-        @keyframes pulse { /* ... */ }
-        @keyframes fadeIn { /* ... */ }
-        @keyframes glow { /* ... */ }
-
-        /* استایل نوار پایین */
+        .language-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        select {
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+            animation-delay: 0.5s;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            margin: 10px 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
+            animation-delay: 1s;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #00eaff;
+            margin: 20px 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
+            animation-delay: 1.5s;
+        }
         .footer-nav {
             position: fixed;
             bottom: 0;
@@ -90,11 +104,49 @@
             height: 24px;
             margin-bottom: 5px;
         }
-        .page-content {
+        /* استایل پنل کشویی */
+        .content-panel {
+            position: fixed;
+            bottom: -50%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: bottom 0.3s ease-in-out;
+            z-index: 1000;
             display: none;
         }
-        .page-content.active {
+        .content-panel.active {
+            bottom: 0;
             display: block;
+        }
+        .content-panel h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
+            to { text-shadow: 0 0 20px rgba(255, 215, 0, 1); }
         }
     </style>
 </head>
@@ -107,68 +159,56 @@
                 <option value="ru">Русский</option>
             </select>
         </div>
-        <div class="icon-wrapper">
-            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.src='https://via.placeholder.com/120?text=Logo+Not+Found';">
-        </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
     </div>
 
-    <!-- صفحات جدید -->
-    <div class="container page-content" id="social-page">
-        <h1>شبکه‌های اجتماعی</h1>
+    <!-- پنل‌های کشویی برای هر بخش -->
+    <div class="content-panel" id="social-panel">
+        <button class="close-button" onclick="closePanel('social-panel')">✖</button>
+        <h2>شبکه‌های اجتماعی</h2>
         <p>اینجا لینک‌های شبکه‌های اجتماعی قرار می‌گیره.</p>
     </div>
-    <div class="container page-content" id="tasks-page">
-        <h1>تسک‌ها</h1>
+    <div class="content-panel" id="tasks-panel">
+        <button class="close-button" onclick="closePanel('tasks-panel')">✖</button>
+        <h2>تسک‌ها</h2>
         <p>لیست تسک‌ها برای کاربران.</p>
     </div>
-    <div class="container page-content" id="mining-page">
-        <h1>استخراج</h1>
+    <div class="content-panel" id="mining-panel">
+        <button class="close-button" onclick="closePanel('mining-panel')">✖</button>
+        <h2>استخراج</h2>
         <p>اطلاعات مربوط به استخراج.</p>
     </div>
-    <div class="container page-content" id="partnerships-page">
-        <h1>پارتنرشیپ‌ها</h1>
+    <div class="content-panel" id="partnerships-panel">
+        <button class="close-button" onclick="closePanel('partnerships-panel')">✖</button>
+        <h2>پارتنرشیپ‌ها</h2>
         <p>جزئیات همکاری‌ها.</p>
     </div>
-    <div class="container page-content" id="comments-page">
-        <h1>نظرات</h1>
+    <div class="content-panel" id="comments-panel">
+        <button class="close-button" onclick="closePanel('comments-panel')">✖</button>
+        <h2>نظرات</h2>
         <p>نظرات کاربران اینجا نمایش داده می‌شه.</p>
-    </div>
-
-    <!-- دکمه پنل اجتماعی -->
-    <button class="panel-button" onclick="openSocialPanel()">Social Links</button>
-
-    <!-- پنل اجتماعی -->
-    <div class="social-panel" id="socialPanel">
-        <div class="social-panel-content">
-            <button class="close-button" onclick="closeSocialPanel()">✖</button>
-            <h2>Follow Us</h2>
-            <div class="social-links">
-                <a href="social.html" target="_blank">View All Social Links</a>
-            </div>
-        </div>
     </div>
 
     <!-- نوار پایین -->
     <div class="footer-nav">
-        <a href="#" onclick="showPage('social-page'); return false;">
+        <a href="#" onclick="openPanel('social-panel'); return false;">
             <img src="https://via.placeholder.com/24?text=S" alt="Social">
             شبکه‌های اجتماعی
         </a>
-        <a href="#" onclick="showPage('tasks-page'); return false;">
+        <a href="#" onclick="openPanel('tasks-panel'); return false;">
             <img src="https://via.placeholder.com/24?text=T" alt="Tasks">
             تسک‌ها
         </a>
-        <a href="#" onclick="showPage('mining-page'); return false;">
+        <a href="#" onclick="openPanel('mining-panel'); return false;">
             <img src="https://via.placeholder.com/24?text=M" alt="Mining">
             استخراج
         </a>
-        <a href="#" onclick="showPage('partnerships-page'); return false;">
+        <a href="#" onclick="openPanel('partnerships-panel'); return false;">
             <img src="https://via.placeholder.com/24?text=P" alt="Partnerships">
             پارتنرشیپ‌ها
         </a>
-        <a href="#" onclick="showPage('comments-page'); return false;">
+        <a href="#" onclick="openPanel('comments-panel'); return false;">
             <img src="https://via.placeholder.com/24?text=C" alt="Comments">
             نظرات
         </a>
@@ -197,20 +237,17 @@
             });
         }
 
-        function openSocialPanel() {
-            document.getElementById("socialPanel").classList.add("active");
-        }
-
-        function closeSocialPanel() {
-            document.getElementById("socialPanel").classList.remove("active");
-        }
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.classList.remove('active');
+        function openPanel(panelId) {
+            // بستن همه پنل‌ها
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
             });
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById(pageId).classList.add('active');
+            // باز کردن پنل مورد نظر
+            document.getElementById(panelId).classList.add('active');
+        }
+
+        function closePanel(panelId) {
+            document.getElementById(panelId).classList.remove('active');
         }
 
         window.onload = function() {
@@ -221,7 +258,7 @@
                 console.log("Telegram WebApp is not available");
             }
             changeLanguage();
-            document.getElementById('main-content').style.display = 'block'; // صفحه اصلی پیش‌فرض
+            document.getElementById('main-content').style.display = 'block';
         };
     </script>
 </body>
