@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto GEM RASA</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
+    <!-- اضافه کردن FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -39,6 +41,24 @@
                 padding: 15px;
             }
         }
+        .icon-wrapper {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #00eaff;
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+        }
         .footer-nav {
             position: fixed;
             bottom: 0;
@@ -65,9 +85,8 @@
         .footer-nav a:hover {
             color: #ffd700;
         }
-        .footer-nav img {
-            width: 24px;
-            height: 24px;
+        .footer-nav i {
+            font-size: 24px;
             margin-bottom: 5px;
         }
         .page-content {
@@ -130,26 +149,26 @@
         </div>
     </div>
 
-    <!-- نوار پایین با آیکن‌ها -->
+    <!-- نوار پایین با آیکن‌های FontAwesome -->
     <div class="footer-nav">
         <a href="#" onclick="showPage('social-page'); return false;">
-            <img src="https://via.placeholder.com/24?text=S" alt="Social">
+            <i class="fas fa-users"></i>
             <span data-lang="social-nav"></span>
         </a>
         <a href="#" onclick="showPage('tasks-page'); return false;">
-            <img src="https://via.placeholder.com/24?text=T" alt="Tasks">
+            <i class="fas fa-tasks"></i>
             <span data-lang="tasks-nav"></span>
         </a>
         <a href="#" onclick="showPage('mining-page'); return false;">
-            <img src="https://via.placeholder.com/24?text=M" alt="Mining">
+            <i class="fas fa-gem"></i>
             <span data-lang="mining-nav"></span>
         </a>
         <a href="#" onclick="showPage('partnerships-page'); return false;">
-            <img src="https://via.placeholder.com/24?text=P" alt="Partnerships">
+            <i class="fas fa-handshake"></i>
             <span data-lang="partnerships-nav"></span>
         </a>
         <a href="#" onclick="showPage('comments-page'); return false;">
-            <img src="https://via.placeholder.com/24?text=C" alt="Comments">
+            <i class="fas fa-comments"></i>
             <span data-lang="comments-nav"></span>
         </a>
     </div>
@@ -205,7 +224,7 @@
 
         function changeLanguage() {
             currentLang = document.getElementById("language").value;
-            console.log("Language changed to: " + currentLang); // برای دیباگ
+            console.log("Language changed to: " + currentLang);
             document.querySelectorAll("[data-lang]").forEach(el => {
                 const key = el.getAttribute("data-lang");
                 el.innerText = translations[currentLang][key] || "Translation missing";
