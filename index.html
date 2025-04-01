@@ -205,9 +205,10 @@
 
         function changeLanguage() {
             currentLang = document.getElementById("language").value;
+            console.log("Language changed to: " + currentLang); // برای دیباگ
             document.querySelectorAll("[data-lang]").forEach(el => {
                 const key = el.getAttribute("data-lang");
-                el.innerText = translations[currentLang][key];
+                el.innerText = translations[currentLang][key] || "Translation missing";
             });
         }
 
@@ -231,6 +232,7 @@
             console.log("Mini app loaded");
             if (typeof Telegram !== "undefined" && Telegram.WebApp) {
                 Telegram.WebApp.ready();
+                console.log("Telegram WebApp is ready");
             } else {
                 console.log("Telegram WebApp is not available");
             }
