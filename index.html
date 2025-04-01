@@ -39,40 +39,6 @@
                 padding: 15px;
             }
         }
-        .language-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        select {
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            cursor: pointer;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards;
-            animation-delay: 0.5s;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #ffd700;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-            margin: 10px 0;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
-            animation-delay: 1s;
-        }
-        p {
-            font-size: 1.2rem;
-            color: #00eaff;
-            margin: 20px 0;
-            opacity: 0;
-            animation: fadeIn 1s ease-in forwards, glow 2s infinite alternate;
-            animation-delay: 1.5s;
-        }
         .footer-nav {
             position: fixed;
             bottom: 0;
@@ -104,49 +70,11 @@
             height: 24px;
             margin-bottom: 5px;
         }
-        /* استایل پنل کشویی */
-        .content-panel {
-            position: fixed;
-            bottom: -50%;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            padding: 20px;
-            box-sizing: border-box;
-            transition: bottom 0.3s ease-in-out;
-            z-index: 1000;
+        .page-content {
             display: none;
         }
-        .content-panel.active {
-            bottom: 0;
+        .page-content.active {
             display: block;
-        }
-        .content-panel h2 {
-            color: #ffd700;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.7); }
-            to { text-shadow: 0 0 20px rgba(255, 215, 0, 1); }
         }
     </style>
 </head>
@@ -159,58 +87,70 @@
                 <option value="ru">Русский</option>
             </select>
         </div>
+        <div class="icon-wrapper">
+            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.src='https://via.placeholder.com/120?text=Logo+Not+Found';">
+        </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
     </div>
 
-    <!-- پنل‌های کشویی برای هر بخش -->
-    <div class="content-panel" id="social-panel">
-        <button class="close-button" onclick="closePanel('social-panel')">✖</button>
-        <h2>شبکه‌های اجتماعی</h2>
-        <p>اینجا لینک‌های شبکه‌های اجتماعی قرار می‌گیره.</p>
+    <!-- صفحات جدید -->
+    <div class="container page-content" id="social-page">
+        <h1 data-lang="social-title">Social Networks</h1>
+        <p data-lang="social-text">Here are the social network links.</p>
     </div>
-    <div class="content-panel" id="tasks-panel">
-        <button class="close-button" onclick="closePanel('tasks-panel')">✖</button>
-        <h2>تسک‌ها</h2>
-        <p>لیست تسک‌ها برای کاربران.</p>
+    <div class="container page-content" id="tasks-page">
+        <h1 data-lang="tasks-title">Tasks</h1>
+        <p data-lang="tasks-text">List of tasks for users.</p>
     </div>
-    <div class="content-panel" id="mining-panel">
-        <button class="close-button" onclick="closePanel('mining-panel')">✖</button>
-        <h2>استخراج</h2>
-        <p>اطلاعات مربوط به استخراج.</p>
+    <div class="container page-content" id="mining-page">
+        <h1 data-lang="mining-title">Mining</h1>
+        <p data-lang="mining-text">Information related to mining.</p>
     </div>
-    <div class="content-panel" id="partnerships-panel">
-        <button class="close-button" onclick="closePanel('partnerships-panel')">✖</button>
-        <h2>پارتنرشیپ‌ها</h2>
-        <p>جزئیات همکاری‌ها.</p>
+    <div class="container page-content" id="partnerships-page">
+        <h1 data-lang="partnerships-title">Partnerships</h1>
+        <p data-lang="partnerships-text">Details of partnerships.</p>
     </div>
-    <div class="content-panel" id="comments-panel">
-        <button class="close-button" onclick="closePanel('comments-panel')">✖</button>
-        <h2>نظرات</h2>
-        <p>نظرات کاربران اینجا نمایش داده می‌شه.</p>
+    <div class="container page-content" id="comments-page">
+        <h1 data-lang="comments-title">Comments</h1>
+        <p data-lang="comments-text">User comments will be displayed here.</p>
     </div>
 
-    <!-- نوار پایین -->
+    <!-- دکمه پنل اجتماعی -->
+    <button class="panel-button" onclick="openSocialPanel()">Social Links</button>
+
+    <!-- پنل اجتماعی -->
+    <div class="social-panel" id="socialPanel">
+        <div class="social-panel-content">
+            <button class="close-button" onclick="closeSocialPanel()">✖</button>
+            <h2 data-lang="follow-us">Follow Us</h2>
+            <div class="social-links">
+                <a href="social.html" target="_blank" data-lang="view-social-links">View All Social Links</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- نوار پایین با آیکن‌ها -->
     <div class="footer-nav">
-        <a href="#" onclick="openPanel('social-panel'); return false;">
+        <a href="#" onclick="showPage('social-page'); return false;">
             <img src="https://via.placeholder.com/24?text=S" alt="Social">
-            شبکه‌های اجتماعی
+            <span data-lang="social-nav">Social</span>
         </a>
-        <a href="#" onclick="openPanel('tasks-panel'); return false;">
+        <a href="#" onclick="showPage('tasks-page'); return false;">
             <img src="https://via.placeholder.com/24?text=T" alt="Tasks">
-            تسک‌ها
+            <span data-lang="tasks-nav">Tasks</span>
         </a>
-        <a href="#" onclick="openPanel('mining-panel'); return false;">
+        <a href="#" onclick="showPage('mining-page'); return false;">
             <img src="https://via.placeholder.com/24?text=M" alt="Mining">
-            استخراج
+            <span data-lang="mining-nav">Mining</span>
         </a>
-        <a href="#" onclick="openPanel('partnerships-panel'); return false;">
+        <a href="#" onclick="showPage('partnerships-page'); return false;">
             <img src="https://via.placeholder.com/24?text=P" alt="Partnerships">
-            پارتنرشیپ‌ها
+            <span data-lang="partnerships-nav">Partners</span>
         </a>
-        <a href="#" onclick="openPanel('comments-panel'); return false;">
+        <a href="#" onclick="showPage('comments-page'); return false;">
             <img src="https://via.placeholder.com/24?text=C" alt="Comments">
-            نظرات
+            <span data-lang="comments-nav">Comments</span>
         </a>
     </div>
 
@@ -219,11 +159,45 @@
         const translations = {
             en: {
                 title: "Crypto GEM RASA",
-                welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates."
+                welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates.",
+                "social-title": "Social Networks",
+                "social-text": "Here are the social network links.",
+                "tasks-title": "Tasks",
+                "tasks-text": "List of tasks for users.",
+                "mining-title": "Mining",
+                "mining-text": "Information related to mining.",
+                "partnerships-title": "Partnerships",
+                "partnerships-text": "Details of partnerships.",
+                "comments-title": "Comments",
+                "comments-text": "User comments will be displayed here.",
+                "follow-us": "Follow Us",
+                "view-social-links": "View All Social Links",
+                "social-nav": "Social",
+                "tasks-nav": "Tasks",
+                "mining-nav": "Mining",
+                "partnerships-nav": "Partners",
+                "comments-nav": "Comments"
             },
             ru: {
                 title: "Crypto GEM RASA",
-                welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями."
+                welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями.",
+                "social-title": "Социальные сети",
+                "social-text": "Здесь находятся ссылки на социальные сети.",
+                "tasks-title": "Задания",
+                "tasks-text": "Список заданий для пользователей.",
+                "mining-title": "Майнинг",
+                "mining-text": "Информация, связанная с майнингом.",
+                "partnerships-title": "Партнерства",
+                "partnerships-text": "Подробности о партнерствах.",
+                "comments-title": "Комментарии",
+                "comments-text": "Комментарии пользователей будут отображаться здесь.",
+                "follow-us": "Подписывайтесь",
+                "view-social-links": "Посмотреть все ссылки",
+                "social-nav": "Социальные",
+                "tasks-nav": "Задания",
+                "mining-nav": "Майнинг",
+                "partnerships-nav": "Партнеры",
+                "comments-nav": "Комментарии"
             }
         };
 
@@ -237,17 +211,20 @@
             });
         }
 
-        function openPanel(panelId) {
-            // بستن همه پنل‌ها
-            document.querySelectorAll('.content-panel').forEach(panel => {
-                panel.classList.remove('active');
-            });
-            // باز کردن پنل مورد نظر
-            document.getElementById(panelId).classList.add('active');
+        function openSocialPanel() {
+            document.getElementById("socialPanel").classList.add("active");
         }
 
-        function closePanel(panelId) {
-            document.getElementById(panelId).classList.remove('active');
+        function closeSocialPanel() {
+            document.getElementById("socialPanel").classList.remove("active");
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById(pageId).classList.add('active');
         }
 
         window.onload = function() {
