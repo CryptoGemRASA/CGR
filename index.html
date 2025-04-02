@@ -40,9 +40,6 @@
             animation: fadeIn 1s ease-in-out forwards;
             position: relative;
         }
-        .container {
-            animation: pulsing-glow 2s infinite alternate;
-        }
         .container:hover {
             transform: scale(1.02);
             box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
@@ -70,13 +67,13 @@
             margin: 10px 0;
             width: 100%;
             text-align: center;
-            font-size: 1rem; /* کوچک‌تر کردن سایز فونت عنوان */
+            font-size: 0.5rem; /* نصف کردن سایز فونت عنوان */
         }
         .container p {
             margin: 10px 0;
             width: 100%;
             text-align: center;
-            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت متن */
+            font-size: 0.4rem; /* نصف کردن سایز فونت متن */
         }
         @media (max-width: 768px) {
             .container {
@@ -85,10 +82,10 @@
                 margin: 10px auto;
             }
             .container h1 {
-                font-size: 0.9rem; /* سایز فونت در موبایل */
+                font-size: 0.45rem; /* نصف کردن سایز فونت در موبایل */
             }
             .container p {
-                font-size: 0.7rem; /* سایز فونت در موبایل */
+                font-size: 0.35rem; /* نصف کردن سایز فونت در موبایل */
             }
         }
         .icon-wrapper {
@@ -161,7 +158,7 @@
             margin-top: 10px;
         }
         .mining-info span {
-            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت اعداد */
+            font-size: 0.4rem; /* نصف کردن سایز فونت اعداد */
         }
         .earnings-form {
             display: flex;
@@ -176,7 +173,7 @@
             border: none;
             width: 80%;
             max-width: 300px;
-            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت ورودی */
+            font-size: 0.4rem; /* نصف کردن سایز فونت ورودی */
         }
         .earnings-form button {
             padding: 10px 20px;
@@ -186,7 +183,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s ease;
-            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت دکمه */
+            font-size: 0.4rem; /* نصف کردن سایز فونت دکمه */
         }
         .earnings-form button:hover {
             background: #66eaff;
@@ -204,7 +201,7 @@
             cursor: pointer;
             transition: background 0.3s ease;
             margin-top: 10px;
-            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت دکمه */
+            font-size: 0.4rem; /* نصف کردن سایز فونت دکمه */
         }
         .friends-wrapper button:hover {
             background: #66eaff;
@@ -214,7 +211,7 @@
         }
         .friends-list p {
             margin: 5px 0;
-            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت لیست دوستان */
+            font-size: 0.4rem; /* نصف کردن سایز فونت لیست دوستان */
         }
         .back-button {
             position: absolute;
@@ -269,16 +266,70 @@
         .page-content.active {
             display: block;
         }
+        /* استایل جدید برای منوی تغییر زبان */
+        .language-menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .language-button {
+            background: linear-gradient(135deg, #00eaff, #1e3c72);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .language-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.8);
+        }
+        .language-button i {
+            color: #fff;
+            font-size: 20px;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            z-index: 1000;
+        }
+        .language-dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+        .language-dropdown a:hover {
+            background: rgba(0, 234, 255, 0.2);
+        }
+        .language-menu:hover .language-dropdown {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <!-- محتوای اصلی -->
     <div class="container" id="main-content">
         <div class="language-menu">
-            <select id="language" onchange="changeLanguage()">
-                <option value="en">English</option>
-                <option value="ru">Русский</option>
-            </select>
+            <button class="language-button">
+                <i class="fas fa-globe"></i>
+            </button>
+            <div class="language-dropdown">
+                <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+                <a href="#" onclick="changeLanguage('ru'); return false;">Русский</a>
+            </div>
         </div>
         <div class="icon-wrapper">
             <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon" onerror="this.src='https://via.placeholder.com/120?text=Logo+Not+Found';">
@@ -637,8 +688,8 @@
         setInterval(updateMiningStatus, 1000);
         miningCircle.addEventListener('click', mine);
 
-        function changeLanguage() {
-            currentLang = document.getElementById("language").value;
+        function changeLanguage(lang) {
+            currentLang = lang;
             console.log("Language changed to: " + currentLang);
             document.querySelectorAll("[data-lang]").forEach(el => {
                 const key = el.getAttribute("data-lang");
@@ -676,7 +727,7 @@
                 userId = "testUser" + Math.random().toString(36).substring(2, 10);
                 username = "TestUser";
             }
-            changeLanguage();
+            changeLanguage('en');
             document.getElementById('main-content').style.display = 'block';
             updateMiningStatus();
             handleReferral();
