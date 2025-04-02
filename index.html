@@ -12,7 +12,7 @@
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
             padding: 0;
-            background: url('https://i.imgur.com/nq2jGI2.jpeg') no-repeat center center fixed, linear-gradient(135deg, #1e1e2f, #3b3b5e);
+            background: url('https://i.imgur.com/nq2jGI2.jpeg') no-repeat center center fixed, linear-gradient(135deg, #1e3c72, #2a5298);
             background-size: cover;
             color: #fff;
             min-height: 100vh;
@@ -23,12 +23,12 @@
             position: relative;
         }
         .container {
-            background: linear-gradient(135deg, #ffd700, #ffaa00); /* برگرداندن به گرادیانت طلایی */
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); /* سایه طلایی */
-            border: 1px solid #ffd700; /* حاشیه طلایی */
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+            border: 1px solid #00eaff;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -45,15 +45,15 @@
         }
         .container:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         @keyframes pulsing-glow {
             0% {
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
             }
             100% {
-                box-shadow: 0 0 40px rgba(255, 215, 0, 0.9);
+                box-shadow: 0 0 40px rgba(0, 234, 255, 0.9);
             }
         }
         @keyframes fadeIn {
@@ -70,13 +70,13 @@
             margin: 10px 0;
             width: 100%;
             text-align: center;
-            font-size: 1.2rem; /* کوچک‌تر کردن سایز فونت عنوان */
+            font-size: 1rem; /* کوچک‌تر کردن سایز فونت عنوان */
         }
         .container p {
             margin: 10px 0;
             width: 100%;
             text-align: center;
-            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت متن */
+            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت متن */
         }
         @media (max-width: 768px) {
             .container {
@@ -85,10 +85,10 @@
                 margin: 10px auto;
             }
             .container h1 {
-                font-size: 1rem; /* سایز فونت در موبایل */
+                font-size: 0.9rem; /* سایز فونت در موبایل */
             }
             .container p {
-                font-size: 0.8rem; /* سایز فونت در موبایل */
+                font-size: 0.7rem; /* سایز فونت در موبایل */
             }
         }
         .icon-wrapper {
@@ -101,15 +101,14 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid #ffd700; /* حاشیه طلایی برای لوگو */
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            border: 3px solid #00eaff;
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .icon:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
         }
-        /* استایل دایره Mining */
         .mining-wrapper {
             display: flex;
             flex-direction: column;
@@ -121,8 +120,8 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            border: 3px solid #00eaff;
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
             cursor: pointer;
             transition: transform 0.3s ease;
             display: flex;
@@ -162,9 +161,8 @@
             margin-top: 10px;
         }
         .mining-info span {
-            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت اعداد */
+            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت اعداد */
         }
-        /* استایل پنل درآمد */
         .earnings-form {
             display: flex;
             flex-direction: column;
@@ -178,7 +176,7 @@
             border: none;
             width: 80%;
             max-width: 300px;
-            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت ورودی */
+            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت ورودی */
         }
         .earnings-form button {
             padding: 10px 20px;
@@ -188,12 +186,11 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s ease;
-            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت دکمه */
+            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت دکمه */
         }
         .earnings-form button:hover {
-            background: #ffd700;
+            background: #66eaff;
         }
-        /* استایل پنل دوستان */
         .friends-wrapper {
             text-align: center;
             margin-top: 20px;
@@ -207,19 +204,18 @@
             cursor: pointer;
             transition: background 0.3s ease;
             margin-top: 10px;
-            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت دکمه */
+            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت دکمه */
         }
         .friends-wrapper button:hover {
-            background: #ffd700;
+            background: #66eaff;
         }
         .friends-list {
             margin-top: 20px;
         }
         .friends-list p {
             margin: 5px 0;
-            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت لیست دوستان */
+            font-size: 0.8rem; /* کوچک‌تر کردن سایز فونت لیست دوستان */
         }
-        /* استایل آیکن بازگشت */
         .back-button {
             position: absolute;
             top: 10px;
@@ -230,7 +226,7 @@
             transition: color 0.3s ease;
         }
         .back-button:hover {
-            color: #ffd700;
+            color: #66eaff;
         }
         .footer-nav {
             position: fixed;
@@ -251,21 +247,21 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #ffd700;
+            color: #00eaff;
             font-size: 0.9rem;
             transition: color 0.3s;
         }
         .footer-nav a:hover {
-            color: #ffaa00;
+            color: #66eaff;
         }
         .footer-nav i {
             font-size: 24px;
             margin-bottom: 5px;
-            color: #ffd700;
+            color: #00eaff;
             transition: color 0.3s;
         }
         .footer-nav a:hover i {
-            color: #ffaa00;
+            color: #66eaff;
         }
         .page-content {
             display: none;
@@ -318,7 +314,7 @@
             </div>
             <div class="mining-info">
                 <span id="miningCount">0 / 500</span><br>
-                <span id="totalMiningCount">Total Mined: 0</span><br> <!-- اضافه کردن نمایش تعداد کل استخراج -->
+                <span id="totalMiningCount">Total Mined: 0</span><br>
                 <span id="timeRemaining"></span>
             </div>
         </div>
@@ -400,7 +396,7 @@
     </div>
 
     <!-- فایل صوتی برای افکت کلیک -->
-    <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/beep-01a.mp3"></audio>
+    <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
@@ -459,7 +455,7 @@
 
         let currentLang = "en";
         let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
-        let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0; // متغیر جدید برای تعداد کل استخراج
+        let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0;
         let startTime = parseInt(localStorage.getItem('startTime')) || 0;
         let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
         let answeredQuestions = JSON.parse(localStorage.getItem('answeredQuestions')) || [];
@@ -475,7 +471,7 @@
 
         const miningCircle = document.getElementById('miningCircle');
         const miningCountDisplay = document.getElementById('miningCount');
-        const totalMiningCountDisplay = document.getElementById('totalMiningCount'); // نمایش تعداد کل استخراج
+        const totalMiningCountDisplay = document.getElementById('totalMiningCount');
         const timeRemainingDisplay = document.getElementById('timeRemaining');
         const clickSound = document.getElementById('clickSound');
         const userTokensDisplay = document.getElementById('userTokens');
@@ -505,7 +501,7 @@
             }
 
             miningCountDisplay.textContent = `${miningCount} / ${maxMining}`;
-            totalMiningCountDisplay.textContent = `Total Mined: ${totalMiningCount}`; // به‌روزرسانی نمایش تعداد کل استخراج
+            totalMiningCountDisplay.textContent = `Total Mined: ${totalMiningCount}`;
             if (miningCount >= maxMining) {
                 miningCircle.classList.add('disabled');
                 const remainingTime = periodMs - elapsed;
@@ -531,9 +527,9 @@
 
             if (miningCount < maxMining) {
                 miningCount++;
-                totalMiningCount++; // افزایش تعداد کل استخراج
+                totalMiningCount++;
                 localStorage.setItem('miningCount', miningCount);
-                localStorage.setItem('totalMiningCount', totalMiningCount); // ذخیره تعداد کل استخراج
+                localStorage.setItem('totalMiningCount', totalMiningCount);
                 try {
                     clickSound.currentTime = 0;
                     clickSound.play();
@@ -581,7 +577,7 @@
                 answerFeedback.style.color = "#00eaff";
 
                 // ارسال جواب به گروه تلگرام
-                fetch('https://your-server.com/sendAnswer', {
+                fetch('https://yourdomain.com/sendAnswer.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -591,12 +587,8 @@
                         answer: userAnswer,
                         timestamp: new Date().toISOString()
                     })
-                }).then(response => {
-                    if (response.ok) {
-                        console.log("Answer sent to group");
-                    } else {
-                        console.log("Failed to send answer to group");
-                    }
+                }).then(response => response.json()).then(data => {
+                    console.log(data);
                 }).catch(error => {
                     console.log("Error sending answer:", error);
                 });
@@ -610,7 +602,7 @@
 
         function generateReferralLink() {
             const referralCode = userId || Math.random().toString(36).substring(2, 10);
-            const botLink = "https://t.me/YourBot"; // جایگزین با لینک ربات خودت
+            const botLink = "https://t.me/YourBot";
             return `${botLink}?start=${referralCode}`;
         }
 
