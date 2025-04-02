@@ -19,16 +19,16 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            align-items: center; /* وسط کردن کل صفحه */
+            align-items: center;
             position: relative;
         }
         .container {
-            background: linear-gradient(135deg, #1e3c72, #2a5298); /* گرادیانت جذاب */
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5); /* سایه اولیه با گلو */
-            border: 1px solid #00eaff; /* حاشیه نئونی */
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+            border: 1px solid #00eaff;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -37,19 +37,17 @@
             min-width: 300px;
             margin: 20px auto;
             flex-grow: 1;
-            animation: fadeIn 1s ease-in-out forwards; /* انیمیشن ورود */
+            animation: fadeIn 1s ease-in-out forwards;
+            position: relative; /* برای قرار دادن آیکن بازگشت */
         }
-        /* انیمیشن گلو پالسی */
         .container {
             animation: pulsing-glow 2s infinite alternate;
         }
-        /* افکت هاور */
         .container:hover {
             transform: scale(1.02);
             box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        /* انیمیشن‌ها */
         @keyframes pulsing-glow {
             0% {
                 box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
@@ -68,13 +66,11 @@
                 transform: translateY(0);
             }
         }
-        /* برای وسط کردن متن‌ها */
         .container h1, .container p {
             margin: 10px 0;
             width: 100%;
             text-align: center;
         }
-        /* استایل برای موبایل */
         @media (max-width: 768px) {
             .container {
                 max-width: 95%;
@@ -99,6 +95,62 @@
         .icon:hover {
             transform: scale(1.1);
             box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+        }
+        /* استایل دایره Mining */
+        .mining-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid #ffd700; /* حاشیه طلایی */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .mining-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .mining-circle.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: #666;
+            box-shadow: none;
+        }
+        .mining-circle:active {
+            animation: pulse 0.3s ease;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .mining-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+        /* استایل آیکن بازگشت */
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #00eaff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .back-button:hover {
+            color: #ffd700;
         }
         .footer-nav {
             position: fixed;
@@ -156,22 +208,44 @@
 
     <!-- صفحات جدید -->
     <div class="container page-content" id="social-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
         <h1 data-lang="social-title"></h1>
         <p data-lang="social-text"></p>
     </div>
     <div class="container page-content" id="tasks-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
         <h1 data-lang="tasks-title"></h1>
         <p data-lang="tasks-text"></p>
     </div>
     <div class="container page-content" id="mining-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
         <h1 data-lang="mining-title"></h1>
         <p data-lang="mining-text"></p>
+        <div class="mining-circle" id="miningCircle">
+            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Mining Circle">
+        </div>
+        <div class="mining-info">
+            <span id="miningCount">0 / 500</span><br>
+            <span id="timeRemaining"></span>
+        </div>
     </div>
     <div class="container page-content" id="partnerships-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
         <h1 data-lang="partnerships-title"></h1>
         <p data-lang="partnerships-text"></p>
     </div>
     <div class="container page-content" id="comments-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
         <h1 data-lang="comments-title"></h1>
         <p data-lang="comments-text"></p>
     </div>
@@ -200,6 +274,9 @@
         </a>
     </div>
 
+    <!-- فایل صوتی برای افکت کلیک -->
+    <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         const translations = {
@@ -211,7 +288,7 @@
                 "tasks-title": "Tasks",
                 "tasks-text": "List of tasks for users.",
                 "mining-title": "Mining",
-                "mining-text": "Information related to mining.",
+                "mining-text": "Tap the circle to mine! You can mine 500 units every 8 hours.",
                 "partnerships-title": "Partnerships",
                 "partnerships-text": "Details of partnerships.",
                 "comments-title": "Comments",
@@ -230,7 +307,7 @@
                 "tasks-title": "Задания",
                 "tasks-text": "Список заданий для пользователей.",
                 "mining-title": "Майнинг",
-                "mining-text": "Информация, связанная с майнингом.",
+                "mining-text": "Нажмите на круг, чтобы добывать! Вы можете добыть 500 единиц каждые 8 часов.",
                 "partnerships-title": "Партнерства",
                 "partnerships-text": "Подробности о партнерствах.",
                 "comments-title": "Комментарии",
@@ -244,6 +321,75 @@
         };
 
         let currentLang = "en";
+        let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
+        let startTime = parseInt(localStorage.getItem('startTime')) || 0;
+        const maxMining = 500;
+        const periodHours = 8;
+        const periodMs = periodHours * 60 * 60 * 1000; // 8 ساعت به میلی‌ثانیه
+
+        const miningCircle = document.getElementById('miningCircle');
+        const miningCountDisplay = document.getElementById('miningCount');
+        const timeRemainingDisplay = document.getElementById('timeRemaining');
+        const clickSound = document.getElementById('clickSound');
+
+        function updateMiningStatus() {
+            const now = Date.now();
+            if (startTime === 0) {
+                startTime = now;
+                localStorage.setItem('startTime', startTime);
+            }
+
+            const elapsed = now - startTime;
+            if (elapsed >= periodMs) {
+                // دوره ۸ ساعته تموم شده، ریست می‌کنیم
+                miningCount = 0;
+                startTime = now;
+                localStorage.setItem('miningCount', miningCount);
+                localStorage.setItem('startTime', startTime);
+            }
+
+            miningCountDisplay.textContent = `${miningCount} / ${maxMining}`;
+            if (miningCount >= maxMining) {
+                miningCircle.classList.add('disabled');
+                const remainingTime = periodMs - elapsed;
+                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+                timeRemainingDisplay.textContent = `Next period in: ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                miningCircle.classList.remove('disabled');
+                timeRemainingDisplay.textContent = '';
+            }
+        }
+
+        function mine() {
+            const now = Date.now();
+            const elapsed = now - startTime;
+
+            if (elapsed >= periodMs) {
+                // دوره جدید شروع شده
+                miningCount = 0;
+                startTime = now;
+                localStorage.setItem('startTime', startTime);
+            }
+
+            if (miningCount < maxMining) {
+                miningCount++;
+                localStorage.setItem('miningCount', miningCount);
+                try {
+                    clickSound.currentTime = 0;
+                    clickSound.play();
+                } catch (e) {
+                    console.log("Sound playback failed:", e);
+                }
+                updateMiningStatus();
+            }
+        }
+
+        // به‌روزرسانی تایمر هر ثانیه
+        setInterval(updateMiningStatus, 1000);
+
+        miningCircle.addEventListener('click', mine);
 
         function changeLanguage() {
             currentLang = document.getElementById("language").value;
@@ -262,6 +408,13 @@
             document.getElementById(pageId).classList.add('active');
         }
 
+        function goToHome() {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('main-content').style.display = 'block';
+        }
+
         window.onload = function() {
             console.log("Mini app loaded");
             if (typeof Telegram !== "undefined" && Telegram.WebApp) {
@@ -272,6 +425,7 @@
             }
             changeLanguage();
             document.getElementById('main-content').style.display = 'block';
+            updateMiningStatus();
         };
     </script>
 </body>
