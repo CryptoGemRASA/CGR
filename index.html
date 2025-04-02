@@ -23,12 +23,12 @@
             position: relative;
         }
         .container {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #ffd700, #ffaa00); /* گرادیانت طلایی */
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
-            border: 1px solid #00eaff;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); /* سایه طلایی */
+            border: 1px solid #ffd700; /* حاشیه طلایی */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -38,22 +38,22 @@
             margin: 20px auto;
             flex-grow: 1;
             animation: fadeIn 1s ease-in-out forwards;
-            position: relative; /* برای قرار دادن آیکن بازگشت */
+            position: relative;
         }
         .container {
             animation: pulsing-glow 2s infinite alternate;
         }
         .container:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         @keyframes pulsing-glow {
             0% {
-                box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             }
             100% {
-                box-shadow: 0 0 40px rgba(0, 234, 255, 0.9);
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.9);
             }
         }
         @keyframes fadeIn {
@@ -88,20 +88,27 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid #00eaff;
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+            border: 3px solid #ffd700; /* حاشیه طلایی برای لوگو */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .icon:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
         }
         /* استایل دایره Mining */
+        .mining-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50vh; /* برای وسط کردن عمودی */
+        }
         .mining-circle {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid #ffd700; /* حاشیه طلایی */
+            border: 3px solid #ffd700;
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -109,6 +116,8 @@
             justify-content: center;
             align-items: center;
             margin: 20px 0;
+            outline: none; /* حذف مربع */
+            -webkit-tap-highlight-color: transparent; /* حذف مربع در موبایل */
         }
         .mining-circle img {
             width: 100%;
@@ -227,12 +236,14 @@
         </div>
         <h1 data-lang="mining-title"></h1>
         <p data-lang="mining-text"></p>
-        <div class="mining-circle" id="miningCircle">
-            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Mining Circle">
-        </div>
-        <div class="mining-info">
-            <span id="miningCount">0 / 500</span><br>
-            <span id="timeRemaining"></span>
+        <div class="mining-wrapper">
+            <div class="mining-circle" id="miningCircle">
+                <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Mining Circle">
+            </div>
+            <div class="mining-info">
+                <span id="miningCount">0 / 500</span><br>
+                <span id="timeRemaining"></span>
+            </div>
         </div>
     </div>
     <div class="container page-content" id="partnerships-page">
