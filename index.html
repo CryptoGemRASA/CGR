@@ -23,12 +23,12 @@
             position: relative;
         }
         .container {
-            background: linear-gradient(135deg, #1e3c72, #2a5298); /* برگرداندن به گرادیانت آبی-بنفش */
+            background: linear-gradient(135deg, #ffd700, #ffaa00); /* برگرداندن به گرادیانت طلایی */
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5); /* سایه آبی */
-            border: 1px solid #00eaff; /* حاشیه آبی نئونی */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); /* سایه طلایی */
+            border: 1px solid #ffd700; /* حاشیه طلایی */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -45,15 +45,15 @@
         }
         .container:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         @keyframes pulsing-glow {
             0% {
-                box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             }
             100% {
-                box-shadow: 0 0 40px rgba(0, 234, 255, 0.9);
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.9);
             }
         }
         @keyframes fadeIn {
@@ -66,16 +66,29 @@
                 transform: translateY(0);
             }
         }
-        .container h1, .container p {
+        .container h1 {
             margin: 10px 0;
             width: 100%;
             text-align: center;
+            font-size: 1.2rem; /* کوچک‌تر کردن سایز فونت عنوان */
+        }
+        .container p {
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت متن */
         }
         @media (max-width: 768px) {
             .container {
                 max-width: 95%;
                 padding: 15px;
                 margin: 10px auto;
+            }
+            .container h1 {
+                font-size: 1rem; /* سایز فونت در موبایل */
+            }
+            .container p {
+                font-size: 0.8rem; /* سایز فونت در موبایل */
             }
         }
         .icon-wrapper {
@@ -88,13 +101,13 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid #00eaff; /* حاشیه آبی نئونی برای لوگو */
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+            border: 3px solid #ffd700; /* حاشیه طلایی برای لوگو */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .icon:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
         }
         /* استایل دایره Mining */
         .mining-wrapper {
@@ -148,6 +161,9 @@
             text-align: center;
             margin-top: 10px;
         }
+        .mining-info span {
+            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت اعداد */
+        }
         /* استایل پنل درآمد */
         .earnings-form {
             display: flex;
@@ -162,6 +178,7 @@
             border: none;
             width: 80%;
             max-width: 300px;
+            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت ورودی */
         }
         .earnings-form button {
             padding: 10px 20px;
@@ -171,6 +188,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s ease;
+            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت دکمه */
         }
         .earnings-form button:hover {
             background: #ffd700;
@@ -189,6 +207,7 @@
             cursor: pointer;
             transition: background 0.3s ease;
             margin-top: 10px;
+            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت دکمه */
         }
         .friends-wrapper button:hover {
             background: #ffd700;
@@ -198,6 +217,7 @@
         }
         .friends-list p {
             margin: 5px 0;
+            font-size: 0.9rem; /* کوچک‌تر کردن سایز فونت لیست دوستان */
         }
         /* استایل آیکن بازگشت */
         .back-button {
@@ -231,21 +251,21 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #ffd700; /* رنگ متن به طلایی */
+            color: #ffd700;
             font-size: 0.9rem;
             transition: color 0.3s;
         }
         .footer-nav a:hover {
-            color: #ffaa00; /* رنگ هاور به طلایی تیره */
+            color: #ffaa00;
         }
         .footer-nav i {
             font-size: 24px;
             margin-bottom: 5px;
-            color: #ffd700; /* رنگ آیکن‌ها به طلایی */
+            color: #ffd700;
             transition: color 0.3s;
         }
         .footer-nav a:hover i {
-            color: #ffaa00; /* رنگ هاور آیکن‌ها به طلایی تیره */
+            color: #ffaa00;
         }
         .page-content {
             display: none;
@@ -298,6 +318,7 @@
             </div>
             <div class="mining-info">
                 <span id="miningCount">0 / 500</span><br>
+                <span id="totalMiningCount">Total Mined: 0</span><br> <!-- اضافه کردن نمایش تعداد کل استخراج -->
                 <span id="timeRemaining"></span>
             </div>
         </div>
@@ -438,6 +459,7 @@
 
         let currentLang = "en";
         let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
+        let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0; // متغیر جدید برای تعداد کل استخراج
         let startTime = parseInt(localStorage.getItem('startTime')) || 0;
         let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
         let answeredQuestions = JSON.parse(localStorage.getItem('answeredQuestions')) || [];
@@ -453,6 +475,7 @@
 
         const miningCircle = document.getElementById('miningCircle');
         const miningCountDisplay = document.getElementById('miningCount');
+        const totalMiningCountDisplay = document.getElementById('totalMiningCount'); // نمایش تعداد کل استخراج
         const timeRemainingDisplay = document.getElementById('timeRemaining');
         const clickSound = document.getElementById('clickSound');
         const userTokensDisplay = document.getElementById('userTokens');
@@ -482,6 +505,7 @@
             }
 
             miningCountDisplay.textContent = `${miningCount} / ${maxMining}`;
+            totalMiningCountDisplay.textContent = `Total Mined: ${totalMiningCount}`; // به‌روزرسانی نمایش تعداد کل استخراج
             if (miningCount >= maxMining) {
                 miningCircle.classList.add('disabled');
                 const remainingTime = periodMs - elapsed;
@@ -507,7 +531,9 @@
 
             if (miningCount < maxMining) {
                 miningCount++;
+                totalMiningCount++; // افزایش تعداد کل استخراج
                 localStorage.setItem('miningCount', miningCount);
+                localStorage.setItem('totalMiningCount', totalMiningCount); // ذخیره تعداد کل استخراج
                 try {
                     clickSound.currentTime = 0;
                     clickSound.play();
