@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto GEM RASA</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
-    <!-- اضافه کردن FontAwesome برای آیکن‌ها -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
@@ -16,14 +15,15 @@
             background-size: cover;
             color: #fff;
             min-height: 100vh;
-            display: flexflex-direction: column;
+            display: flex;
+            flex-direction: column;
             justify-content: space-between;
             align-items: center;
             position: relative;
         }
         .container {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            backdrop-filter: blur(5px); /* کاهش تاری از 15px به 5px */
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)); /* شفافیت برای نمایان شدن بک‌گراند */
+            backdrop-filter: blur(15px); /* مقدار اصلی حفظ شده */
             border-radius: 20px;
             padding: 20px;
             box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
@@ -351,7 +351,6 @@
     </style>
 </head>
 <body>
-    <!-- محتوای اصلی -->
     <div class="container" id="main-content">
         <div class="language-menu">
             <button class="language-button">
@@ -369,7 +368,6 @@
         <p data-lang="welcome"></p>
     </div>
 
-    <!-- صفحات جدید -->
     <div class="container page-content" id="social-page">
         <div class="back-button" onclick="goToHome()">
             <i class="fas fa-home"></i>
@@ -445,7 +443,6 @@
         </div>
     </div>
 
-    <!-- نوار پایین با آیکن‌های FontAwesome -->
     <div class="footer-nav">
         <a href="#" onclick="showPage('social-page'); return false;">
             <i class="fas fa-users"></i>
@@ -477,7 +474,6 @@
         </a>
     </div>
 
-    <!-- فایل صوتی برای افکت کلیک -->
     <audio id="clickSound" src="https://freesound.org/data/previews/245/245645_4052905-lq.mp3"></audio>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
