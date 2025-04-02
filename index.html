@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto GEM RASA</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
-    <!-- اضافه کردن FontAwesome -->
+    <!-- اضافه کردن FontAwesome برای آیکن‌ها -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body {
@@ -19,26 +19,67 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            align-items: center; /* وسط کردن کل صفحه */
             position: relative;
         }
         .container {
-            background: rgba(255, 255, 255, 0.05);
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* گرادیانت جذاب */
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5); /* سایه اولیه با گلو */
+            border: 1px solid #00eaff; /* حاشیه نئونی */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 90%;
+            min-width: 300px;
             margin: 20px auto;
             flex-grow: 1;
+            animation: fadeIn 1s ease-in-out forwards; /* انیمیشن ورود */
         }
+        /* انیمیشن گلو پالسی */
+        .container {
+            animation: pulsing-glow 2s infinite alternate;
+        }
+        /* افکت هاور */
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* انیمیشن‌ها */
+        @keyframes pulsing-glow {
+            0% {
+                box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 40px rgba(0, 234, 255, 0.9);
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* برای وسط کردن متن‌ها */
+        .container h1, .container p {
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        /* استایل برای موبایل */
         @media (max-width: 768px) {
             .container {
-                width: calc(100% - 20px);
-                margin: 10px auto;
-                border-radius: 15px;
+                max-width: 95%;
                 padding: 15px;
+                margin: 10px auto;
             }
         }
         .icon-wrapper {
@@ -135,20 +176,6 @@
         <p data-lang="comments-text"></p>
     </div>
 
-    <!-- دکمه پنل اجتماعی -->
-    <button class="panel-button" onclick="openSocialPanel()">Social Links</button>
-
-    <!-- پنل اجتماعی -->
-    <div class="social-panel" id="socialPanel">
-        <div class="social-panel-content">
-            <button class="close-button" onclick="closeSocialPanel()">✖</button>
-            <h2 data-lang="follow-us"></h2>
-            <div class="social-links">
-                <a href="social.html" target="_blank" data-lang="view-social-links"></a>
-            </div>
-        </div>
-    </div>
-
     <!-- نوار پایین با آیکن‌های FontAwesome -->
     <div class="footer-nav">
         <a href="#" onclick="showPage('social-page'); return false;">
@@ -189,8 +216,6 @@
                 "partnerships-text": "Details of partnerships.",
                 "comments-title": "Comments",
                 "comments-text": "User comments will be displayed here.",
-                "follow-us": "Follow Us",
-                "view-social-links": "View All Social Links",
                 "social-nav": "Social",
                 "tasks-nav": "Tasks",
                 "mining-nav": "Mining",
@@ -210,8 +235,6 @@
                 "partnerships-text": "Подробности о партнерствах.",
                 "comments-title": "Комментарии",
                 "comments-text": "Комментарии пользователей будут отображаться здесь.",
-                "follow-us": "Подписывайтесь",
-                "view-social-links": "Посмотреть все ссылки",
                 "social-nav": "Социальные",
                 "tasks-nav": "Задания",
                 "mining-nav": "Майнинг",
@@ -229,14 +252,6 @@
                 const key = el.getAttribute("data-lang");
                 el.innerText = translations[currentLang][key] || "Translation missing";
             });
-        }
-
-        function openSocialPanel() {
-            document.getElementById("socialPanel").classList.add("active");
-        }
-
-        function closeSocialPanel() {
-            document.getElementById("socialPanel").classList.remove("active");
         }
 
         function showPage(pageId) {
