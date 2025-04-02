@@ -23,12 +23,12 @@
             position: relative;
         }
         .container {
-            background: linear-gradient(135deg, #ffd700, #ffaa00); /* گرادیانت طلایی */
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* برگرداندن به گرادیانت آبی-بنفش */
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); /* سایه طلایی */
-            border: 1px solid #ffd700; /* حاشیه طلایی */
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5); /* سایه آبی */
+            border: 1px solid #00eaff; /* حاشیه آبی نئونی */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -45,15 +45,15 @@
         }
         .container:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         @keyframes pulsing-glow {
             0% {
-                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+                box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
             }
             100% {
-                box-shadow: 0 0 40px rgba(255, 215, 0, 0.9);
+                box-shadow: 0 0 40px rgba(0, 234, 255, 0.9);
             }
         }
         @keyframes fadeIn {
@@ -88,13 +88,13 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid #ffd700; /* حاشیه طلایی برای لوگو */
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            border: 3px solid #00eaff; /* حاشیه آبی نئونی برای لوگو */
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .icon:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
         }
         /* استایل دایره Mining */
         .mining-wrapper {
@@ -102,7 +102,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 50vh; /* برای وسط کردن عمودی */
+            height: 50vh;
         }
         .mining-circle {
             width: 120px;
@@ -116,8 +116,8 @@
             justify-content: center;
             align-items: center;
             margin: 20px 0;
-            outline: none; /* حذف مربع */
-            -webkit-tap-highlight-color: transparent; /* حذف مربع در موبایل */
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .mining-circle img {
             width: 100%;
@@ -147,6 +147,57 @@
         .mining-info {
             text-align: center;
             margin-top: 10px;
+        }
+        /* استایل پنل درآمد */
+        .earnings-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .earnings-form input {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+            max-width: 300px;
+        }
+        .earnings-form button {
+            padding: 10px 20px;
+            background: #00eaff;
+            color: #1e1e2f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .earnings-form button:hover {
+            background: #ffd700;
+        }
+        /* استایل پنل دوستان */
+        .friends-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .friends-wrapper button {
+            padding: 10px 20px;
+            background: #00eaff;
+            color: #1e1e2f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+        .friends-wrapper button:hover {
+            background: #ffd700;
+        }
+        .friends-list {
+            margin-top: 20px;
+        }
+        .friends-list p {
+            margin: 5px 0;
         }
         /* استایل آیکن بازگشت */
         .back-button {
@@ -180,16 +231,21 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #00eaff;
+            color: #ffd700; /* رنگ متن به طلایی */
             font-size: 0.9rem;
             transition: color 0.3s;
         }
         .footer-nav a:hover {
-            color: #ffd700;
+            color: #ffaa00; /* رنگ هاور به طلایی تیره */
         }
         .footer-nav i {
             font-size: 24px;
             margin-bottom: 5px;
+            color: #ffd700; /* رنگ آیکن‌ها به طلایی */
+            transition: color 0.3s;
+        }
+        .footer-nav a:hover i {
+            color: #ffaa00; /* رنگ هاور آیکن‌ها به طلایی تیره */
         }
         .page-content {
             display: none;
@@ -260,6 +316,35 @@
         <h1 data-lang="comments-title"></h1>
         <p data-lang="comments-text"></p>
     </div>
+    <div class="container page-content" id="earnings-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="earnings-title"></h1>
+        <p data-lang="earnings-text"></p>
+        <p>Total Tokens: <span id="userTokens">0</span></p>
+        <p id="currentQuestion"></p>
+        <div class="earnings-form">
+            <input type="text" id="answerInput" placeholder="Your answer">
+            <button onclick="checkAnswer()">Submit Answer</button>
+        </div>
+        <p id="answerFeedback"></p>
+    </div>
+    <div class="container page-content" id="friends-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="friends-title"></h1>
+        <p data-lang="friends-text"></p>
+        <div class="friends-wrapper">
+            <p>Your Referral Link: <span id="referralLink"></span></p>
+            <button onclick="copyReferralLink()">Copy Link</button>
+            <div class="friends-list">
+                <h3>Invited Friends (<span id="friendsCount">0</span>/5)</h3>
+                <div id="friendsList"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- نوار پایین با آیکن‌های FontAwesome -->
     <div class="footer-nav">
@@ -283,10 +368,18 @@
             <i class="fas fa-comments"></i>
             <span data-lang="comments-nav"></span>
         </a>
+        <a href="#" onclick="showPage('earnings-page'); return false;">
+            <i class="fas fa-money-bill"></i>
+            <span data-lang="earnings-nav"></span>
+        </a>
+        <a href="#" onclick="showPage('friends-page'); return false;">
+            <i class="fas fa-user-friends"></i>
+            <span data-lang="friends-nav"></span>
+        </a>
     </div>
 
     <!-- فایل صوتی برای افکت کلیک -->
-    <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+    <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/beep-01a.mp3"></audio>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
@@ -304,11 +397,17 @@
                 "partnerships-text": "Details of partnerships.",
                 "comments-title": "Comments",
                 "comments-text": "User comments will be displayed here.",
+                "earnings-title": "Earnings",
+                "earnings-text": "Answer the question to earn 200 tokens!",
+                "friends-title": "Friends",
+                "friends-text": "Invite friends to earn 1000 tokens per referral (max 5).",
                 "social-nav": "Social",
                 "tasks-nav": "Tasks",
                 "mining-nav": "Mining",
                 "partnerships-nav": "Partners",
-                "comments-nav": "Comments"
+                "comments-nav": "Comments",
+                "earnings-nav": "Earnings",
+                "friends-nav": "Friends"
             },
             ru: {
                 title: "Crypto GEM RASA",
@@ -323,25 +422,49 @@
                 "partnerships-text": "Подробности о партнерствах.",
                 "comments-title": "Комментарии",
                 "comments-text": "Комментарии пользователей будут отображаться здесь.",
+                "earnings-title": "Заработок",
+                "earnings-text": "Ответьте на вопрос, чтобы заработать 200 токенов!",
+                "friends-title": "Друзья",
+                "friends-text": "Приглашайте друзей, чтобы заработать 1000 токенов за каждого (макс. 5).",
                 "social-nav": "Социальные",
                 "tasks-nav": "Задания",
                 "mining-nav": "Майнинг",
                 "partnerships-nav": "Партнеры",
-                "comments-nav": "Комментарии"
+                "comments-nav": "Комментарии",
+                "earnings-nav": "Заработок",
+                "friends-nav": "Друзья"
             }
         };
 
         let currentLang = "en";
         let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
         let startTime = parseInt(localStorage.getItem('startTime')) || 0;
+        let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
+        let answeredQuestions = JSON.parse(localStorage.getItem('answeredQuestions')) || [];
+        let referrals = JSON.parse(localStorage.getItem('referrals')) || [];
         const maxMining = 500;
         const periodHours = 8;
-        const periodMs = periodHours * 60 * 60 * 1000; // 8 ساعت به میلی‌ثانیه
+        const periodMs = periodHours * 60 * 60 * 1000;
+
+        const questions = [
+            { id: 1, text: "What is the capital of France?", answer: "Paris", active: true },
+            { id: 2, text: "What is 2 + 2?", answer: "4", active: false }
+        ];
 
         const miningCircle = document.getElementById('miningCircle');
         const miningCountDisplay = document.getElementById('miningCount');
         const timeRemainingDisplay = document.getElementById('timeRemaining');
         const clickSound = document.getElementById('clickSound');
+        const userTokensDisplay = document.getElementById('userTokens');
+        const currentQuestionDisplay = document.getElementById('currentQuestion');
+        const answerInput = document.getElementById('answerInput');
+        const answerFeedback = document.getElementById('answerFeedback');
+        const referralLinkDisplay = document.getElementById('referralLink');
+        const friendsCountDisplay = document.getElementById('friendsCount');
+        const friendsListDisplay = document.getElementById('friendsList');
+
+        let userId = null;
+        let username = null;
 
         function updateMiningStatus() {
             const now = Date.now();
@@ -352,7 +475,6 @@
 
             const elapsed = now - startTime;
             if (elapsed >= periodMs) {
-                // دوره ۸ ساعته تموم شده، ریست می‌کنیم
                 miningCount = 0;
                 startTime = now;
                 localStorage.setItem('miningCount', miningCount);
@@ -378,7 +500,6 @@
             const elapsed = now - startTime;
 
             if (elapsed >= periodMs) {
-                // دوره جدید شروع شده
                 miningCount = 0;
                 startTime = now;
                 localStorage.setItem('startTime', startTime);
@@ -397,9 +518,105 @@
             }
         }
 
-        // به‌روزرسانی تایمر هر ثانیه
-        setInterval(updateMiningStatus, 1000);
+        function updateEarningsPage() {
+            userTokensDisplay.textContent = userTokens;
+            const activeQuestion = questions.find(q => q.active);
+            if (activeQuestion) {
+                currentQuestionDisplay.textContent = activeQuestion.text;
+                if (answeredQuestions.includes(activeQuestion.id)) {
+                    answerInput.disabled = true;
+                    answerInput.placeholder = "You have already answered this question.";
+                    document.querySelector('.earnings-form button').disabled = true;
+                } else {
+                    answerInput.disabled = false;
+                    answerInput.placeholder = "Your answer";
+                    document.querySelector('.earnings-form button').disabled = false;
+                }
+            } else {
+                currentQuestionDisplay.textContent = "No active question available.";
+                answerInput.disabled = true;
+                document.querySelector('.earnings-form button').disabled = true;
+            }
+        }
 
+        function checkAnswer() {
+            const activeQuestion = questions.find(q => q.active);
+            if (!activeQuestion || answeredQuestions.includes(activeQuestion.id)) return;
+
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = activeQuestion.answer.toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                userTokens += 200;
+                localStorage.setItem('userTokens', userTokens);
+                answeredQuestions.push(activeQuestion.id);
+                localStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestions));
+                answerFeedback.textContent = "Correct! You earned 200 tokens.";
+                answerFeedback.style.color = "#00eaff";
+
+                // ارسال جواب به گروه تلگرام
+                fetch('https://your-server.com/sendAnswer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId: userId,
+                        username: username,
+                        question: activeQuestion.text,
+                        answer: userAnswer,
+                        timestamp: new Date().toISOString()
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        console.log("Answer sent to group");
+                    } else {
+                        console.log("Failed to send answer to group");
+                    }
+                }).catch(error => {
+                    console.log("Error sending answer:", error);
+                });
+            } else {
+                answerFeedback.textContent = "Incorrect answer. Try again!";
+                answerFeedback.style.color = "#ff5555";
+            }
+
+            updateEarningsPage();
+        }
+
+        function generateReferralLink() {
+            const referralCode = userId || Math.random().toString(36).substring(2, 10);
+            const botLink = "https://t.me/YourBot"; // جایگزین با لینک ربات خودت
+            return `${botLink}?start=${referralCode}`;
+        }
+
+        function copyReferralLink() {
+            const referralLink = referralLinkDisplay.textContent;
+            navigator.clipboard.writeText(referralLink).then(() => {
+                alert("Referral link copied to clipboard!");
+            });
+        }
+
+        function updateFriendsPage() {
+            friendsCountDisplay.textContent = referrals.length;
+            friendsListDisplay.innerHTML = referrals.length > 0
+                ? referrals.map(friend => `<p>${friend.username || friend.userId}</p>`).join('')
+                : "<p>No friends invited yet.</p>";
+
+            userTokensDisplay.textContent = userTokens;
+            referralLinkDisplay.textContent = generateReferralLink();
+        }
+
+        function handleReferral() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const referralCode = urlParams.get('start');
+            if (referralCode && referralCode !== userId && referrals.length < 5 && !referrals.some(f => f.userId === userId)) {
+                referrals.push({ userId: userId, username: username });
+                localStorage.setItem('referrals', JSON.stringify(referrals));
+                userTokens += 1000;
+                localStorage.setItem('userTokens', userTokens);
+            }
+        }
+
+        setInterval(updateMiningStatus, 1000);
         miningCircle.addEventListener('click', mine);
 
         function changeLanguage() {
@@ -417,6 +634,9 @@
             });
             document.getElementById('main-content').style.display = 'none';
             document.getElementById(pageId).classList.add('active');
+
+            if (pageId === 'earnings-page') updateEarningsPage();
+            if (pageId === 'friends-page') updateFriendsPage();
         }
 
         function goToHome() {
@@ -431,12 +651,17 @@
             if (typeof Telegram !== "undefined" && Telegram.WebApp) {
                 Telegram.WebApp.ready();
                 console.log("Telegram WebApp is ready");
+                userId = Telegram.WebApp.initDataUnsafe.user?.id;
+                username = Telegram.WebApp.initDataUnsafe.user?.username;
             } else {
                 console.log("Telegram WebApp is not available");
+                userId = "testUser" + Math.random().toString(36).substring(2, 10);
+                username = "TestUser";
             }
             changeLanguage();
             document.getElementById('main-content').style.display = 'block';
             updateMiningStatus();
+            handleReferral();
         };
     </script>
 </body>
