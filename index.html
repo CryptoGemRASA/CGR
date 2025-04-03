@@ -152,6 +152,59 @@
         .mining-info span {
             font-size: 0.8rem;
         }
+        .earnings-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .earnings-form input {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+            max-width: 300px;
+            font-size: 0.8rem;
+        }
+        .earnings-form button {
+            padding: 10px 20px;
+            background: #00eaff;
+            color: #1e1e2f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 0.8rem;
+        }
+        .earnings-form button:hover {
+            background: #66eaff;
+        }
+        .friends-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .friends-wrapper button {
+            padding: 10px 20px;
+            background: #00eaff;
+            color: #1e1e2f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+        .friends-wrapper button:hover {
+            background: #66eaff;
+        }
+        .friends-list {
+            margin-top: 20px;
+        }
+        .friends-list p {
+            margin: 5px 0;
+            font-size: 0.8rem;
+        }
         .back-button {
             position: absolute;
             top: 10px;
@@ -197,10 +250,60 @@
         .footer-nav a:hover i { color: #66eaff; }
         .page-content { display: none; }
         .page-content.active { display: block; }
+        .language-menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .language-button {
+            background: linear-gradient(135deg, #00eaff, #1e3c72);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .language-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.8);
+        }
+        .language-button i {
+            color: #fff;
+            font-size: 20px;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+            z-index: 1000;
+        }
+        .language-dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+        .language-dropdown a:hover {
+            background: rgba(0, 234, 255, 0.2);
+        }
+        .language-menu:hover .language-dropdown {
+            display: block;
+        }
         .social-links {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: flex-start; /* چپ‌چین کردن لینک‌ها */
             gap: 15px;
             margin-top: 20px;
             width: 100%;
@@ -213,8 +316,8 @@
             color: #fff;
             font-size: 1rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
+            outline: none; /* حذف کادر مستطیلی */
+            -webkit-tap-highlight-color: transparent; /* حذف هایلایت موبایل */
         }
         .social-link i {
             font-size: 24px;
@@ -239,7 +342,7 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background: rgba(0, 234, 255, 0.8);
+            background: linear-gradient(135deg, #00eaff, #ffffff); /* گرادیانت برای جبران */
             border-radius: 50%;
             pointer-events: none;
             animation: fadeOut 0.5s ease forwards;
@@ -252,11 +355,20 @@
 </head>
 <body>
     <div class="container" id="main-content">
+        <div class="language-menu">
+            <button class="language-button">
+                <i class="fas fa-globe"></i>
+            </button>
+            <div class="language-dropdown">
+                <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+                <a href="#" onclick="changeLanguage('ru'); return false;">Русский</a>
+            </div>
+        </div>
         <div class="icon-wrapper">
             <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon">
         </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
-        <p data-lang="welcome">Welcome to Crypto GEM RASA!</p>
+        <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
     </div>
 
     <div class="container page-content" id="social-page">
@@ -301,12 +413,20 @@
         </div>
     </div>
 
+    <div class="container page-content" id="tasks-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="tasks-title">Tasks</h1>
+        <p data-lang="tasks-text">List of tasks for users.</p>
+    </div>
+
     <div class="container page-content" id="mining-page">
         <div class="back-button" onclick="goToHome()">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="mining-title">Mining</h1>
-        <p data-lang="mining-text">Tap the circle to mine!</p>
+        <p data-lang="mining-text">Tap the circle to mine! You can mine 500 units every 8 hours.</p>
         <div class="mining-wrapper">
             <div class="mining-circle" id="miningCircle">
                 <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Mining Circle">
@@ -319,18 +439,144 @@
         </div>
     </div>
 
+    <div class="container page-content" id="partnerships-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="partnerships-title">Partnerships</h1>
+        <p data-lang="partnerships-text">Details of partnerships.</p>
+    </div>
+
+    <div class="container page-content" id="comments-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="comments-title">Comments</h1>
+        <p data-lang="comments-text">User comments will be displayed here.</p>
+    </div>
+
+    <div class="container page-content" id="earnings-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="earnings-title">Earnings</h1>
+        <p data-lang="earnings-text">Answer the question to earn 200 tokens!</p>
+        <p>Total Tokens: <span id="userTokens">0</span></p>
+        <p id="currentQuestion"></p>
+        <div class="earnings-form">
+            <input type="text" id="answerInput" placeholder="Your answer">
+            <button onclick="checkAnswer()">Submit Answer</button>
+        </div>
+        <p id="answerFeedback"></p>
+    </div>
+
+    <div class="container page-content" id="friends-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="friends-title">Friends</h1>
+        <p data-lang="friends-text">Invite friends to earn 1000 tokens per referral (max 5).</p>
+        <div class="friends-wrapper">
+            <p>Your Referral Link: <span id="referralLink"></span></p>
+            <button onclick="copyReferralLink()">Copy Link</button>
+            <div class="friends-list">
+                <h3>Invited Friends (<span id="friendsCount">0</span>/5)</h3>
+                <div id="friendsList"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="footer-nav">
         <a href="#" onclick="showPage('social-page'); return false;">
             <i class="fas fa-users"></i>
             <span data-lang="social-nav">Social</span>
         </a>
+        <a href="#" onclick="showPage('tasks-page'); return false;">
+            <i class="fas fa-tasks"></i>
+            <span data-lang="tasks-nav">Tasks</span>
+        </a>
         <a href="#" onclick="showPage('mining-page'); return false;">
             <i class="fas fa-gem"></i>
             <span data-lang="mining-nav">Mining</span>
         </a>
+        <a href="#" onclick="showPage('partnerships-page'); return false;">
+            <i class="fas fa-handshake"></i>
+            <span data-lang="partnerships-nav">Partners</span>
+        </a>
+        <a href="#" onclick="showPage('comments-page'); return false;">
+            <i class="fas fa-comments"></i>
+            <span data-lang="comments-nav">Comments</span>
+        </a>
+        <a href="#" onclick="showPage('earnings-page'); return false;">
+            <i class="fas fa-money-bill"></i>
+            <span data-lang="earnings-nav">Earnings</span>
+        </a>
+        <a href="#" onclick="showPage('friends-page'); return false;">
+            <i class="fas fa-user-friends"></i>
+            <span data-lang="friends-nav">Friends</span>
+        </a>
     </div>
 
+    <audio id="clickSound" src="https://freesound.org/data/previews/245/245645_4052905-lq.mp3"></audio>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        const translations = {
+            en: {
+                title: "Crypto GEM RASA",
+                welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates.",
+                "social-title": "Social Networks",
+                "social-text": "Follow us on our social media platforms!",
+                "tasks-title": "Tasks",
+                "tasks-text": "List of tasks for users.",
+                "mining-title": "Mining",
+                "mining-text": "Tap the circle to mine! You can mine 500 units every 8 hours.",
+                "partnerships-title": "Partnerships",
+                "partnerships-text": "Details of partnerships.",
+                "comments-title": "Comments",
+                "comments-text": "User comments will be displayed here.",
+                "earnings-title": "Earnings",
+                "earnings-text": "Answer the question to earn 200 tokens!",
+                "friends-title": "Friends",
+                "friends-text": "Invite friends to earn 1000 tokens per referral (max 5).",
+                "social-nav": "Social",
+                "tasks-nav": "Tasks",
+                "mining-nav": "Mining",
+                "partnerships-nav": "Partners",
+                "comments-nav": "Comments",
+                "earnings-nav": "Earnings",
+                "friends-nav": "Friends"
+            },
+            ru: {
+                title: "Crypto GEM RASA",
+                welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями.",
+                "social-title": "Социальные сети",
+                "social-text": "Подписывайтесь на нас в социальных сетях!",
+                "tasks-title": "Задания",
+                "tasks-text": "Список заданий для пользователей.",
+                "mining-title": "Майнинг",
+                "mining-text": "Нажмите на круг, чтобы добывать! Вы можете добыть 500 единиц каждые 8 часов.",
+                "partnerships-title": "Партнерства",
+                "partnerships-text": "Подробности о партнерствах.",
+                "comments-title": "Комментарии",
+                "comments-text": "Комментарии пользователей будут отображаться здесь.",
+                "earnings-title": "Заработок",
+                "earnings-text": "Ответьте на вопрос, чтобы заработать 200 токенов!",
+                "friends-title": "Друзья",
+                "friends-text": "Приглашайте друзей, чтобы заработать 1000 токенов за каждого (макс. 5).",
+                "social-nav": "Социальные",
+                "tasks-nav": "Задания",
+                "mining-nav": "Майнинг",
+                "partnerships-nav": "Партнеры",
+                "comments-nav": "Комментарии",
+                "earnings-nav": "Заработок",
+                "friends-nav": "Друзья"
+            }
+        };
+
+        let currentLang = "en";
+        let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
+
         function showTouchEffect(event) {
             const circle = document.getElementById('miningCircle');
             const rect = circle.getBoundingClientRect();
@@ -350,36 +596,22 @@
             setTimeout(() => touchDot.remove(), 500);
         }
 
-        let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
-        const maxMining = 500;
+        const miningCircle = document.getElementById('miningCircle');
+        miningCircle.addEventListener('click', showTouchEffect);
+        miningCircle.addEventListener('touchstart', showTouchEffect);
 
         function updateMiningStatus() {
-            document.getElementById('miningCount').textContent = `${miningCount} / ${maxMining}`;
+            document.getElementById('miningCount').textContent = `${miningCount} / 500`;
             document.getElementById('totalMiningCount').textContent = `Total Mined: ${miningCount}`;
-            if (miningCount >= maxMining) {
-                document.getElementById('miningCircle').classList.add('disabled');
-            } else {
-                document.getElementById('miningCircle').classList.remove('disabled');
-            }
         }
 
-        function mine() {
-            if (miningCount < maxMining) {
-                miningCount++;
-                localStorage.setItem('miningCount', miningCount);
-                updateMiningStatus();
-            }
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                element.textContent = translations[lang][key];
+            });
         }
-
-        const miningCircle = document.getElementById('miningCircle');
-        miningCircle.addEventListener('click', (e) => {
-            showTouchEffect(e);
-            mine();
-        });
-        miningCircle.addEventListener('touchstart', (e) => {
-            showTouchEffect(e);
-            mine();
-        });
 
         function showPage(pageId) {
             document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
@@ -394,6 +626,7 @@
 
         window.onload = function() {
             document.getElementById('main-content').style.display = 'block';
+            changeLanguage(currentLang);
             updateMiningStatus();
         };
     </script>
