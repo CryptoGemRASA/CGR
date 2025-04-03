@@ -7,366 +7,7 @@
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: url('https://i.imgur.com/nq2jGI2.jpeg') no-repeat center center fixed, linear-gradient(135deg, #1e3c72, #2a5298);
-            background-size: cover;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-        .container {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8));
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
-            border: 1px solid #00eaff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            max-width: 90%;
-            min-width: 300px;
-            margin: 20px auto;
-            flex-grow: 1;
-            animation: fadeIn 1s ease-in-out forwards;
-            position: relative;
-        }
-        .container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .container h1 {
-            margin: 10px 0;
-            width: 100%;
-            text-align: center;
-            font-size: 1rem;
-        }
-        .container p {
-            margin: 10px 0;
-            width: 100%;
-            text-align: center;
-            font-size: 0.8rem;
-        }
-        #main-content h1 {
-            font-size: 1.5rem;
-            background: linear-gradient(90deg, #00eaff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 234, 255, 0.8);
-            margin: 10px 0;
-            width: 100%;
-            text-align: center;
-        }
-        #main-content p {
-            font-size: 1rem;
-            color: #fff;
-            text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
-            margin: 10px 0;
-            width: 100%;
-            text-align: center;
-        }
-        @media (max-width: 768px) {
-            .container { max-width: 95%; padding: 15px; margin: 10px auto; }
-            .container h1 { font-size: 0.9rem; }
-            .container p { font-size: 0.7rem; }
-            #main-content h1 { font-size: 1.2rem; }
-            #main-content p { font-size: 0.9rem; }
-        }
-        .icon-wrapper {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #00eaff;
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
-            transition: transform 0.3s ease;
-        }
-        .icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
-        }
-        .mining-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 50vh;
-        }
-        .mining-circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #00eaff;
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
-            position: relative;
-        }
-        .mining-circle img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-        .mining-circle.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            border-color: #666;
-            box-shadow: none;
-        }
-        .mining-circle:active {
-            animation: pulse 0.3s ease;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .mining-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .mining-info span {
-            font-size: 0.8rem;
-        }
-        .earnings-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .earnings-form input {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: none;
-            width: 80%;
-            max-width: 300px;
-            font-size: 0.8rem;
-        }
-        .earnings-form button {
-            padding: 10px 20px;
-            background: #00eaff;
-            color: #1e1e2f;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            font-size: 0.8rem;
-        }
-        .earnings-form button:hover {
-            background: #66eaff;
-        }
-        .friends-wrapper {
-            text-align: center;
-            margin-top: 20px;
-            width: 100%;
-        }
-        .friends-wrapper button {
-            padding: 10px 20px;
-            background: #00eaff;
-            color: #1e1e2f;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-top: 10px;
-            font-size: 0.8rem;
-        }
-        .friends-wrapper button:hover {
-            background: #66eaff;
-        }
-        .friends-list {
-            margin-top: 20px;
-        }
-        .friends-list p {
-            margin: 5px 0;
-            font-size: 0.8rem;
-        }
-        .back-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #00eaff;
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        .back-button:hover {
-            color: #66eaff;
-        }
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            z-index: 1000;
-        }
-        .footer-nav a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #00eaff;
-            font-size: 0.45rem;
-            transition: color 0.3s;
-        }
-        .footer-nav a:hover { color: #66eaff; }
-        .footer-nav i {
-            font-size: 24px;
-            margin-bottom: 5px;
-            color: #00eaff;
-            transition: color 0.3s;
-        }
-        .footer-nav a:hover i { color: #66eaff; }
-        .page-content { display: none; }
-        .page-content.active { display: block; }
-        .language-menu {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .language-button {
-            background: linear-gradient(135deg, #00eaff, #1e3c72);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .language-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 234, 255, 0.8);
-        }
-        .language-button i {
-            color: #fff;
-            font-size: 20px;
-        }
-        .language-dropdown {
-            display: none;
-            position: absolute;
-            top: 50px;
-            left: 0;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
-            z-index: 1000;
-        }
-        .language-dropdown a {
-            display: block;
-            padding: 10px 20px;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: background 0.3s ease;
-        }
-        .language-dropdown a:hover {
-            background: rgba(0, 234, 255, 0.2);
-        }
-        .language-menu:hover .language-dropdown {
-            display: block;
-        }
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 15px;
-            margin-top: 20px;
-            width: 100%;
-            padding-left: 10px;
-        }
-        .social-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .social-link i {
-            font-size: 24px;
-            margin-right: 10px;
-            background: linear-gradient(135deg, #ffd700, #c0c0c0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: transform 0.3s ease;
-        }
-        .social-link span {
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
-            text-align: left;
-        }
-        .social-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-        }
-        .social-link:hover i {
-            transform: scale(1.2);
-        }
-        .touch-effect {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(135deg, #00eaff, #ffffff);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: fadeOut 0.5s ease forwards;
-        }
-        @keyframes fadeOut {
-            0% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(2); }
-        }
-        /* استایل برای مدیریت نمایش لینک رفرال */
-        .referral-link-container {
-            width: 100%;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            font-size: 0.8rem;
-            color: #00eaff;
-            margin: 10px 0;
-            padding: 5px;
-            border: 1px solid #00eaff;
-            border-radius: 5px;
-            background: rgba(0, 234, 255, 0.1);
-        }
+        /* استایل‌ها در بخش بعدی ارسال می‌شوند */
     </style>
 </head>
 <body>
@@ -534,256 +175,617 @@
     </div>
 
     <audio id="clickSound" src="click-sound.mp3"></audio>
-
-    <script>
-        const translations = {
-            en: {
-                title: "Crypto GEM RASA",
-                welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates.",
-                "social-title": "Social Networks",
-                "social-text": "Follow us on our social media platforms!",
-                "tasks-title": "Tasks",
-                "tasks-text": "List of tasks for users.",
-                "mining-title": "Mining",
-                "mining-text": "Tap the circle to mine! You can mine 500 units every 8 hours.",
-                "partnerships-title": "Partnerships",
-                "partnerships-text": "Details of partnerships.",
-                "comments-title": "Comments",
-                "comments-text": "User comments will be displayed here.",
-                "earnings-title": "Earnings",
-                "earnings-text": "Answer the question to earn 200 tokens!",
-                "friends-title": "Friends",
-                "friends-text": "Invite friends to earn 1000 tokens per referral (max 5).",
-                "social-nav": "Social",
-                "tasks-nav": "Tasks",
-                "mining-nav": "Mining",
-                "partnerships-nav": "Partners",
-                "comments-nav": "Comments",
-                "earnings-nav": "Earnings",
-                "friends-nav": "Friends"
-            },
-            ru: {
-                title: "Crypto GEM RASA",
-                welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями.",
-                "social-title": "Социальные сети",
-                "social-text": "Подписывайтесь на нас в социальных сетях!",
-                "tasks-title": "Задания",
-                "tasks-text": "Список заданий для пользователей.",
-                "mining-title": "Майнинг",
-                "mining-text": "Нажмите на круг, чтобы добывать! Вы можете добыть 500 единиц каждые 8 часов.",
-                "partnerships-title": "Партнерства",
-                "partnerships-text": "Подробности о партнерствах.",
-                "comments-title": "Комментарии",
-                "comments-text": "Комментарии пользователей будут отображаться здесь.",
-                "earnings-title": "Заработок",
-                "earnings-text": "Ответьте на вопрос, чтобы заработать 200 токенов!",
-                "friends-title": "Друзья",
-                "friends-text": "Приглашайте друзей, чтобы заработать 1000 токенов за каждого (макс. 5).",
-                "social-nav": "Социальные",
-                "tasks-nav": "Задания",
-                "mining-nav": "Майнинг",
-                "partnerships-nav": "Партнеры",
-                "comments-nav": "Комментарии",
-                "earnings-nav": "Заработок",
-                "friends-nav": "Друзья"
-            }
-        };
-
-        let currentLang = "en";
-        let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
-        let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0;
-        let lastMiningTime = parseInt(localStorage.getItem('lastMiningTime')) || 0;
-        let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
-        let friendsCount = parseInt(localStorage.getItem('friendsCount')) || 0;
-        let friendsList = JSON.parse(localStorage.getItem('friendsList')) || [];
-
-        const miningLimit = 500;
-        const miningInterval = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById(pageId).classList.add('active');
-            if (pageId === 'earnings-page') loadQuestion();
-            if (pageId === 'friends-page') updateFriendsPage();
+    <style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url('https://i.imgur.com/nq2jGI2.jpeg') no-repeat center center fixed, linear-gradient(135deg, #1e3c72, #2a5298);
+        background-size: cover;
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+    .container {
+        background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8));
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+        border: 1px solid #00eaff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 90%;
+        min-width: 300px;
+        margin: 20px auto;
+        flex-grow: 1;
+        animation: fadeIn 1s ease-in-out forwards;
+        position: relative;
+        box-sizing: border-box;
+    }
+    .container > * {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .container:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .container h1 {
+        margin: 10px 0;
+        text-align: center;
+        font-size: 1rem;
+    }
+    .container p {
+        margin: 10px 0;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    #main-content h1 {
+        font-size: 1.5rem;
+        background: linear-gradient(90deg, #00eaff, #ff00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 10px rgba(0, 234, 255, 0.8);
+        margin: 10px 0;
+        text-align: center;
+    }
+    #main-content p {
+        font-size: 1rem;
+        color: #fff;
+        text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
+        margin: 10px 0;
+        text-align: center;
+    }
+    @media (max-width: 768px) {
+        .container { max-width: 95%; padding: 15px; margin: 10px auto; }
+        .container h1 { font-size: 0.9rem; }
+        .container p { font-size: 0.7rem; }
+        #main-content h1 { font-size: 1.2rem; }
+        #main-content p { font-size: 0.9rem; }
+    }
+    .icon-wrapper {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #00eaff;
+        box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+        transition: transform 0.3s ease;
+    }
+    .icon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(0, 234, 255, 0.8);
+    }
+    .mining-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+    }
+    .mining-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #00eaff;
+        box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+        position: relative;
+    }
+    .mining-circle img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+    .mining-circle.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        border-color: #666;
+        box-shadow: none;
+    }
+    .mining-circle:active {
+        animation: pulse 0.3s ease;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    .mining-info {
+        text-align: center;
+        margin-top: 10px;
+    }
+    .mining-info span {
+        font-size: 0.8rem;
+    }
+    .earnings-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .earnings-form input {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+        width: 80%;
+        max-width: 300px;
+        font-size: 0.8rem;
+    }
+    .earnings-form button {
+        padding: 10px 20px;
+        background: #00eaff;
+        color: #1e1e2f;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 0.8rem;
+    }
+    .earnings-form button:hover {
+        background: #66eaff;
+    }
+    .friends-wrapper {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .friends-wrapper button {
+        padding: 10px 20px;
+        background: #00eaff;
+        color: #1e1e2f;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+        font-size: 0.8rem;
+    }
+    .friends-wrapper button:hover {
+        background: #66eaff;
+    }
+    .friends-list {
+        margin-top: 20px;
+    }
+    .friends-list p {
+        margin: 5px 0;
+        font-size: 0.8rem;
+    }
+    .back-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #00eaff;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .back-button:hover {
+        color: #66eaff;
+    }
+    .footer-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 1000;
+    }
+    .footer-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #00eaff;
+        font-size: 0.45rem;
+        transition: color 0.3s;
+    }
+    .footer-nav a:hover { color: #66eaff; }
+    .footer-nav i {
+        font-size: 24px;
+        margin-bottom: 5px;
+        color: #00eaff;
+        transition: color 0.3s;
+    }
+    .footer-nav a:hover i { color: #66eaff; }
+    .page-content { display: none; }
+    .page-content.active { display: block; }
+    .language-menu {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+    .language-button {
+        background: linear-gradient(135deg, #00eaff, #1e3c72);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .language-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 234, 255, 0.8);
+    }
+    .language-button i {
+        color: #fff;
+        font-size: 20px;
+    }
+    .language-dropdown {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
+        z-index: 1000;
+    }
+    .language-dropdown a {
+        display: block;
+        padding: 10px 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: background 0.3s ease;
+    }
+    .language-dropdown a:hover {
+        background: rgba(0, 234, 255, 0.2);
+    }
+    .language-menu:hover .language-dropdown {
+        display: block;
+    }
+    .social-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-top: 20px;
+        padding-left: 10px;
+    }
+    .social-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #fff;
+        font-size: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .social-link i {
+        font-size: 24px;
+        margin-right: 10px;
+        background: linear-gradient(135deg, #ffd700, #c0c0c0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.3s ease;
+    }
+    .social-link span {
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+        text-align: left;
+    }
+    .social-link:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
+    .social-link:hover i {
+        transform: scale(1.2);
+    }
+    .touch-effect {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: linear-gradient(135deg, #00eaff, #ffffff);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: fadeOut 0.5s ease forwards;
+    }
+    @keyframes fadeOut {
+        0% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(2); }
+    }
+    .referral-link-container {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.8rem;
+        color: #00eaff;
+        margin: 10px 0;
+        padding: 5px;
+        border: 1px solid #00eaff;
+        border-radius: 5px;
+        background: rgba(0, 234, 255, 0.1);
+    }
+</style>
+<script>
+    const translations = {
+        en: {
+            title: "Crypto GEM RASA",
+            welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates.",
+            "social-title": "Social Networks",
+            "social-text": "Follow us on our social media platforms!",
+            "tasks-title": "Tasks",
+            "tasks-text": "List of tasks for users.",
+            "mining-title": "Mining",
+            "mining-text": "Tap the circle to mine! You can mine 500 units every 8 hours.",
+            "partnerships-title": "Partnerships",
+            "partnerships-text": "Details of partnerships.",
+            "comments-title": "Comments",
+            "comments-text": "User comments will be displayed here.",
+            "earnings-title": "Earnings",
+            "earnings-text": "Answer the question to earn 200 tokens!",
+            "friends-title": "Friends",
+            "friends-text": "Invite friends to earn 1000 tokens per referral (max 5).",
+            "social-nav": "Social",
+            "tasks-nav": "Tasks",
+            "mining-nav": "Mining",
+            "partnerships-nav": "Partners",
+            "comments-nav": "Comments",
+            "earnings-nav": "Earnings",
+            "friends-nav": "Friends"
+        },
+        ru: {
+            title: "Crypto GEM RASA",
+            welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями.",
+            "social-title": "Социальные сети",
+            "social-text": "Подписывайтесь на нас в социальных сетях!",
+            "tasks-title": "Задания",
+            "tasks-text": "Список заданий для пользователей.",
+            "mining-title": "Майнинг",
+            "mining-text": "Нажмите на круг, чтобы добывать! Вы можете добыть 500 единиц каждые 8 часов.",
+            "partnerships-title": "Партнерства",
+            "partnerships-text": "Подробности о партнерствах.",
+            "comments-title": "Комментарии",
+            "comments-text": "Комментарии пользователей будут отображаться здесь.",
+            "earnings-title": "Заработок",
+            "earnings-text": "Ответьте на вопрос, чтобы заработать 200 токенов!",
+            "friends-title": "Друзья",
+            "friends-text": "Приглашайте друзей, чтобы заработать 1000 токенов за каждого (макс. 5).",
+            "social-nav": "Социальные",
+            "tasks-nav": "Задания",
+            "mining-nav": "Майнинг",
+            "partnerships-nav": "Партнеры",
+            "comments-nav": "Комментарии",
+            "earnings-nav": "Заработок",
+            "friends-nav": "Друзья"
         }
+    };
 
-        function goToHome() {
-            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
-            document.getElementById('main-content').style.display = 'block';
+    let currentLang = "en";
+    let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
+    let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0;
+    let lastMiningTime = parseInt(localStorage.getItem('lastMiningTime')) || 0;
+    let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
+    let friendsCount = parseInt(localStorage.getItem('friendsCount')) || 0;
+    let friendsList = JSON.parse(localStorage.getItem('friendsList')) || [];
+
+    // بررسی و تولید کد رفرال (فقط یک بار)
+    let referralCode = localStorage.getItem('referralCode');
+    if (!referralCode) {
+        referralCode = Math.random().toString(36).substring(2, 8); // کد 6 کاراکتری تصادفی
+        localStorage.setItem('referralCode', referralCode); // ذخیره کد در localStorage
+    }
+
+    const miningLimit = 500;
+    const miningInterval = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+
+    function showPage(pageId) {
+        document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById(pageId).classList.add('active');
+        if (pageId === 'earnings-page') loadQuestion();
+        if (pageId === 'friends-page') updateFriendsPage();
+    }
+
+    function goToHome() {
+        document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+        document.getElementById('main-content').style.display = 'block';
+    }
+
+    function showTouchEffect(event) {
+        const circle = document.getElementById('miningCircle');
+        const rect = circle.getBoundingClientRect();
+        let x, y;
+        if (event.type === 'touchstart') {
+            x = event.touches[0].clientX - rect.left;
+            y = event.touches[0].clientY - rect.top;
+        } else {
+            x = event.clientX - rect.left;
+            y = event.clientY - rect.top;
         }
+        const touchDot = document.createElement('div');
+        touchDot.classList.add('touch-effect');
+        touchDot.style.left = `${x - 5}px`;
+        touchDot.style.top = `${y - 5}px`;
+        circle.appendChild(touchDot);
+        setTimeout(() => touchDot.remove(), 500);
+    }
 
-        function showTouchEffect(event) {
-            const circle = document.getElementById('miningCircle');
-            const rect = circle.getBoundingClientRect();
-            let x, y;
-            if (event.type === 'touchstart') {
-                x = event.touches[0].clientX - rect.left;
-                y = event.touches[0].clientY - rect.top;
-            } else {
-                x = event.clientX - rect.left;
-                y = event.clientY - rect.top;
-            }
-            const touchDot = document.createElement('div');
-            touchDot.classList.add('touch-effect');
-            touchDot.style.left = `${x - 5}px`;
-            touchDot.style.top = `${y - 5}px`;
-            circle.appendChild(touchDot);
-            setTimeout(() => touchDot.remove(), 500);
+    function updateMiningStatus() {
+        const now = Date.now();
+        const timeElapsed = now - lastMiningTime;
+        const timeRemaining = miningInterval - timeElapsed;
+
+        document.getElementById('miningCount').textContent = `${miningCount} / ${miningLimit}`;
+        document.getElementById('totalMiningCount').textContent = `Total Mined: ${totalMiningCount}`;
+
+        if (timeRemaining > 0) {
+            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            document.getElementById('timeRemaining').textContent = `Next mining in: ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('miningCircle').classList.add('disabled');
+        } else {
+            document.getElementById('timeRemaining').textContent = '';
+            document.getElementById('miningCircle').classList.remove('disabled');
         }
+    }
 
-        function updateMiningStatus() {
-            const now = Date.now();
-            const timeElapsed = now - lastMiningTime;
-            const timeRemaining = miningInterval - timeElapsed;
-
-            document.getElementById('miningCount').textContent = `${miningCount} / ${miningLimit}`;
-            document.getElementById('totalMiningCount').textContent = `Total Mined: ${totalMiningCount}`;
-
-            if (timeRemaining > 0) {
-                const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
-                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-                document.getElementById('timeRemaining').textContent = `Next mining in: ${hours}h ${minutes}m ${seconds}s`;
-                document.getElementById('miningCircle').classList.add('disabled');
-            } else {
-                document.getElementById('timeRemaining').textContent = '';
-                document.getElementById('miningCircle').classList.remove('disabled');
+    function mine() {
+        const now = Date.now();
+        if (now - lastMiningTime >= miningInterval || miningCount === 0) {
+            miningCount += 10; // Mine 10 units per click
+            totalMiningCount += 10;
+            if (miningCount >= miningLimit) {
+                miningCount = miningLimit;
+                lastMiningTime = now;
+            }
+            localStorage.setItem('miningCount', miningCount);
+            localStorage.setItem('totalMiningCount', totalMiningCount);
+            localStorage.setItem('lastMiningTime', lastMiningTime);
+            const clickSound = document.getElementById('clickSound');
+            if (clickSound) {
+                clickSound.play().catch(err => console.log("Audio playback failed:", err));
             }
         }
+        updateMiningStatus();
+    }
 
-        function mine() {
-            const now = Date.now();
-            if (now - lastMiningTime >= miningInterval || miningCount === 0) {
-                miningCount += 10; // Mine 10 units per click
-                totalMiningCount += 10;
-                if (miningCount >= miningLimit) {
-                    miningCount = miningLimit;
-                    lastMiningTime = now;
-                }
-                localStorage.setItem('miningCount', miningCount);
-                localStorage.setItem('totalMiningCount', totalMiningCount);
-                localStorage.setItem('lastMiningTime', lastMiningTime);
-                const clickSound = document.getElementById('clickSound');
-                if (clickSound) {
-                    clickSound.play().catch(err => console.log("Audio playback failed:", err));
-                }
-            }
-            updateMiningStatus();
+    const miningCircle = document.getElementById('miningCircle');
+    miningCircle.addEventListener('click', (e) => {
+        if (!miningCircle.classList.contains('disabled')) {
+            showTouchEffect(e);
+            mine();
         }
+    });
+    miningCircle.addEventListener('touchstart', (e) => {
+        if (!miningCircle.classList.contains('disabled')) {
+            showTouchEffect(e);
+            mine();
+        }
+    });
 
-        const miningCircle = document.getElementById('miningCircle');
-        miningCircle.addEventListener('click', (e) => {
-            if (!miningCircle.classList.contains('disabled')) {
-                showTouchEffect(e);
-                mine();
-            }
+    function changeLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('[data-lang]').forEach(element => {
+            const key = element.getAttribute('data-lang');
+            element.textContent = translations[lang][key];
         });
-        miningCircle.addEventListener('touchstart', (e) => {
-            if (!miningCircle.classList.contains('disabled')) {
-                showTouchEffect(e);
-                mine();
-            }
-        });
+    }
 
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-lang]').forEach(element => {
-                const key = element.getAttribute('data-lang');
-                element.textContent = translations[lang][key];
-            });
-        }
+    // Earnings Logic
+    const questions = [
+        { question: "What is 2 + 2?", answer: "4" },
+        { question: "What is the capital of France?", answer: "Paris" },
+        { question: "What is 5 x 3?", answer: "15" }
+    ];
+    let currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
 
-        // Earnings Logic
-        const questions = [
-            { question: "What is 2 + 2?", answer: "4" },
-            { question: "What is the capital of France?", answer: "Paris" },
-            { question: "What is 5 x 3?", answer: "15" }
-        ];
-        let currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
-
-        function loadQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                document.getElementById('currentQuestion').textContent = "No more questions available.";
-                document.getElementById('answerInput').style.display = 'none';
-                document.getElementById('answerFeedback').textContent = '';
-                document.querySelector('.earnings-form button').style.display = 'none';
-                return;
-            }
-            document.getElementById('currentQuestion').textContent = questions[currentQuestionIndex].question;
-            document.getElementById('answerInput').value = '';
+    function loadQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+            document.getElementById('currentQuestion').textContent = "No more questions available.";
+            document.getElementById('answerInput').style.display = 'none';
             document.getElementById('answerFeedback').textContent = '';
+            document.querySelector('.earnings-form button').style.display = 'none';
+            return;
         }
+        document.getElementById('currentQuestion').textContent = questions[currentQuestionIndex].question;
+        document.getElementById('answerInput').value = '';
+        document.getElementById('answerFeedback').textContent = '';
+    }
 
-        function checkAnswer() {
-            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
-            const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase();
-            if (userAnswer === correctAnswer) {
-                userTokens += 200;
-                localStorage.setItem('userTokens', userTokens);
-                document.getElementById('userTokens').textContent = userTokens;
-                document.getElementById('answerFeedback').textContent = "Correct! You earned 200 tokens.";
-                currentQuestionIndex++;
-                localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
-                setTimeout(loadQuestion, 1000);
-            } else {
-                document.getElementById('answerFeedback').textContent = "Wrong answer. Try again!";
-            }
-        }
-
-        // Friends Logic
-        function updateFriendsPage() {
-            // تولید یک کد کوتاه و جذاب برای رفرال
-            const referralCode = Math.random().toString(36).substring(2, 8); // کد 6 کاراکتری تصادفی
-
-            // تنظیم آدرس پایه برای مینی اپ تلگرام
-            const baseUrl = "https://t.me/CryptoGemRasa_Bot/app";
-
-            // تولید لینک رفرال با پارامتر start
-            const referralLink = `${baseUrl}?start=${referralCode}`;
-
-            // ذخیره لینک کامل برای کپی کردن
-            document.getElementById('referralLink').dataset.fullLink = referralLink;
-            // نمایش لینک در صفحه
-            document.getElementById('referralLink').textContent = referralLink;
-
-            document.getElementById('friendsCount').textContent = friendsCount;
-            const friendsListDiv = document.getElementById('friendsList');
-            friendsListDiv.innerHTML = '';
-            friendsList.forEach(friend => {
-                const p = document.createElement('p');
-                p.textContent = friend;
-                friendsListDiv.appendChild(p);
-            });
-        }
-
-        function copyReferralLink() {
-            const referralLink = document.getElementById('referralLink').dataset.fullLink;
-            navigator.clipboard.writeText(referralLink).then(() => {
-                alert('Referral link copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy referral link:', err);
-                alert('Failed to copy the link. Please copy it manually.');
-            });
-            if (friendsCount < 5) {
-                friendsCount++;
-                userTokens += 1000;
-                friendsList.push(`Friend ${friendsCount}`);
-                localStorage.setItem('friendsCount', friendsCount);
-                localStorage.setItem('userTokens', userTokens);
-                localStorage.setItem('friendsList', JSON.stringify(friendsList));
-                updateFriendsPage();
-                document.getElementById('userTokens').textContent = userTokens;
-            }
-        }
-
-        window.onload = function() {
-            document.getElementById('main-content').style.display = 'block';
-            changeLanguage(currentLang);
-            updateMiningStatus();
+    function checkAnswer() {
+        const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+        const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase();
+        if (userAnswer === correctAnswer) {
+            userTokens += 200;
+            localStorage.setItem('userTokens', userTokens);
             document.getElementById('userTokens').textContent = userTokens;
-            setInterval(updateMiningStatus, 1000); // Update timer every second
-        };
-    </script>
+            document.getElementById('answerFeedback').textContent = "Correct! You earned 200 tokens.";
+            currentQuestionIndex++;
+            localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+            setTimeout(loadQuestion, 1000);
+        } else {
+            document.getElementById('answerFeedback').textContent = "Wrong answer. Try again!";
+        }
+    }
+
+    // Friends Logic
+    function updateFriendsPage() {
+        // استفاده از کد رفرال ذخیره‌شده
+        const baseUrl = "https://t.me/CryptoGemRasa_Bot/app";
+        const referralLink = `${baseUrl}?start=${referralCode}`;
+
+        // ذخیره لینک کامل برای کپی کردن
+        document.getElementById('referralLink').dataset.fullLink = referralLink;
+        // نمایش لینک در صفحه
+        document.getElementById('referralLink').textContent = referralLink;
+
+        document.getElementById('friendsCount').textContent = friendsCount;
+        const friendsListDiv = document.getElementById('friendsList');
+        friendsListDiv.innerHTML = '';
+        friendsList.forEach(friend => {
+            const p = document.createElement('p');
+            p.textContent = friend;
+            friendsListDiv.appendChild(p);
+        });
+    }
+
+    function copyReferralLink() {
+        const referralLink = document.getElementById('referralLink').dataset.fullLink;
+        navigator.clipboard.writeText(referralLink).then(() => {
+            alert('Referral link copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy referral link:', err);
+            alert('Failed to copy the link. Please copy it manually.');
+        });
+        if (friendsCount < 5) {
+            friendsCount++;
+            userTokens += 1000;
+            friendsList.push(`Friend ${friendsCount}`);
+            localStorage.setItem('friendsCount', friendsCount);
+            localStorage.setItem('userTokens', userTokens);
+            localStorage.setItem('friendsList', JSON.stringify(friendsList));
+            updateFriendsPage();
+            document.getElementById('userTokens').textContent = userTokens;
+        }
+    }
+
+    window.onload = function() {
+        document.getElementById('main-content').style.display = 'block';
+        changeLanguage(currentLang);
+        updateMiningStatus();
+        document.getElementById('userTokens').textContent = userTokens;
+        setInterval(updateMiningStatus, 1000); // Update timer every second
+    };
+</script>
 </body>
 </html>
