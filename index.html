@@ -22,8 +22,8 @@
             position: relative;
         }
         .container {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)); /* شفافیت برای نمایان شدن بک‌گراند */
-            backdrop-filter: blur(15px); /* مقدار اصلی حفظ شده */
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8));
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 20px;
             box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
@@ -45,22 +45,12 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         @keyframes pulsing-glow {
-            0% {
-                box-shadow: 0 0 20px rgba(0, 234, 255, 0.5);
-            }
-            100% {
-                box-shadow: 0 0 40px rgba(0, 234, 255, 0.9);
-            }
+            0% { box-shadow: 0 0 20px rgba(0, 234, 255, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(0, 234, 255, 0.9); }
         }
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         .container h1 {
             margin: 10px 0;
@@ -75,31 +65,27 @@
             font-size: 0.8rem;
         }
         #main-content h1 {
-            font-size: 1.5rem; /* افزایش فونت صفحه خانه */
-            background: linear-gradient(90deg, #00eaff, #ff00ff); /* رنگ گرادیانت گرافیکی */
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #00eaff, #ff00ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 234, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5); /* افکت گلو */
-            animation: glow 1.5s ease-in-out infinite alternate; /* انیمیشن گلو */
+            text-shadow: 0 0 10px rgba(0, 234, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5);
+            animation: glow 1.5s ease-in-out infinite alternate;
             margin: 10px 0;
             width: 100%;
             text-align: center;
         }
         #main-content p {
-            font-size: 1rem; /* افزایش فونت صفحه خانه */
+            font-size: 1rem;
             color: #fff;
-            text-shadow: 0 0 5px rgba(0, 234, 255, 0.6); /* سایه متنی ملایم */
+            text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
             margin: 10px 0;
             width: 100%;
             text-align: center;
         }
         @keyframes glow {
-            0% {
-                text-shadow: 0 0 10px rgba(0, 234, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5);
-            }
-            100% {
-                text-shadow: 0 0 20px rgba(0, 234, 255, 1), 0 0 30px rgba(255, 0, 255, 0.8);
-            }
+            0% { text-shadow: 0 0 10px rgba(0, 234, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(0, 234, 255, 1), 0 0 30px rgba(255, 0, 255, 0.8); }
         }
         @media (max-width: 768px) {
             .container {
@@ -107,18 +93,10 @@
                 padding: 15px;
                 margin: 10px auto;
             }
-            .container h1 {
-                font-size: 0.9rem;
-            }
-            .container p {
-                font-size: 0.7rem;
-            }
-            #main-content h1 {
-                font-size: 1.2rem; /* تنظیم برای موبایل */
-            }
-            #main-content p {
-                font-size: 0.9rem; /* تنظیم برای موبایل */
-            }
+            .container h1 { font-size: 0.9rem; }
+            .container p { font-size: 0.7rem; }
+            #main-content h1 { font-size: 1.2rem; }
+            #main-content p { font-size: 0.9rem; }
         }
         .icon-wrapper {
             margin: 20px 0;
@@ -175,15 +153,9 @@
             animation: pulse 0.3s ease;
         }
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         .mining-info {
             text-align: center;
@@ -348,6 +320,39 @@
         .language-menu:hover .language-dropdown {
             display: block;
         }
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .social-link i {
+            font-size: 24px;
+            margin-right: 10px;
+            background: linear-gradient(135deg, #ffd700, #c0c0c0); /* گرادیانت طلایی به نقره‌ای */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+        .social-link span {
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+        }
+        .social-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -374,7 +379,42 @@
         </div>
         <h1 data-lang="social-title"></h1>
         <p data-lang="social-text"></p>
+        <div class="social-links">
+            <a href="https://t.me/Crypto_GEM_RASA" target="_blank" class="social-link">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Telegram</span>
+            </a>
+            <a href="https://www.instagram.com/crypto_gem_rasa?igsh=dDBneTRpNWt6OHNk" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="https://www.reddit.com/u/RASA_TEAM/s/VjWS27u1P4" target="_blank" class="social-link">
+                <i class="fab fa-reddit-alien"></i>
+                <span>Reddit</span>
+            </a>
+            <a href="https://www.threads.net/@crypto_gem_rasa" target="_blank" class="social-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>Threads</span>
+            </a>
+            <a href="https://x.com/Crypto_GEM_RASA?t=oiR1MbXSMKHk9NzIOmmecw&s=09" target="_blank" class="social-link">
+                <i class="fab fa-twitter"></i>
+                <span>Twitter</span>
+            </a>
+            <a href="https://youtube.com/@crypto_gem_rasa?si=xZ5lpwZ7kT1q83Bc" target="_blank" class="social-link">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </a>
+            <a href="https://www.tiktok.com/@crypto_gem_rasa?_t=ZS-8vDQtVW04wM&_r=1" target="_blank" class="social-link">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </a>
+            <a href="https://medium.com/@Crypto_Gem_RASA" target="_blank" class="social-link">
+                <i class="fab fa-medium-m"></i>
+                <span>Medium</span>
+            </a>
+        </div>
     </div>
+
     <div class="container page-content" id="tasks-page">
         <div class="back-button" onclick="goToHome()">
             <i class="fas fa-home"></i>
@@ -483,7 +523,7 @@
                 title: "Crypto GEM RASA",
                 welcome: "Welcome to Crypto GEM RASA! Stay tuned for exciting updates.",
                 "social-title": "Social Networks",
-                "social-text": "Here are the social network links.",
+                "social-text": "Follow us on our social media platforms!",
                 "tasks-title": "Tasks",
                 "tasks-text": "List of tasks for users.",
                 "mining-title": "Mining",
@@ -508,7 +548,7 @@
                 title: "Crypto GEM RASA",
                 welcome: "Добро пожаловать в Crypto GEM RASA! Следите за обновлениями.",
                 "social-title": "Социальные сети",
-                "social-text": "Здесь находятся ссылки на социальные сети.",
+                "social-text": "Подписывайтесь на нас в социальных сетях!",
                 "tasks-title": "Задания",
                 "tasks-text": "Список заданий для пользователей.",
                 "mining-title": "Майнинг",
@@ -569,7 +609,6 @@
                 startTime = now;
                 localStorage.setItem('startTime', startTime);
             }
-
             const elapsed = now - startTime;
             if (elapsed >= periodMs) {
                 miningCount = 0;
@@ -577,7 +616,6 @@
                 localStorage.setItem('miningCount', miningCount);
                 localStorage.setItem('startTime', startTime);
             }
-
             miningCountDisplay.textContent = `${miningCount} / ${maxMining}`;
             totalMiningCountDisplay.textContent = `Total Mined: ${totalMiningCount}`;
             if (miningCount >= maxMining) {
@@ -596,13 +634,11 @@
         function mine() {
             const now = Date.now();
             const elapsed = now - startTime;
-
             if (elapsed >= periodMs) {
                 miningCount = 0;
                 startTime = now;
                 localStorage.setItem('startTime', startTime);
             }
-
             if (miningCount < maxMining) {
                 miningCount++;
                 totalMiningCount++;
@@ -642,10 +678,8 @@
         function checkAnswer() {
             const activeQuestion = questions.find(q => q.active);
             if (!activeQuestion || answeredQuestions.includes(activeQuestion.id)) return;
-
             const userAnswer = answerInput.value.trim().toLowerCase();
             const correctAnswer = activeQuestion.answer.toLowerCase();
-
             if (userAnswer === correctAnswer) {
                 userTokens += 200;
                 localStorage.setItem('userTokens', userTokens);
@@ -653,7 +687,6 @@
                 localStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestions));
                 answerFeedback.textContent = "Correct! You earned 200 tokens.";
                 answerFeedback.style.color = "#00eaff";
-
                 fetch('https://yourdomain.com/sendAnswer.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -673,7 +706,6 @@
                 answerFeedback.textContent = "Incorrect answer. Try again!";
                 answerFeedback.style.color = "#ff5555";
             }
-
             updateEarningsPage();
         }
 
@@ -695,7 +727,6 @@
             friendsListDisplay.innerHTML = referrals.length > 0
                 ? referrals.map(friend => `<p>${friend.username || friend.userId}</p>`).join('')
                 : "<p>No friends invited yet.</p>";
-
             userTokensDisplay.textContent = userTokens;
             referralLinkDisplay.textContent = generateReferralLink();
         }
@@ -729,7 +760,6 @@
             });
             document.getElementById('main-content').style.display = 'none';
             document.getElementById(pageId).classList.add('active');
-
             if (pageId === 'earnings-page') updateEarningsPage();
             if (pageId === 'friends-page') updateFriendsPage();
         }
