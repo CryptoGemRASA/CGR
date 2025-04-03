@@ -351,6 +351,11 @@
             0% { opacity: 1; transform: scale(1); }
             100% { opacity: 0; transform: scale(2); }
         }
+        #referralLink {
+            word-break: break-all;
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
     </style>
 </head>
 <body>
@@ -517,11 +522,9 @@
         </a>
     </div>
 
-    <!-- فایل صوتی را به صورت محلی فرض می‌کنیم -->
     <audio id="clickSound" src="click-sound.mp3"></audio>
 
     <script>
-        // تعریف توابع قبل از استفاده در HTML
         const translations = {
             en: {
                 title: "Crypto GEM RASA",
@@ -584,7 +587,7 @@
         let friendsList = JSON.parse(localStorage.getItem('friendsList')) || [];
 
         const miningLimit = 500;
-        const miningInterval = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+        const miningInterval = 8 * 60 * 60 * 1000;
 
         function showPage(pageId) {
             document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
@@ -641,7 +644,7 @@
         function mine() {
             const now = Date.now();
             if (now - lastMiningTime >= miningInterval || miningCount === 0) {
-                miningCount += 10; // Mine 10 units per click
+                miningCount += 10;
                 totalMiningCount += 10;
                 if (miningCount >= miningLimit) {
                     miningCount = miningLimit;
@@ -680,7 +683,6 @@
             });
         }
 
-        // Earnings Logic
         const questions = [
             { question: "What is 2 + 2?", answer: "4" },
             { question: "What is the capital of France?", answer: "Paris" },
@@ -717,9 +719,16 @@
             }
         }
 
-        // Friends Logic
         function updateFriendsPage() {
-            const referralLink = `${window.location.href}?ref=${Math.random().toString(36).substring(2, 10)}`;
+            const generateShortRef = () => {
+                const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < 5; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            };
+            const referralLink = `${window.location.origin}${window.location.pathname}?ref=${generateShortRef()}`;
             document.getElementById('referralLink').textContent = referralLink;
             document.getElementById('friendsCount').textContent = friendsCount;
             const friendsListDiv = document.getElementById('friendsList');
@@ -756,7 +765,7 @@
             changeLanguage(currentLang);
             updateMiningStatus();
             document.getElementById('userTokens').textContent = userTokens;
-            setInterval(updateMiningStatus, 1000); // Update timer every second
+            setInterval(updateMiningStatus, 1000);
         };
     </script>
 </body>
