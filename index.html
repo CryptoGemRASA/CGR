@@ -7,175 +7,6 @@
     <link rel="icon" type="image/png" href="https://i.imgur.com/kxU98Ni.jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        /* استایل‌ها در بخش بعدی ارسال می‌شوند */
-    </style>
-</head>
-<body>
-    <div class="container" id="main-content">
-        <div class="language-menu">
-            <button class="language-button">
-                <i class="fas fa-globe"></i>
-            </button>
-            <div class="language-dropdown">
-                <a href="#" onclick="changeLanguage('en'); return false;">English</a>
-                <a href="#" onclick="changeLanguage('ru'); return false;">Русский</a>
-            </div>
-        </div>
-        <div class="icon-wrapper">
-            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon">
-        </div>
-        <h1 data-lang="title">Crypto GEM RASA</h1>
-        <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
-    </div>
-
-    <div class="container page-content" id="social-page">
-        <div class="back-button" onclick="goToHome()">
-            <i class="fas fa-home"></i>
-        </div>
-        <h1 data-lang="social-title">Social Networks</h1>
-        <p data-lang="social-text">Follow us on our social media platforms!</p>
-        <div class="social-links">
-            <a href="https://t.me/Crypto_GEM_RASA" target="_blank" class="social-link">
-                <i class="fab fa-telegram-plane"></i>
-                <span>Telegram</span>
-            </a>
-            <a href="https://www.instagram.com/crypto_gem_rasa?igsh=dDBneTRpNWt6OHNk" target="_blank" class="social-link">
-                <i class="fab fa-instagram"></i>
-                <span>Instagram</span>
-            </a>
-            <a href="https://www.reddit.com/u/RASA_TEAM/s/VjWS27u1P4" target="_blank" class="social-link">
-                <i class="fab fa-reddit-alien"></i>
-                <span>Reddit</span>
-            </a>
-            <a href="https://www.threads.net/@crypto_gem_rasa" target="_blank" class="social-link">
-                <i class="fas fa-comment-dots"></i>
-                <span>Threads</span>
-            </a>
-            <a href="https://x.com/Crypto_GEM_RASA?t=oiR1MbXSMKHk9NzIOmmecw&s=09" target="_blank" class="social-link">
-                <i class="fab fa-twitter"></i>
-                <span>Twitter</span>
-            </a>
-            <a href="https://youtube.com/@crypto_gem_rasa?si=xZ5lpwZ7kT1q83Bc" target="_blank" class="social-link">
-                <i class="fab fa-youtube"></i>
-                <span>YouTube</span>
-            </a>
-            <a href="https://www.tiktok.com/@crypto_gem_rasa?_t=ZS-8vDQtVW04wM&_r=1" target="_blank" class="social-link">
-                <i class="fab fa-tiktok"></i>
-                <span>TikTok</span>
-            </a>
-            <a href="https://medium.com/@Crypto_Gem_RASA" target="_blank" class="social-link">
-                <i class="fab fa-medium-m"></i>
-                <span>Medium</span>
-            </a>
-        </div>
-    </div>
-
-    <div class="container page-content" id="tasks-page">
-        <div class="back-button" onclick="goToHome()">
-            <i class="fas fa-home"></i>
-        </div>
-        <h1 data-lang="tasks-title">Tasks</h1>
-        <p data-lang="tasks-text">List of tasks for users.</p>
-    </div>
-
-    <div class="container page-content" id="mining-page">
-        <div class="back-button" onclick="goToHome()">
-            <i class="fas fa-home"></i>
-        </div>
-        <h1 data-lang="mining-title">Mining</h1>
-        <p data-lang="mining-text">Tap the circle to mine! You can mine 500 units every 8 hours.</p>
-        <div class="mining-wrapper">
-            <div class="mining-circle" id="miningCircle">
-                <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Mining Circle">
-            </div>
-            <div class="mining-info">
-                <span id="miningCount">0 / 500</span><br>
-                <span id="totalMiningCount">Total Mined: 0</span><br>
-                <span id="timeRemaining"></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="container page-content" id="partnerships-page">
-        <div class="back-button" onclick="goToHome()">
-            <i class="fas fa-home"></i>
-        </div>
-        <h1 data-lang="partnerships-title">Partnerships</h1>
-        <p data-lang="partnerships-text">Details of partnerships.</p>
-    </div>
-
-    <div class="container page-content" id="comments-page">
-        <div class="back-button" onclick="goToHome()">
-            <i class="fas fa-home"></i>
-        </div>
-        <h1 data-lang="comments-title">Comments</h1>
-        <p data-lang="comments-text">User comments will be displayed here.</p>
-    </div>
-
-    <div class="container page-content" id="earnings-page">
-        <div class="back-button" onclick="goToHome()">
-            <i class="fas fa-home"></i>
-        </div>
-        <h1 data-lang="earnings-title">Earnings</h1>
-        <p data-lang="earnings-text">Answer the question to earn 200 tokens!</p>
-        <p>Total Tokens: <span id="userTokens">0</span></p>
-        <p id="currentQuestion"></p>
-        <div class="earnings-form">
-            <input type="text" id="answerInput" placeholder="Your answer">
-            <button onclick="checkAnswer()">Submit Answer</button>
-        </div>
-        <p id="answerFeedback"></p>
-    </div>
-
-    <div class="container page-content" id="friends-page">
-        <div class="back-button" onclick="goToHome()">
-            <i class="fas fa-home"></i>
-        </div>
-        <h1 data-lang="friends-title">Friends</h1>
-        <p data-lang="friends-text">Invite friends to earn 1000 tokens per referral (max 5).</p>
-        <div class="friends-wrapper">
-            <p>Your Referral Link: <span id="referralLink" class="referral-link-container"></span></p>
-            <button onclick="copyReferralLink()">Copy Link</button>
-            <div class="friends-list">
-                <h3>Invited Friends (<span id="friendsCount">0</span>/5)</h3>
-                <div id="friendsList"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-nav">
-        <a href="#" onclick="showPage('social-page'); return false;">
-            <i class="fas fa-users"></i>
-            <span data-lang="social-nav">Social</span>
-        </a>
-        <a href="#" onclick="showPage('tasks-page'); return false;">
-            <i class="fas fa-tasks"></i>
-            <span data-lang="tasks-nav">Tasks</span>
-        </a>
-        <a href="#" onclick="showPage('mining-page'); return false;">
-            <i class="fas fa-gem"></i>
-            <span data-lang="mining-nav">Mining</span>
-        </a>
-        <a href="#" onclick="showPage('partnerships-page'); return false;">
-            <i class="fas fa-handshake"></i>
-            <span data-lang="partnerships-nav">Partners</span>
-        </a>
-        <a href="#" onclick="showPage('comments-page'); return false;">
-            <i class="fas fa-comments"></i>
-            <span data-lang="comments-nav">Comments</span>
-        </a>
-        <a href="#" onclick="showPage('earnings-page'); return false;">
-            <i class="fas fa-money-bill"></i>
-            <span data-lang="earnings-nav">Earnings</span>
-        </a>
-        <a href="#" onclick="showPage('friends-page'); return false;">
-            <i class="fas fa-user-friends"></i>
-            <span data-lang="friends-nav">Friends</span>
-        </a>
-    </div>
-
-    <audio id="clickSound" src="click-sound.mp3"></audio>
-    <style>
     body {
         font-family: 'Segoe UI', sans-serif;
         margin: 0;
@@ -535,6 +366,172 @@
         background: rgba(0, 234, 255, 0.1);
     }
 </style>
+</head>
+<body>
+    <div class="container" id="main-content">
+        <div class="language-menu">
+            <button class="language-button">
+                <i class="fas fa-globe"></i>
+            </button>
+            <div class="language-dropdown">
+                <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+                <a href="#" onclick="changeLanguage('ru'); return false;">Русский</a>
+            </div>
+        </div>
+        <div class="icon-wrapper">
+            <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Crypto GEM RASA Icon" class="icon">
+        </div>
+        <h1 data-lang="title">Crypto GEM RASA</h1>
+        <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
+    </div>
+
+    <div class="container page-content" id="social-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="social-title">Social Networks</h1>
+        <p data-lang="social-text">Follow us on our social media platforms!</p>
+        <div class="social-links">
+            <a href="https://t.me/Crypto_GEM_RASA" target="_blank" class="social-link">
+                <i class="fab fa-telegram-plane"></i>
+                <span>Telegram</span>
+            </a>
+            <a href="https://www.instagram.com/crypto_gem_rasa?igsh=dDBneTRpNWt6OHNk" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="https://www.reddit.com/u/RASA_TEAM/s/VjWS27u1P4" target="_blank" class="social-link">
+                <i class="fab fa-reddit-alien"></i>
+                <span>Reddit</span>
+            </a>
+            <a href="https://www.threads.net/@crypto_gem_rasa" target="_blank" class="social-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>Threads</span>
+            </a>
+            <a href="https://x.com/Crypto_GEM_RASA?t=oiR1MbXSMKHk9NzIOmmecw&s=09" target="_blank" class="social-link">
+                <i class="fab fa-twitter"></i>
+                <span>Twitter</span>
+            </a>
+            <a href="https://youtube.com/@crypto_gem_rasa?si=xZ5lpwZ7kT1q83Bc" target="_blank" class="social-link">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </a>
+            <a href="https://www.tiktok.com/@crypto_gem_rasa?_t=ZS-8vDQtVW04wM&_r=1" target="_blank" class="social-link">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </a>
+            <a href="https://medium.com/@Crypto_Gem_RASA" target="_blank" class="social-link">
+                <i class="fab fa-medium-m"></i>
+                <span>Medium</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container page-content" id="tasks-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="tasks-title">Tasks</h1>
+        <p data-lang="tasks-text">List of tasks for users.</p>
+    </div>
+
+    <div class="container page-content" id="mining-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="mining-title">Mining</h1>
+        <p data-lang="mining-text">Tap the circle to mine! You can mine 500 units every 8 hours.</p>
+        <div class="mining-wrapper">
+            <div class="mining-circle" id="miningCircle">
+                <img src="https://i.imgur.com/kxU98Ni.jpeg" alt="Mining Circle">
+            </div>
+            <div class="mining-info">
+                <span id="miningCount">0 / 500</span><br>
+                <span id="totalMiningCount">Total Mined: 0</span><br>
+                <span id="timeRemaining"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container page-content" id="partnerships-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="partnerships-title">Partnerships</h1>
+        <p data-lang="partnerships-text">Details of partnerships.</p>
+    </div>
+
+    <div class="container page-content" id="comments-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="comments-title">Comments</h1>
+        <p data-lang="comments-text">User comments will be displayed here.</p>
+    </div>
+
+    <div class="container page-content" id="earnings-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="earnings-title">Earnings</h1>
+        <p data-lang="earnings-text">Answer the question to earn 200 tokens!</p>
+        <p>Total Tokens: <span id="userTokens">0</span></p>
+        <p id="currentQuestion"></p>
+        <div class="earnings-form">
+            <input type="text" id="answerInput" placeholder="Your answer">
+            <button onclick="checkAnswer()">Submit Answer</button>
+        </div>
+        <p id="answerFeedback"></p>
+    </div>
+
+    <div class="container page-content" id="friends-page">
+        <div class="back-button" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="friends-title">Friends</h1>
+        <p data-lang="friends-text">Invite friends to earn 1000 tokens per referral (max 5).</p>
+        <div class="friends-wrapper">
+            <p>Your Referral Link: <span id="referralLink" class="referral-link-container"></span></p>
+            <button onclick="copyReferralLink()">Copy Link</button>
+            <div class="friends-list">
+                <h3>Invited Friends (<span id="friendsCount">0</span>/5)</h3>
+                <div id="friendsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="#" onclick="showPage('social-page'); return false;">
+            <i class="fas fa-users"></i>
+            <span data-lang="social-nav">Social</span>
+        </a>
+        <a href="#" onclick="showPage('tasks-page'); return false;">
+            <i class="fas fa-tasks"></i>
+            <span data-lang="tasks-nav">Tasks</span>
+        </a>
+        <a href="#" onclick="showPage('mining-page'); return false;">
+            <i class="fas fa-gem"></i>
+            <span data-lang="mining-nav">Mining</span>
+        </a>
+        <a href="#" onclick="showPage('partnerships-page'); return false;">
+            <i class="fas fa-handshake"></i>
+            <span data-lang="partnerships-nav">Partners</span>
+        </a>
+        <a href="#" onclick="showPage('comments-page'); return false;">
+            <i class="fas fa-comments"></i>
+            <span data-lang="comments-nav">Comments</span>
+        </a>
+        <a href="#" onclick="showPage('earnings-page'); return false;">
+            <i class="fas fa-money-bill"></i>
+            <span data-lang="earnings-nav">Earnings</span>
+        </a>
+        <a href="#" onclick="showPage('friends-page'); return false;">
+            <i class="fas fa-user-friends"></i>
+            <span data-lang="friends-nav">Friends</span>
+        </a>
+    </div>
+
+    <audio id="clickSound" src="click-sound.mp3"></audio>
 <script>
     const translations = {
         en: {
