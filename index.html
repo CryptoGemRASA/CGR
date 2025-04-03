@@ -303,7 +303,7 @@
         .social-links {
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* چپ‌چین کردن لینک‌ها */
+            align-items: flex-start;
             gap: 15px;
             margin-top: 20px;
             width: 100%;
@@ -316,8 +316,8 @@
             color: #fff;
             font-size: 1rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            outline: none; /* حذف کادر مستطیلی */
-            -webkit-tap-highlight-color: transparent; /* حذف هایلایت موبایل */
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .social-link i {
             font-size: 24px;
@@ -342,7 +342,7 @@
             position: absolute;
             width: 10px;
             height: 10px;
-            background: linear-gradient(135deg, #00eaff, #ffffff); /* گرادیانت برای جبران */
+            background: linear-gradient(135deg, #00eaff, #ffffff);
             border-radius: 50%;
             pointer-events: none;
             animation: fadeOut 0.5s ease forwards;
@@ -517,10 +517,11 @@
         </a>
     </div>
 
-    <audio id="clickSound" src="https://freesound.org/data/previews/245/245645_4052905-lq.mp3"></audio>
+    <!-- فایل صوتی را به صورت محلی فرض می‌کنیم -->
+    <audio id="clickSound" src="click-sound.mp3"></audio>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        // تعریف توابع قبل از استفاده در HTML
         const translations = {
             en: {
                 title: "Crypto GEM RASA",
@@ -576,6 +577,27 @@
 
         let currentLang = "en";
         let miningCount = parseInt(localStorage.getItem('miningCount')) || 0;
+        let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0;
+        let lastMiningTime = parseInt(localStorage.getItem('lastMiningTime')) || 0;
+        let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
+        let friendsCount = parseInt(localStorage.getItem('friendsCount')) || 0;
+        let friendsList = JSON.parse(localStorage.getItem('friendsList')) || [];
+
+        const miningLimit = 500;
+        const miningInterval = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById(pageId).classList.add('active');
+            if (pageId === 'earnings-page') loadQuestion();
+            if (pageId === 'friends-page') updateFriendsPage();
+        }
+
+        function goToHome() {
+            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+            document.getElementById('main-content').style.display = 'block';
+        }
 
         function showTouchEffect(event) {
             const circle = document.getElementById('miningCircle');
@@ -596,14 +618,59 @@
             setTimeout(() => touchDot.remove(), 500);
         }
 
-        const miningCircle = document.getElementById('miningCircle');
-        miningCircle.addEventListener('click', showTouchEffect);
-        miningCircle.addEventListener('touchstart', showTouchEffect);
-
         function updateMiningStatus() {
-            document.getElementById('miningCount').textContent = `${miningCount} / 500`;
-            document.getElementById('totalMiningCount').textContent = `Total Mined: ${miningCount}`;
+            const now = Date.now();
+            const timeElapsed = now - lastMiningTime;
+            const timeRemaining = miningInterval - timeElapsed;
+
+            document.getElementById('miningCount').textContent = `${miningCount} / ${miningLimit}`;
+            document.getElementById('totalMiningCount').textContent = `Total Mined: ${totalMiningCount}`;
+
+            if (timeRemaining > 0) {
+                const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                document.getElementById('timeRemaining').textContent = `Next mining in: ${hours}h ${minutes}m ${seconds}s`;
+                document.getElementById('miningCircle').classList.add('disabled');
+            } else {
+                document.getElementById('timeRemaining').textContent = '';
+                document.getElementById('miningCircle').classList.remove('disabled');
+            }
         }
+
+        function mine() {
+            const now = Date.now();
+            if (now - lastMiningTime >= miningInterval || miningCount === 0) {
+                miningCount += 10; // Mine 10 units per click
+                totalMiningCount += 10;
+                if (miningCount >= miningLimit) {
+                    miningCount = miningLimit;
+                    lastMiningTime = now;
+                }
+                localStorage.setItem('miningCount', miningCount);
+                localStorage.setItem('totalMiningCount', totalMiningCount);
+                localStorage.setItem('lastMiningTime', lastMiningTime);
+                const clickSound = document.getElementById('clickSound');
+                if (clickSound) {
+                    clickSound.play().catch(err => console.log("Audio playback failed:", err));
+                }
+            }
+            updateMiningStatus();
+        }
+
+        const miningCircle = document.getElementById('miningCircle');
+        miningCircle.addEventListener('click', (e) => {
+            if (!miningCircle.classList.contains('disabled')) {
+                showTouchEffect(e);
+                mine();
+            }
+        });
+        miningCircle.addEventListener('touchstart', (e) => {
+            if (!miningCircle.classList.contains('disabled')) {
+                showTouchEffect(e);
+                mine();
+            }
+        });
 
         function changeLanguage(lang) {
             currentLang = lang;
@@ -613,21 +680,83 @@
             });
         }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById(pageId).classList.add('active');
+        // Earnings Logic
+        const questions = [
+            { question: "What is 2 + 2?", answer: "4" },
+            { question: "What is the capital of France?", answer: "Paris" },
+            { question: "What is 5 x 3?", answer: "15" }
+        ];
+        let currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                document.getElementById('currentQuestion').textContent = "No more questions available.";
+                document.getElementById('answerInput').style.display = 'none';
+                document.getElementById('answerFeedback').textContent = '';
+                document.querySelector('.earnings-form button').style.display = 'none';
+                return;
+            }
+            document.getElementById('currentQuestion').textContent = questions[currentQuestionIndex].question;
+            document.getElementById('answerInput').value = '';
+            document.getElementById('answerFeedback').textContent = '';
         }
 
-        function goToHome() {
-            document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
-            document.getElementById('main-content').style.display = 'block';
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+            const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase();
+            if (userAnswer === correctAnswer) {
+                userTokens += 200;
+                localStorage.setItem('userTokens', userTokens);
+                document.getElementById('userTokens').textContent = userTokens;
+                document.getElementById('answerFeedback').textContent = "Correct! You earned 200 tokens.";
+                currentQuestionIndex++;
+                localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+                setTimeout(loadQuestion, 1000);
+            } else {
+                document.getElementById('answerFeedback').textContent = "Wrong answer. Try again!";
+            }
+        }
+
+        // Friends Logic
+        function updateFriendsPage() {
+            const referralLink = `${window.location.href}?ref=${Math.random().toString(36).substring(2, 10)}`;
+            document.getElementById('referralLink').textContent = referralLink;
+            document.getElementById('friendsCount').textContent = friendsCount;
+            const friendsListDiv = document.getElementById('friendsList');
+            friendsListDiv.innerHTML = '';
+            friendsList.forEach(friend => {
+                const p = document.createElement('p');
+                p.textContent = friend;
+                friendsListDiv.appendChild(p);
+            });
+        }
+
+        function copyReferralLink() {
+            const referralLink = document.getElementById('referralLink').textContent;
+            navigator.clipboard.writeText(referralLink).then(() => {
+                alert('Referral link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy referral link:', err);
+                alert('Failed to copy the link. Please copy it manually.');
+            });
+            if (friendsCount < 5) {
+                friendsCount++;
+                userTokens += 1000;
+                friendsList.push(`Friend ${friendsCount}`);
+                localStorage.setItem('friendsCount', friendsCount);
+                localStorage.setItem('userTokens', userTokens);
+                localStorage.setItem('friendsList', JSON.stringify(friendsList));
+                updateFriendsPage();
+                document.getElementById('userTokens').textContent = userTokens;
+            }
         }
 
         window.onload = function() {
             document.getElementById('main-content').style.display = 'block';
             changeLanguage(currentLang);
             updateMiningStatus();
+            document.getElementById('userTokens').textContent = userTokens;
+            setInterval(updateMiningStatus, 1000); // Update timer every second
         };
     </script>
 </body>
