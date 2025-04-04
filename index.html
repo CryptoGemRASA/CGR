@@ -33,7 +33,7 @@
         border: 1px solid #00eaff;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start; /* تغییر به flex-start برای قرار گرفتن محتوا در بالا */
         align-items: center;
         max-width: 90%;
         min-width: 300px;
@@ -88,23 +88,6 @@
         .container p { font-size: 0.7rem; }
         #main-content h1 { font-size: 1.2rem; }
         #main-content p { font-size: 0.9rem; }
-    }
-    .header {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 10px;
-        position: relative;
-    }
-    .back-button {
-        color: #00eaff;
-        font-size: 24px;
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
-    .back-button:hover {
-        color: #66eaff;
     }
     .icon-wrapper {
         margin: 20px 0;
@@ -225,6 +208,9 @@
     .friends-list p {
         margin: 5px 0;
         font-size: 0.8rem;
+    }
+    .back-button:hover {
+        color: #66eaff;
     }
     .footer-nav {
         position: fixed;
@@ -396,10 +382,8 @@
     </div>
 
     <div class="container page-content" id="social-page">
-        <div class="header">
-            <div class="back-button" onclick="goToHome()">
-                <i class="fas fa-home"></i>
-            </div>
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="social-title">Social Networks</h1>
         <p data-lang="social-text">Follow us on our social media platforms!</p>
@@ -440,20 +424,16 @@
     </div>
 
     <div class="container page-content" id="tasks-page">
-        <div class="header">
-            <div class="back-button" onclick="goToHome()">
-                <i class="fas fa-home"></i>
-            </div>
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="tasks-title">Tasks</h1>
         <p data-lang="tasks-text">List of tasks for users.</p>
     </div>
 
     <div class="container page-content" id="mining-page">
-        <div class="header">
-            <div class="back-button" onclick="goToHome()">
-                <i class="fas fa-home"></i>
-            </div>
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="mining-title">Mining</h1>
         <p data-lang="mining-text">Tap the circle to mine! You can mine 500 units every 8 hours.</p>
@@ -470,30 +450,24 @@
     </div>
 
     <div class="container page-content" id="partnerships-page">
-        <div class="header">
-            <div class="back-button" onclick="goToHome()">
-                <i class="fas fa-home"></i>
-            </div>
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="partnerships-title">Partnerships</h1>
         <p data-lang="partnerships-text">Details of partnerships.</p>
     </div>
 
     <div class="container page-content" id="comments-page">
-        <div class="header">
-            <div class="back-button" onclick="goToHome()">
-                <i class="fas fa-home"></i>
-            </div>
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="comments-title">Comments</h1>
         <p data-lang="comments-text">User comments will be displayed here.</p>
     </div>
 
     <div class="container page-content" id="earnings-page">
-        <div class="header">
-            <div class="back-button" onclick="goToHome()">
-                <i class="fas fa-home"></i>
-            </div>
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="earnings-title">Earnings</h1>
         <p data-lang="earnings-text">Answer the question to earn 200 tokens!</p>
@@ -507,10 +481,8 @@
     </div>
 
     <div class="container page-content" id="friends-page">
-        <div class="header">
-            <div class="back-button" onclick="goToHome()">
-                <i class="fas fa-home"></i>
-            </div>
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="friends-title">Friends</h1>
         <p data-lang="friends-text">Invite friends to earn 1000 tokens per referral (max 5).</p>
@@ -558,10 +530,6 @@
 
     <audio id="clickSound" src="click-sound.mp3"></audio>
 <script>
-    // اجبار جهت‌گیری به LTR
-    document.documentElement.setAttribute('dir', 'ltr');
-    document.body.setAttribute('dir', 'ltr');
-
     const translations = {
         en: {
             title: "Crypto GEM RASA",
@@ -640,7 +608,154 @@
         document.getElementById('main-content').style.display = 'none';
         document.getElementById(pageId).classList.add('active');
         if (pageId === 'earnings-page') loadQuestion();
-        if (pageId === 'friends        friendsListDiv.innerHTML = '';
+        if (pageId === 'friends-page') updateFriendsPage();
+    }
+
+    function goToHome() {
+        document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+        document.getElementById('main-content').style.display = 'block';
+    }
+
+    function showTouchEffect(event) {
+        const circle = document.getElementById('miningCircle');
+        const rect = circle.getBoundingClientRect();
+        let x, y;
+        if (event.type === 'touchstart') {
+            x = event.touches[0].clientX - rect.left;
+            y = event.touches[0].clientY - rect.top;
+        } else {
+            x = event.clientX - rect.left;
+            y = event.clientY - rect.top;
+        }
+        const touchDot = document.createElement('div');
+        touchDot.classList.add('touch-effect');
+        touchDot.style.left = `${x - 5}px`;
+        touchDot.style.top = `${y - 5}px`;
+        circle.appendChild(touchDot);
+        setTimeout(() => touchDot.remove(), 500);
+    }
+
+    function updateMiningStatus() {
+        const now = Date.now();
+        const timeElapsed = now - lastMiningTime;
+        const timeRemaining = miningInterval - timeElapsed;
+
+        document.getElementById('miningCount').textContent = `${miningCount} / ${miningLimit}`;
+        document.getElementById('totalMiningCount').textContent = `Total Mined: ${totalMiningCount}`;
+
+        if (timeRemaining > 0) {
+            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            document.getElementById('timeRemaining').textContent = `Next mining in: ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('miningCircle').classList.add('disabled');
+        } else {
+            document.getElementById('timeRemaining').textContent = '';
+            document.getElementById('miningCircle').classList.remove('disabled');
+        }
+    }
+
+    function mine() {
+        const now = Date.now();
+        if (now - lastMiningTime >= miningInterval || miningCount === 0) {
+            miningCount += 5;
+            totalMiningCount += 5;
+            if (miningCount >= miningLimit) {
+                miningCount = miningLimit;
+                lastMiningTime = now;
+            }
+            localStorage.setItem('miningCount', miningCount);
+            localStorage.setItem('totalMiningCount', totalMiningCount);
+            localStorage.setItem('lastMiningTime', lastMiningTime);
+            const clickSound = document.getElementById('clickSound');
+            if (clickSound) {
+                clickSound.play().catch(err => console.log("Audio playback failed:", err));
+            }
+        }
+        updateMiningStatus();
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    const debouncedMine = debounce(mine, 300);
+
+    const miningCircle = document.getElementById('miningCircle');
+    miningCircle.addEventListener('click', (e) => {
+        if (!miningCircle.classList.contains('disabled')) {
+            showTouchEffect(e);
+            debouncedMine();
+        }
+    });
+    miningCircle.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!miningCircle.classList.contains('disabled')) {
+            showTouchEffect(e);
+            debouncedMine();
+        }
+    });
+
+    function changeLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('[data-lang]').forEach(element => {
+            const key = element.getAttribute('data-lang');
+            element.textContent = translations[lang][key];
+        });
+    }
+
+    const questions = [
+        { question: "What is 2 + 2?", answer: "4" },
+        { question: "What is the capital of France?", answer: "Paris" },
+        { question: "What is 5 x 3?", answer: "15" }
+    ];
+    let currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
+
+    function loadQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+            document.getElementById('currentQuestion').textContent = "No more questions available.";
+            document.getElementById('answerInput').style.display = 'none';
+            document.getElementById('answerFeedback').textContent = '';
+            document.querySelector('.earnings-form button').style.display = 'none';
+            return;
+        }
+        document.getElementById('currentQuestion').textContent = questions[currentQuestionIndex].question;
+        document.getElementById('answerInput').value = '';
+        document.getElementById('answerFeedback').textContent = '';
+    }
+
+    function checkAnswer() {
+        const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+        const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase();
+        if (userAnswer === correctAnswer) {
+            userTokens += 200;
+            localStorage.setItem('userTokens', userTokens);
+            document.getElementById('userTokens').textContent = userTokens;
+            document.getElementById('answerFeedback').textContent = "Correct! You earned 200 tokens.";
+            currentQuestionIndex++;
+            localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+            setTimeout(loadQuestion, 1000);
+        } else {
+            document.getElementById('answerFeedback').textContent = "Wrong answer. Try again!";
+        }
+    }
+
+    function updateFriendsPage() {
+        const baseUrl = "https://t.me/CryptoGemRasa_Bot/app";
+        const referralLink = `${baseUrl}?start=${referralCode}`;
+        document.getElementById('referralLink').dataset.fullLink = referralLink;
+        document.getElementById('referralLink').textContent = referralLink;
+        document.getElementById('friendsCount').textContent = friendsCount;
+        const friendsListDiv = document.getElementById('friendsList');
+        friendsListDiv.innerHTML = '';
         friendsList.forEach(friend => {
             const p = document.createElement('p');
             p.textContent = friend;
