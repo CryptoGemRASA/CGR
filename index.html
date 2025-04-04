@@ -20,6 +20,7 @@
         justify-content: space-between;
         align-items: center;
         position: relative;
+        direction: ltr !important; /* اجبار به جهت چپ به راست */
     }
     .container {
         background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8));
@@ -206,16 +207,6 @@
         margin: 5px 0;
         font-size: 0.8rem;
     }
-    .back-button {
-        position: absolute;
-        top: 10px;
-        right: 10px !important; /* اولویت بالاتر */
-        left: auto !important; /* حذف هرگونه left */
-        color: #00eaff;
-        font-size: 24px;
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
     .back-button:hover {
         color: #66eaff;
     }
@@ -389,7 +380,7 @@
     </div>
 
     <div class="container page-content" id="social-page">
-        <div class="back-button" onclick="goToHome()">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="social-title">Social Networks</h1>
@@ -431,7 +422,7 @@
     </div>
 
     <div class="container page-content" id="tasks-page">
-        <div class="back-button" onclick="goToHome()">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="tasks-title">Tasks</h1>
@@ -439,7 +430,7 @@
     </div>
 
     <div class="container page-content" id="mining-page">
-        <div class="back-button" onclick="goToHome()">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="mining-title">Mining</h1>
@@ -457,7 +448,7 @@
     </div>
 
     <div class="container page-content" id="partnerships-page">
-        <div class="back-button" onclick="goToHome()">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="partnerships-title">Partnerships</h1>
@@ -465,7 +456,7 @@
     </div>
 
     <div class="container page-content" id="comments-page">
-        <div class="back-button" onclick="goToHome()">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="comments-title">Comments</h1>
@@ -473,7 +464,7 @@
     </div>
 
     <div class="container page-content" id="earnings-page">
-        <div class="back-button" onclick="goToHome()">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="earnings-title">Earnings</h1>
@@ -488,7 +479,7 @@
     </div>
 
     <div class="container page-content" id="friends-page">
-        <div class="back-button" onclick="goToHome()">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; right: 10px; left: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
             <i class="fas fa-home"></i>
         </div>
         <h1 data-lang="friends-title">Friends</h1>
@@ -595,22 +586,20 @@
     let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0;
     let lastMiningTime = parseInt(localStorage.getItem('lastMiningTime')) || 0;
     let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
-    let friendsCount = 0; // ریست کردن تعداد رفرال‌ها
-    let friendsList = []; // ریست کردن لیست دوستان
+    let friendsCount = 0;
+    let friendsList = [];
 
-    // ذخیره مقادیر ریست‌شده در localStorage
     localStorage.setItem('friendsCount', friendsCount);
     localStorage.setItem('friendsList', JSON.stringify(friendsList));
 
-    // بررسی و تولید کد رفرال (فقط یک بار)
     let referralCode = localStorage.getItem('referralCode');
     if (!referralCode) {
-        referralCode = Math.random().toString(36).substring(2, 8); // کد 6 کاراکتری تصادفی
-        localStorage.setItem('referralCode', referralCode); // ذخیره کد در localStorage
+        referralCode = Math.random().toString(36).substring(2, 8);
+        localStorage.setItem('referralCode', referralCode);
     }
 
     const miningLimit = 500;
-    const miningInterval = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+    const miningInterval = 8 * 60 * 60 * 1000;
 
     function showPage(pageId) {
         document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
@@ -667,7 +656,7 @@
     function mine() {
         const now = Date.now();
         if (now - lastMiningTime >= miningInterval || miningCount === 0) {
-            miningCount += 5; // Mine 5 units per click
+            miningCount += 5;
             totalMiningCount += 5;
             if (miningCount >= miningLimit) {
                 miningCount = miningLimit;
@@ -684,18 +673,32 @@
         updateMiningStatus();
     }
 
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    const debouncedMine = debounce(mine, 300);
+
     const miningCircle = document.getElementById('miningCircle');
     miningCircle.addEventListener('click', (e) => {
         if (!miningCircle.classList.contains('disabled')) {
             showTouchEffect(e);
-            mine();
+            debouncedMine();
         }
     });
     miningCircle.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // جلوگیری از اجرای click همزمان
+        e.preventDefault();
         if (!miningCircle.classList.contains('disabled')) {
             showTouchEffect(e);
-            mine();
+            debouncedMine();
         }
     });
 
@@ -707,7 +710,6 @@
         });
     }
 
-    // Earnings Logic
     const questions = [
         { question: "What is 2 + 2?", answer: "4" },
         { question: "What is the capital of France?", answer: "Paris" },
@@ -744,7 +746,6 @@
         }
     }
 
-    // Friends Logic
     function updateFriendsPage() {
         const baseUrl = "https://t.me/CryptoGemRasa_Bot/app";
         const referralLink = `${baseUrl}?start=${referralCode}`;
