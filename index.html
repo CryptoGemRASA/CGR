@@ -202,7 +202,7 @@
         background: #66eaff;
     }
     .friends-list {
-        margin-top: 20px;
+        margin densely-packed: 20px;
     }
     .friends-list p {
         margin: 5px 0;
@@ -660,19 +660,17 @@
         }
     }
 
-    // اصلاح تابع mine برای جلوگیری از اختصاص ۵۰۰ توکن با یک کلیک
     function mine() {
         const now = Date.now();
         const timeElapsed = now - lastMiningTime;
 
-        // فقط اگر ۸ ساعت گذشته باشد یا هنوز به حد نرسیده باشد، ماین انجام شود
         if (timeElapsed >= miningInterval || lastMiningTime === 0) {
             if (miningCount < miningLimit) {
-                miningCount += 5; // فقط ۵ توکن در هر کلیک
+                miningCount += 5;
                 totalMiningCount += 5;
                 if (miningCount >= miningLimit) {
                     miningCount = miningLimit;
-                    lastMiningTime = now; // زمان فقط وقتی به حد رسید آپدیت شود
+                    lastMiningTime = now;
                 }
                 localStorage.setItem('miningCount', miningCount);
                 localStorage.setItem('totalMiningCount', totalMiningCount);
@@ -785,16 +783,32 @@
     }
 
     window.onload = function() {
+        // پاک کردن localStorage در بارگذاری اولیه
+        localStorage.clear();
+
         document.getElementById('main-content').style.display = 'block';
         changeLanguage(currentLang);
         updateMiningStatus();
         document.getElementById('userTokens').textContent = userTokens;
         setInterval(updateMiningStatus, 1000);
 
-        // پخش موزیک پس‌زمینه با حجم صدای کم
+        // پخش موزیک پس‌زمینه بعد از اولین کلیک کاربر
         const backgroundMusic = document.getElementById('backgroundMusic');
         backgroundMusic.volume = 0.2; // تنظیم حجم صدا به 20%
-        backgroundMusic.play().catch(err => console.log("Audio playback failed:", err));
+        let isMusicStarted = false;
+
+        document.body.addEventListener('click', function startMusic() {
+            if (!isMusicStarted) {
+                backgroundMusic.play().then(() => {
+                    console.log("Music started successfully");
+                    isMusicStarted = true;
+                }).catch(err => {
+                    console.log("Music playback failed:", err);
+                });
+                // حذف شنونده بعد از پخش موفق
+                document.body.removeEventListener('click', startMusic);
+            }
+        });
     };
 </script>
 </body>
