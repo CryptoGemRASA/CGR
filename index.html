@@ -352,20 +352,22 @@
         100% { opacity: 0; transform: scale(2); }
     }
     .referral-link-container {
-        width: 100%;
-        max-width: 100%;
+        display: block; /* تغییر به block برای انتقال به خط پایین */
+        width: 80%; /* عرض کمتر برای بهتر دیده شدن */
+        max-width: 300px; /* حداکثر عرض */
+        margin: 10px auto; /* وسط‌چین کردن */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 0.8rem;
         color: #00eaff;
-        margin: 10px 0;
         padding: 5px;
         border: 1px solid #00eaff;
         border-radius: 5px;
         background: rgba(0, 234, 255, 0.1);
+        text-align: center; /* متن داخل کادر هم وسط‌چین باشد */
     }
-</style>
+    </style>
 </head>
 <body>
     <div class="container" id="main-content">
@@ -491,7 +493,8 @@
         <h1 data-lang="friends-title">Friends</h1>
         <p data-lang="friends-text">Invite friends to earn 1000 tokens per referral (max 5).</p>
         <div class="friends-wrapper">
-            <p>Your Referral Link: <span id="referralLink" class="referral-link-container"></span></p>
+            <p>Your Referral Link:</p>
+            <span id="referralLink" class="referral-link-container"></span>
             <button onclick="copyReferralLink()">Copy Link</button>
             <div class="friends-list">
                 <h3>Invited Friends (<span id="friendsCount">0</span>/5)</h3>
@@ -591,8 +594,12 @@
     let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0;
     let lastMiningTime = parseInt(localStorage.getItem('lastMiningTime')) || 0;
     let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
-    let friendsCount = parseInt(localStorage.getItem('friendsCount')) || 0;
-    let friendsList = JSON.parse(localStorage.getItem('friendsList')) || [];
+    let friendsCount = 0; // ریست کردن تعداد رفرال‌ها
+    let friendsList = []; // ریست کردن لیست دوستان
+
+    // ذخیره مقادیر ریست‌شده در localStorage
+    localStorage.setItem('friendsCount', friendsCount);
+    localStorage.setItem('friendsList', JSON.stringify(friendsList));
 
     // بررسی و تولید کد رفرال (فقط یک بار)
     let referralCode = localStorage.getItem('referralCode');
@@ -764,16 +771,7 @@
             console.error('Failed to copy referral link:', err);
             alert('Failed to copy the link. Please copy it manually.');
         });
-        if (friendsCount < 5) {
-            friendsCount++;
-            userTokens += 1000;
-            friendsList.push(`Friend ${friendsCount}`);
-            localStorage.setItem('friendsCount', friendsCount);
-            localStorage.setItem('userTokens', userTokens);
-            localStorage.setItem('friendsList', JSON.stringify(friendsList));
-            updateFriendsPage();
-            document.getElementById('userTokens').textContent = userTokens;
-        }
+        // منطق افزایش friendsCount حذف شده است
     }
 
     window.onload = function() {
