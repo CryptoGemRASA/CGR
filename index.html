@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto GEM RASA</title>
-    <link rel="icon" type="image/png" href="https://i.imgur.com/hvY8WDa.jpeg">
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
     html, body {
@@ -33,10 +33,9 @@
         border: 1px solid #00eaff;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* تغییر به flex-start برای قرار گرفتن محتوا در بالا */
+        justify-content: flex-start;
         align-items: center;
-        max-width: 90%;
-        min-width: 300px;
+        width: 340px; /* عرض ثابت برای تمام پنل‌ها */
         margin: 20px auto;
         flex-grow: 1;
         animation: fadeIn 1s ease-in-out forwards;
@@ -83,7 +82,7 @@
         text-align: center;
     }
     @media (max-width: 768px) {
-        .container { max-width: 95%; padding: 15px; margin: 10px auto; }
+        .container { padding: 15px; margin: 10px auto; }
         .container h1 { font-size: 0.9rem; }
         .container p { font-size: 0.7rem; }
         #main-content h1 { font-size: 1.2rem; }
@@ -375,7 +374,7 @@
             </div>
         </div>
         <div class="icon-wrapper">
-            <img src="https://i.imgur.com/hvY8WDa.jpeg" alt="Crypto GEM RASA Icon" class="icon">
+            <img src="logo.png" alt="Crypto GEM RASA Icon" class="icon">
         </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
@@ -439,7 +438,7 @@
         <p data-lang="mining-text">Tap the circle to mine! You can mine 500 units every 8 hours.</p>
         <div class="mining-wrapper">
             <div class="mining-circle" id="miningCircle">
-                <img src="https://i.imgur.com/hvY8WDa.jpeg" alt="Mining Circle">
+                <img src="logo.png" alt="Mining Circle">
             </div>
             <div class="mining-info">
                 <span id="miningCount">0 / 500</span><br>
