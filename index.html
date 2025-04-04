@@ -363,6 +363,12 @@
     </style>
 </head>
 <body>
+    <!-- اضافه کردن موزیک پس‌زمینه -->
+    <audio id="backgroundMusic" loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="container" id="main-content">
         <div class="language-menu">
             <button class="language-button">
@@ -654,21 +660,27 @@
         }
     }
 
+    // اصلاح تابع mine برای جلوگیری از اختصاص ۵۰۰ توکن با یک کلیک
     function mine() {
         const now = Date.now();
-        if (now - lastMiningTime >= miningInterval || miningCount === 0) {
-            miningCount += 5;
-            totalMiningCount += 5;
-            if (miningCount >= miningLimit) {
-                miningCount = miningLimit;
-                lastMiningTime = now;
-            }
-            localStorage.setItem('miningCount', miningCount);
-            localStorage.setItem('totalMiningCount', totalMiningCount);
-            localStorage.setItem('lastMiningTime', lastMiningTime);
-            const clickSound = document.getElementById('clickSound');
-            if (clickSound) {
-                clickSound.play().catch(err => console.log("Audio playback failed:", err));
+        const timeElapsed = now - lastMiningTime;
+
+        // فقط اگر ۸ ساعت گذشته باشد یا هنوز به حد نرسیده باشد، ماین انجام شود
+        if (timeElapsed >= miningInterval || lastMiningTime === 0) {
+            if (miningCount < miningLimit) {
+                miningCount += 5; // فقط ۵ توکن در هر کلیک
+                totalMiningCount += 5;
+                if (miningCount >= miningLimit) {
+                    miningCount = miningLimit;
+                    lastMiningTime = now; // زمان فقط وقتی به حد رسید آپدیت شود
+                }
+                localStorage.setItem('miningCount', miningCount);
+                localStorage.setItem('totalMiningCount', totalMiningCount);
+                localStorage.setItem('lastMiningTime', lastMiningTime);
+                const clickSound = document.getElementById('clickSound');
+                if (clickSound) {
+                    clickSound.play().catch(err => console.log("Audio playback failed:", err));
+                }
             }
         }
         updateMiningStatus();
@@ -778,6 +790,11 @@
         updateMiningStatus();
         document.getElementById('userTokens').textContent = userTokens;
         setInterval(updateMiningStatus, 1000);
+
+        // پخش موزیک پس‌زمینه با حجم صدای کم
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        backgroundMusic.volume = 0.2; // تنظیم حجم صدا به 20%
+        backgroundMusic.play().catch(err => console.log("Audio playback failed:", err));
     };
 </script>
 </body>
