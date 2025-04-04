@@ -209,7 +209,8 @@
     .back-button {
         position: absolute;
         top: 10px;
-        right: 10px;
+        right: 10px !important; /* اولویت بالاتر */
+        left: auto !important; /* حذف هرگونه left */
         color: #00eaff;
         font-size: 24px;
         cursor: pointer;
@@ -352,10 +353,10 @@
         100% { opacity: 0; transform: scale(2); }
     }
     .referral-link-container {
-        display: block; /* تغییر به block برای انتقال به خط پایین */
-        width: 80%; /* عرض کمتر برای بهتر دیده شدن */
-        max-width: 300px; /* حداکثر عرض */
-        margin: 10px auto; /* وسط‌چین کردن */
+        display: block;
+        width: 80%;
+        max-width: 300px;
+        margin: 10px auto;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -365,7 +366,7 @@
         border: 1px solid #00eaff;
         border-radius: 5px;
         background: rgba(0, 234, 255, 0.1);
-        text-align: center; /* متن داخل کادر هم وسط‌چین باشد */
+        text-align: center;
     }
     </style>
 </head>
@@ -666,8 +667,8 @@
     function mine() {
         const now = Date.now();
         if (now - lastMiningTime >= miningInterval || miningCount === 0) {
-            miningCount += 10; // Mine 10 units per click
-            totalMiningCount += 10;
+            miningCount += 5; // Mine 5 units per click
+            totalMiningCount += 5;
             if (miningCount >= miningLimit) {
                 miningCount = miningLimit;
                 lastMiningTime = now;
@@ -691,6 +692,7 @@
         }
     });
     miningCircle.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // جلوگیری از اجرای click همزمان
         if (!miningCircle.classList.contains('disabled')) {
             showTouchEffect(e);
             mine();
@@ -744,15 +746,10 @@
 
     // Friends Logic
     function updateFriendsPage() {
-        // استفاده از کد رفرال ذخیره‌شده
         const baseUrl = "https://t.me/CryptoGemRasa_Bot/app";
         const referralLink = `${baseUrl}?start=${referralCode}`;
-
-        // ذخیره لینک کامل برای کپی کردن
         document.getElementById('referralLink').dataset.fullLink = referralLink;
-        // نمایش لینک در صفحه
         document.getElementById('referralLink').textContent = referralLink;
-
         document.getElementById('friendsCount').textContent = friendsCount;
         const friendsListDiv = document.getElementById('friendsList');
         friendsListDiv.innerHTML = '';
@@ -771,7 +768,6 @@
             console.error('Failed to copy referral link:', err);
             alert('Failed to copy the link. Please copy it manually.');
         });
-        // منطق افزایش friendsCount حذف شده است
     }
 
     window.onload = function() {
@@ -779,7 +775,7 @@
         changeLanguage(currentLang);
         updateMiningStatus();
         document.getElementById('userTokens').textContent = userTokens;
-        setInterval(updateMiningStatus, 1000); // Update timer every second
+        setInterval(updateMiningStatus, 1000);
     };
 </script>
 </body>
