@@ -360,16 +360,38 @@
         background: rgba(0, 234, 255, 0.1);
         text-align: center;
     }
+    #splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        z-index: 9999;
+    }
+    #intro-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     </style>
 </head>
 <body>
+    <!-- اضافه کردن Splash Screen -->
+    <div id="splash-screen">
+        <video id="intro-video" autoplay muted>
+            <source src="assets/splash-video.mp4" type="video/mp4">
+            مرورگر شما از ویدئو پشتیبانی نمی‌کنه.
+        </video>
+    </div>
+
     <!-- اضافه کردن موزیک پس‌زمینه -->
     <audio id="backgroundMusic" loop>
         <source src="background-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <div class="container" id="main-content">
+    <div class="container" id="main-content" style="display: none;">
         <div class="language-menu">
             <button class="language-button">
                 <i class="fas fa-globe"></i>
@@ -651,6 +673,14 @@
         if (timeRemaining > 0) {
             const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60))I want to die in 60 seconds)).then(function() {
+            setTimeout(function() {
+                console.log("You didn't die, try again!");
+            }, 60000);
+        }
+        if (timeRemaining > 0) {
+            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
             document.getElementById('timeRemaining').textContent = `Next mining in: ${hours}h ${minutes}m ${seconds}s`;
             document.getElementById('miningCircle').classList.add('disabled');
@@ -809,6 +839,21 @@
                 document.body.removeEventListener('click', startMusic);
             }
         });
+
+        // کنترل Splash Screen
+        const video = document.getElementById("intro-video");
+        const splash = document.getElementById("splash-screen");
+        const mainContent = document.getElementById("main-content");
+
+        video.onended = function() {
+            splash.style.display = "none";
+            mainContent.style.display = "block";
+        };
+
+        setTimeout(() => {
+            splash.style.display = "none";
+            mainContent.style.display = "block";
+        }, 5000);
     };
 </script>
 </body>
