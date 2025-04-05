@@ -422,7 +422,7 @@
     @media (max-width: 768px) {
         .news-section h2 { font-size: 1rem; }
         .news-item p { font-size: 0.7rem; }
-        .news-item img { width: 40px; height: 40px; } /* اندازه تصویر در موبایل */
+        .news-item img { width: 40px; height: 40px; }
     }
     </style>
 </head>
@@ -687,32 +687,33 @@
     const miningLimit = 500;
     const miningInterval = 8 * 60 * 60 * 1000;
 
-    // تابع برای دریافت اخبار کریپتو
+    // تابع برای دریافت اخبار کریپتو از CoinGecko
     async function fetchCryptoNews() {
         try {
-            const apiKey = 'your-api-key'; // کلید API خودت رو اینجا بذار
-            const url = `https://newsapi.org/v2/everything?q=cryptocurrency&language=en&sortBy=publishedAt&apiKey=${apiKey}&pageSize=3`;
+            const url = `https://api.coingecko.com/api/v3/news`;
+            console.log("Fetching news from:", url); // برای دیباگ
             const response = await fetch(url);
             const data = await response.json();
+            console.log("API Response:", data); // برای دیباگ
 
-            if (data.status === "ok" && data.articles.length > 0) {
+            if (data.data && data.data.length > 0) {
                 const newsContainer = document.getElementById('news-container');
                 newsContainer.innerHTML = ''; // پاک کردن اخبار قدیمی
 
-                // اضافه کردن اخبار جدید
-                data.articles.forEach(article => {
+                // فقط 3 خبر اول رو نمایش بده
+                data.data.slice(0, 3).forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
 
                     // اضافه کردن تصویر
                     const newsImage = document.createElement('img');
-                    newsImage.src = article.urlToImage || 'https://via.placeholder.com/50';
+                    newsImage.src = article.thumb || 'https://via.placeholder.com/50';
                     newsImage.alt = article.title;
                     newsImage.onerror = () => { newsImage.src = 'https://via.placeholder.com/50'; };
 
                     // اضافه کردن متن خبر
                     const newsText = document.createElement('p');
-                    const publishedAt = new Date(article.publishedAt);
+                    const publishedAt = new Date(article.date);
                     const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
                     newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
 
@@ -722,7 +723,7 @@
                     newsContainer.appendChild(newsItem);
                 });
             } else {
-                console.error('No news available');
+                console.error('No news available:', data.message || 'Unknown error');
                 document.getElementById('news-container').innerHTML = '<p>No news available at the moment.</p>';
             }
         } catch (error) {
@@ -801,7 +802,7 @@
                 localStorage.setItem('lastMiningTime', lastMiningTime);
                 const clickSound = document.getElementById('clickSound');
                 if (clickSound) {
-                    clickSound.volume = 0.3; // کاهش صدا به 30%
+                    clickSound.volume = 0.3;
                     clickSound.play().catch(err => console.log("Audio playback failed:", err));
                 }
             }
