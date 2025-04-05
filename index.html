@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crypto GEM RASA</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -631,7 +631,7 @@
             "comments-nav": "Comments",
             "earnings-nav": "Earnings",
             "friends-nav": "Friends",
-            "news-title": "Crypto News" // اضافه کردن ترجمه برای عنوان اخبار
+            "news-title": "Crypto News"
         },
         ru: {
             title: "Crypto GEM RASA",
@@ -657,7 +657,7 @@
             "comments-nav": "Комментарии",
             "earnings-nav": "Заработок",
             "friends-nav": "Друзья",
-            "news-title": "Новости Криптовалют" // اضافه کردن ترجمه برای عنوان اخبار
+            "news-title": "Новости Криптовалют"
         }
     };
 
@@ -750,6 +750,7 @@
                 localStorage.setItem('lastMiningTime', lastMiningTime);
                 const clickSound = document.getElementById('clickSound');
                 if (clickSound) {
+                    clickSound.volume = 0.5; // تنظیم صدا به نصف
                     clickSound.play().catch(err => console.log("Audio playback failed:", err));
                 }
             }
