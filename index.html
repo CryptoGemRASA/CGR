@@ -687,33 +687,40 @@
     const miningLimit = 500;
     const miningInterval = 8 * 60 * 60 * 1000;
 
-    // تابع برای دریافت اخبار کریپتو از CoinGecko
+    // اخبار پیش‌فرض
+    const defaultNews = [
+        { title: "Bitcoin hits $70,000 amid market rally", imageurl: "https://via.placeholder.com/50", published_on: Date.now() / 1000 - 3600 },
+        { title: "Ethereum ETF approval boosts prices", imageurl: "https://via.placeholder.com/50", published_on: Date.now() / 1000 - 7200 },
+        { title: "Solana announces new DeFi integration", imageurl: "https://via.placeholder.com/50", published_on: Date.now() / 1000 - 18000 }
+    ];
+
+    // تابع برای دریافت اخبار کریپتو از CryptoCompare
     async function fetchCryptoNews() {
         try {
-            const url = `https://api.coingecko.com/api/v3/news`;
+            const url = `https://min-api.cryptocompare.com/data/v2/news/?lang=EN`;
             console.log("Fetching news from:", url); // برای دیباگ
             const response = await fetch(url);
             const data = await response.json();
             console.log("API Response:", data); // برای دیباگ
 
-            if (data.data && data.data.length > 0) {
+            if (data.Data && data.Data.length > 0) {
                 const newsContainer = document.getElementById('news-container');
                 newsContainer.innerHTML = ''; // پاک کردن اخبار قدیمی
 
                 // فقط 3 خبر اول رو نمایش بده
-                data.data.slice(0, 3).forEach(article => {
+                data.Data.slice(0, 3).forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
 
                     // اضافه کردن تصویر
                     const newsImage = document.createElement('img');
-                    newsImage.src = article.thumb || 'https://via.placeholder.com/50';
+                    newsImage.src = article.imageurl || 'https://via.placeholder.com/50';
                     newsImage.alt = article.title;
                     newsImage.onerror = () => { newsImage.src = 'https://via.placeholder.com/50'; };
 
                     // اضافه کردن متن خبر
                     const newsText = document.createElement('p');
-                    const publishedAt = new Date(article.date);
+                    const publishedAt = new Date(article.published_on * 1000); // تبدیل timestamp به تاریخ
                     const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
                     newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
 
@@ -724,12 +731,38 @@
                 });
             } else {
                 console.error('No news available:', data.message || 'Unknown error');
-                document.getElementById('news-container').innerHTML = '<p>No news available at the moment.</p>';
+                // نمایش اخبار پیش‌فرض
+                displayDefaultNews();
             }
         } catch (error) {
             console.error('Error fetching news:', error);
-            document.getElementById('news-container').innerHTML = '<p>Failed to load news.</p>';
+            // نمایش اخبار پیش‌فرض در صورت خطا
+            displayDefaultNews();
         }
+    }
+
+    // تابع برای نمایش اخبار پیش‌فرض
+    function displayDefaultNews() {
+        const newsContainer = document.getElementById('news-container');
+        newsContainer.innerHTML = ''; // پاک کردن اخبار قدیمی
+
+        defaultNews.forEach(article => {
+            const newsItem = document.createElement('div');
+            newsItem.classList.add('news-item');
+
+            const newsImage = document.createElement('img');
+            newsImage.src = article.imageurl;
+            newsImage.alt = article.title;
+
+            const newsText = document.createElement('p');
+            const publishedAt = new Date(article.published_on * 1000);
+            const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
+            newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
+
+            newsItem.appendChild(newsImage);
+            newsItem.appendChild(newsText);
+            newsContainer.appendChild(newsItem);
+        });
     }
 
     function showPage(pageId) {
