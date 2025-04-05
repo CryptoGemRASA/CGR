@@ -25,7 +25,7 @@
         align-items: center;
         position: relative;
         box-sizing: border-box;
-        overflow: hidden; /* غیرفعال کردن اسکرول در کل صفحه */
+        overflow: hidden;
     }
     .container {
         background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8));
@@ -44,8 +44,8 @@
         animation: fadeIn 1s ease-in-out forwards;
         position: relative;
         box-sizing: border-box;
-        overflow: hidden; /* غیرفعال کردن اسکرول در داخل پنل */
-        max-height: calc(100vh - 110px); /* محدود کردن ارتفاع با احتساب padding و footer */
+        overflow: hidden;
+        max-height: calc(100vh - 110px);
     }
     .container > * {
         width: 100%;
@@ -402,16 +402,27 @@
         padding: 10px;
         margin: 10px 0;
         box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .news-item img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 5px;
     }
     .news-item p {
         font-size: 0.8rem;
         margin: 0;
         color: #fff;
         text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
+        flex: 1;
     }
     @media (max-width: 768px) {
         .news-section h2 { font-size: 1rem; }
         .news-item p { font-size: 0.7rem; }
+        .news-item img { width: 40px; height: 40px; } /* اندازه تصویر در موبایل */
     }
     </style>
 </head>
@@ -448,15 +459,7 @@
         <!-- بخش اخبار کریپتو -->
         <div class="news-section">
             <h2 data-lang="news-title">Crypto News</h2>
-            <div class="news-item">
-                <p>Bitcoin hits $70,000 amid market rally - 1 hour ago</p>
-            </div>
-            <div class="news-item">
-                <p>Ethereum ETF approval boosts prices - 2 hours ago</p>
-            </div>
-            <div class="news-item">
-                <p>Solana announces new DeFi integration - 5 hours ago</p>
-            </div>
+            <div id="news-container"></div>
         </div>
     </div>
 
@@ -684,6 +687,50 @@
     const miningLimit = 500;
     const miningInterval = 8 * 60 * 60 * 1000;
 
+    // تابع برای دریافت اخبار کریپتو
+    async function fetchCryptoNews() {
+        try {
+            const apiKey = 'your-api-key'; // کلید API خودت رو اینجا بذار
+            const url = `https://newsapi.org/v2/everything?q=cryptocurrency&language=en&sortBy=publishedAt&apiKey=${apiKey}&pageSize=3`;
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.status === "ok" && data.articles.length > 0) {
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = ''; // پاک کردن اخبار قدیمی
+
+                // اضافه کردن اخبار جدید
+                data.articles.forEach(article => {
+                    const newsItem = document.createElement('div');
+                    newsItem.classList.add('news-item');
+
+                    // اضافه کردن تصویر
+                    const newsImage = document.createElement('img');
+                    newsImage.src = article.urlToImage || 'https://via.placeholder.com/50';
+                    newsImage.alt = article.title;
+                    newsImage.onerror = () => { newsImage.src = 'https://via.placeholder.com/50'; };
+
+                    // اضافه کردن متن خبر
+                    const newsText = document.createElement('p');
+                    const publishedAt = new Date(article.publishedAt);
+                    const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
+                    newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
+
+                    // اضافه کردن تصویر و متن به کادر خبر
+                    newsItem.appendChild(newsImage);
+                    newsItem.appendChild(newsText);
+                    newsContainer.appendChild(newsItem);
+                });
+            } else {
+                console.error('No news available');
+                document.getElementById('news-container').innerHTML = '<p>No news available at the moment.</p>';
+            }
+        } catch (error) {
+            console.error('Error fetching news:', error);
+            document.getElementById('news-container').innerHTML = '<p>Failed to load news.</p>';
+        }
+    }
+
     function showPage(pageId) {
         document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
         document.getElementById('main-content').style.display = 'none';
@@ -695,6 +742,7 @@
     function goToHome() {
         document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
         document.getElementById('main-content').style.display = 'block';
+        fetchCryptoNews(); // بارگذاری مجدد اخبار هنگام بازگشت به صفحه اصلی
     }
 
     function showTouchEffect(event) {
@@ -753,7 +801,7 @@
                 localStorage.setItem('lastMiningTime', lastMiningTime);
                 const clickSound = document.getElementById('clickSound');
                 if (clickSound) {
-                    clickSound.volume = 0.5;
+                    clickSound.volume = 0.3; // کاهش صدا به 30%
                     clickSound.play().catch(err => console.log("Audio playback failed:", err));
                 }
             }
@@ -868,6 +916,9 @@
         updateMiningStatus();
         document.getElementById('userTokens').textContent = userTokens;
         setInterval(updateMiningStatus, 1000);
+
+        // دریافت اخبار کریپتو
+        fetchCryptoNews();
 
         // پخش موزیک پس‌زمینه بعد از اولین کلیک کاربر
         const backgroundMusic = document.getElementById('backgroundMusic');
