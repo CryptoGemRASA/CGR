@@ -14,6 +14,7 @@
         font-family: 'Segoe UI', sans-serif;
         margin: 0;
         padding: 0;
+        padding-bottom: 70px; /* اضافه کردن فاصله از پایین برای هماهنگی با footer-nav */
         background: url('https://i.imgur.com/nq2jGI2.jpeg') no-repeat center center fixed, linear-gradient(135deg, #1e3c72, #2a5298);
         background-size: cover;
         color: #fff;
@@ -23,6 +24,7 @@
         justify-content: space-between;
         align-items: center;
         position: relative;
+        box-sizing: border-box; /* اضافه کردن برای اطمینان از محاسبه درست padding */
     }
     .container {
         background: linear-gradient(135deg, rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8));
@@ -213,7 +215,7 @@
     }
     .footer-nav {
         position: fixed;
-        bottom: 0;
+        bottom: 10px; /* فاصله از پایین صفحه برای هماهنگی با خط حاشیه */
         left: 0;
         width: 100%;
         background: rgba(255, 255, 255, 0.1);
@@ -223,7 +225,9 @@
         justify-content: space-around;
         align-items: center;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid #00eaff; /* اضافه کردن خط حاشیه پایین برای هماهنگی */
         z-index: 1000;
+        box-sizing: border-box;
     }
     .footer-nav a {
         display: flex;
@@ -374,6 +378,38 @@
         height: 100%;
         object-fit: cover;
     }
+    /* استایل‌های بخش اخبار */
+    .news-section {
+        margin-top: 20px;
+        width: 100%;
+        text-align: center;
+    }
+    .news-section h2 {
+        font-size: 1.2rem;
+        background: linear-gradient(90deg, #00eaff, #ff00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 10px rgba(0, 234, 255, 0.8);
+        margin: 10px 0;
+    }
+    .news-item {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid #00eaff;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+    }
+    .news-item p {
+        font-size: 0.8rem;
+        margin: 0;
+        color: #fff;
+        text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
+    }
+    @media (max-width: 768px) {
+        .news-section h2 { font-size: 1rem; }
+        .news-item p { font-size: 0.7rem; }
+    }
     </style>
 </head>
 <body>
@@ -406,6 +442,19 @@
         </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
+        <!-- بخش اخبار کریپتو -->
+        <div class="news-section">
+            <h2 data-lang="news-title">Crypto News</h2>
+            <div class="news-item">
+                <p>Bitcoin hits $70,000 amid market rally - 1 hour ago</p>
+            </div>
+            <div class="news-item">
+                <p>Ethereum ETF approval boosts prices - 2 hours ago</p>
+            </div>
+            <div class="news-item">
+                <p>Solana announces new DeFi integration - 5 hours ago</p>
+            </div>
+        </div>
     </div>
 
     <div class="container page-content" id="social-page">
@@ -581,7 +630,8 @@
             "partnerships-nav": "Partners",
             "comments-nav": "Comments",
             "earnings-nav": "Earnings",
-            "friends-nav": "Friends"
+            "friends-nav": "Friends",
+            "news-title": "Crypto News" // اضافه کردن ترجمه برای عنوان اخبار
         },
         ru: {
             title: "Crypto GEM RASA",
@@ -606,7 +656,8 @@
             "partnerships-nav": "Партнеры",
             "comments-nav": "Комментарии",
             "earnings-nav": "Заработок",
-            "friends-nav": "Друзья"
+            "friends-nav": "Друзья",
+            "news-title": "Новости Криптовалют" // اضافه کردن ترجمه برای عنوان اخبار
         }
     };
 
