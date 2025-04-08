@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
     html, body {
-        direction: ltr !important; /* اجبار به جهت چپ به راست */
+        direction: ltr !important;
     }
     body {
         font-family: 'Segoe UI', sans-serif;
@@ -117,6 +117,8 @@
         justify-content: center;
         align-items: center;
         height: 50vh;
+        max-height: 300px; /* اضافه شده برای اسکرول */
+        overflow-y: auto; /* اضافه شده برای اسکرول */
     }
     .mining-circle {
         width: 120px;
@@ -165,6 +167,8 @@
         flex-direction: column;
         align-items: center;
         margin-top: 20px;
+        max-height: 200px; /* اضافه شده برای اسکرول */
+        overflow-y: auto; /* اضافه شده برای اسکرول */
     }
     .earnings-form input {
         padding: 10px;
@@ -191,6 +195,8 @@
     .friends-wrapper {
         text-align: center;
         margin-top: 20px;
+        max-height: 300px; /* اضافه شده برای اسکرول */
+        overflow-y: auto; /* اضافه شده برای اسکرول */
     }
     .friends-wrapper button {
         padding: 10px 20px;
@@ -207,7 +213,7 @@
         background: #66eaff;
     }
     .friends-list {
-        margin densely-packed: 20px;
+        margin: 20px; /* اصلاح شده از "densely-packed" که اشتباه تایپی بود */
     }
     .friends-list p {
         margin: 5px 0;
@@ -308,6 +314,8 @@
         gap: 15px;
         margin-top: 20px;
         padding-left: 10px;
+        max-height: 300px; /* اضافه شده برای اسکرول */
+        overflow-y: auto; /* اضافه شده برای اسکرول */
     }
     .social-link {
         display: flex;
@@ -381,11 +389,12 @@
         height: 100%;
         object-fit: cover;
     }
-    /* استایل‌های بخش اخبار */
     .news-section {
         margin-top: 20px;
         width: 100%;
         text-align: center;
+        max-height: 300px; /* اضافه شده برای اسکرول */
+        overflow-y: auto; /* اضافه شده برای اسکرول */
     }
     .news-section h2 {
         font-size: 1.2rem;
@@ -496,7 +505,7 @@
             </a>
             <a href="https://www.tiktok.com/@crypto_gem_rasa?_t=ZS-8vDQtVW04wM&_r=1" target="_blank" class="social-link">
                 <i class="fab fa-tiktok"></i>
-                <span>TikTok</span>
+                GAME<span>TikTok</span>
             </a>
             <a href="https://medium.com/@Crypto_Gem_RASA" target="_blank" class="social-link">
                 <i class="fab fa-medium-m"></i>
@@ -709,7 +718,7 @@
 
                 // فقط 3 خبر اول رو نمایش بده
                 data.Data.slice(0, 3).forEach(article => {
-                    const newsItem = document.createElement('div');
+                    const newsItem = document.createد('div');
                     newsItem.classList.add('news-item');
 
                     // اضافه کردن تصویر
