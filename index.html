@@ -117,8 +117,8 @@
         justify-content: center;
         align-items: center;
         height: 50vh;
-        max-height: 300px; /* اضافه شده برای اسکرول */
-        overflow-y: auto; /* اضافه شده برای اسکرول */
+        max-height: 300px;
+        overflow-y: auto;
     }
     .mining-circle {
         width: 120px;
@@ -167,8 +167,8 @@
         flex-direction: column;
         align-items: center;
         margin-top: 20px;
-        max-height: 200px; /* اضافه شده برای اسکرول */
-        overflow-y: auto; /* اضافه شده برای اسکرول */
+        max-height: 200px;
+        overflow-y: auto;
     }
     .earnings-form input {
         padding: 10px;
@@ -195,8 +195,8 @@
     .friends-wrapper {
         text-align: center;
         margin-top: 20px;
-        max-height: 300px; /* اضافه شده برای اسکرول */
-        overflow-y: auto; /* اضافه شده برای اسکرول */
+        max-height: 300px;
+        overflow-y: auto;
     }
     .friends-wrapper button {
         padding: 10px 20px;
@@ -213,7 +213,7 @@
         background: #66eaff;
     }
     .friends-list {
-        margin: 20px; /* اصلاح شده از "densely-packed" که اشتباه تایپی بود */
+        margin: 20px;
     }
     .friends-list p {
         margin: 5px 0;
@@ -298,7 +298,7 @@
         padding: 10px 20px;
         color: #fff;
         text-decoration: none;
-        font-size: 0.8rem;
+ B       font-size: 0.8rem;
         transition: background 0.3s ease;
     }
     .language-dropdown a:hover {
@@ -314,8 +314,8 @@
         gap: 15px;
         margin-top: 20px;
         padding-left: 10px;
-        max-height: 300px; /* اضافه شده برای اسکرول */
-        overflow-y: auto; /* اضافه شده برای اسکرول */
+        max-height: 300px;
+        overflow-y: auto;
     }
     .social-link {
         display: flex;
@@ -393,8 +393,8 @@
         margin-top: 20px;
         width: 100%;
         text-align: center;
-        max-height: 300px; /* اضافه شده برای اسکرول */
-        overflow-y: auto; /* اضافه شده برای اسکرول */
+        max-height: 300px;
+        overflow-y: auto;
     }
     .news-section h2 {
         font-size: 1.2rem;
@@ -505,7 +505,7 @@
             </a>
             <a href="https://www.tiktok.com/@crypto_gem_rasa?_t=ZS-8vDQtVW04wM&_r=1" target="_blank" class="social-link">
                 <i class="fab fa-tiktok"></i>
-                GAME<span>TikTok</span>
+                <span>TikTok</span>
             </a>
             <a href="https://medium.com/@Crypto_Gem_RASA" target="_blank" class="social-link">
                 <i class="fab fa-medium-m"></i>
@@ -707,10 +707,10 @@
     async function fetchCryptoNews() {
         try {
             const url = `https://min-api.cryptocompare.com/data/v2/news/?lang=EN`;
-            console.log("Fetching news from:", url); // برای دیباگ
+            console.log("Fetching news from:", url);
             const response = await fetch(url);
             const data = await response.json();
-            console.log("API Response:", data); // برای دیباگ
+            console.log("API Response:", data);
 
             if (data.Data && data.Data.length > 0) {
                 const newsContainer = document.getElementById('news-container');
@@ -718,7 +718,7 @@
 
                 // فقط 3 خبر اول رو نمایش بده
                 data.Data.slice(0, 3).forEach(article => {
-                    const newsItem = document.createد('div');
+                    const newsItem = document.createElement('div'); // اصلاح اشتباه تایپی
                     newsItem.classList.add('news-item');
 
                     // اضافه کردن تصویر
@@ -729,7 +729,7 @@
 
                     // اضافه کردن متن خبر
                     const newsText = document.createElement('p');
-                    const publishedAt = new Date(article.published_on * 1000); // تبدیل timestamp به تاریخ
+                    const publishedAt = new Date(article.published_on * 1000);
                     const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
                     newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
 
@@ -740,12 +740,10 @@
                 });
             } else {
                 console.error('No news available:', data.message || 'Unknown error');
-                // نمایش اخبار پیش‌فرض
                 displayDefaultNews();
             }
         } catch (error) {
             console.error('Error fetching news:', error);
-            // نمایش اخبار پیش‌فرض در صورت خطا
             displayDefaultNews();
         }
     }
