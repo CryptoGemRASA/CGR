@@ -842,14 +842,18 @@
                 localStorage.setItem('miningCount', miningCount);
                 localStorage.setItem('totalMiningCount', totalMiningCount);
                 localStorage.setItem('lastMiningTime', lastMiningTime);
-                const clickSound = document.getElementById('clickSound');
-                if (clickSound) {
-                    clickSound.volume = 0.3;
-                    clickSound.play().catch(err => console.log("Audio playback failed:", err));
-                }
             }
         }
         updateMiningStatus();
+    }
+
+    function playClickSound() {
+        const clickSound = document.getElementById('clickSound');
+        if (clickSound) {
+            clickSound.currentTime = 0; // هر بار از اول پخش بشه
+            clickSound.volume = 0.3;
+            clickSound.play().catch(err => console.log("Audio playback failed:", err));
+        }
     }
 
     function debounce(func, wait) {
@@ -864,13 +868,13 @@
         };
     }
 
-    // تغییر زمان debounce از 300 به 100 میلی‌ثانیه برای سرعت 3 برابر
     const debouncedMine = debounce(mine, 100);
 
     const miningCircle = document.getElementById('miningCircle');
     miningCircle.addEventListener('click', (e) => {
         if (!miningCircle.classList.contains('disabled')) {
             showTouchEffect(e);
+            playClickSound(); // پخش صدا با هر کلیک
             debouncedMine();
         }
     });
@@ -878,6 +882,7 @@
         e.preventDefault();
         if (!miningCircle.classList.contains('disabled')) {
             showTouchEffect(e);
+            playClickSound(); // پخش صدا با هر تپ
             debouncedMine();
         }
     });
