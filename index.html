@@ -298,7 +298,7 @@
         padding: 10px 20px;
         color: #fff;
         text-decoration: none;
- B       font-size: 0.8rem;
+        font-size: 0.8rem;
         transition: background 0.3s ease;
     }
     .language-dropdown a:hover {
@@ -436,15 +436,13 @@
     </style>
 </head>
 <body>
-    <!-- اضافه کردن Splash Screen -->
     <div id="splash-screen">
         <video id="intro-video" autoplay muted>
             <source src="splash-video.mp4" type="video/mp4">
-            مرورگر شما از ویدئو پشتیبانی نمی‌کنه.
+            Your browser doesn’t support video.
         </video>
     </div>
 
-    <!-- اضافه کردن موزیک پس‌زمینه -->
     <audio id="backgroundMusic" loop>
         <source src="background-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -465,7 +463,6 @@
         </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
-        <!-- بخش اخبار کریپتو -->
         <div class="news-section">
             <h2 data-lang="news-title">Crypto News</h2>
             <div id="news-container"></div>
@@ -681,11 +678,8 @@
     let totalMiningCount = parseInt(localStorage.getItem('totalMiningCount')) || 0;
     let lastMiningTime = parseInt(localStorage.getItem('lastMiningTime')) || 0;
     let userTokens = parseInt(localStorage.getItem('userTokens')) || 0;
-    let friendsCount = 0;
-    let friendsList = [];
-
-    localStorage.setItem('friendsCount', friendsCount);
-    localStorage.setItem('friendsList', JSON.stringify(friendsList));
+    let friendsCount = parseInt(localStorage.getItem('friendsCount')) || 0;
+    let friendsList = JSON.parse(localStorage.getItem('friendsList')) || [];
 
     let referralCode = localStorage.getItem('referralCode');
     if (!referralCode) {
@@ -696,14 +690,12 @@
     const miningLimit = 500;
     const miningInterval = 8 * 60 * 60 * 1000;
 
-    // اخبار پیش‌فرض
     const defaultNews = [
         { title: "Bitcoin hits $70,000 amid market rally", imageurl: "https://via.placeholder.com/50", published_on: Date.now() / 1000 - 3600 },
         { title: "Ethereum ETF approval boosts prices", imageurl: "https://via.placeholder.com/50", published_on: Date.now() / 1000 - 7200 },
         { title: "Solana announces new DeFi integration", imageurl: "https://via.placeholder.com/50", published_on: Date.now() / 1000 - 18000 }
     ];
 
-    // تابع برای دریافت اخبار کریپتو از CryptoCompare
     async function fetchCryptoNews() {
         try {
             const url = `https://min-api.cryptocompare.com/data/v2/news/?lang=EN`;
@@ -714,26 +706,22 @@
 
             if (data.Data && data.Data.length > 0) {
                 const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = ''; // پاک کردن اخبار قدیمی
+                newsContainer.innerHTML = '';
 
-                // فقط 3 خبر اول رو نمایش بده
                 data.Data.slice(0, 3).forEach(article => {
-                    const newsItem = document.createElement('div'); // اصلاح اشتباه تایپی
+                    const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
 
-                    // اضافه کردن تصویر
                     const newsImage = document.createElement('img');
                     newsImage.src = article.imageurl || 'https://via.placeholder.com/50';
                     newsImage.alt = article.title;
                     newsImage.onerror = () => { newsImage.src = 'https://via.placeholder.com/50'; };
 
-                    // اضافه کردن متن خبر
                     const newsText = document.createElement('p');
                     const publishedAt = new Date(article.published_on * 1000);
                     const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
                     newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
 
-                    // اضافه کردن تصویر و متن به کادر خبر
                     newsItem.appendChild(newsImage);
                     newsItem.appendChild(newsText);
                     newsContainer.appendChild(newsItem);
@@ -744,32 +732,46 @@
             }
         } catch (error) {
             console.error('Error fetching news:', error);
-            displayDefaultNews();
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = '';
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = currentLang === 'en' 
+                ? "Oops! Looks like something broke. Take a deep breath and try again—we’ll fix it!" 
+                : "Ой! Кажется, что-то сломалось. Сделай глубокий вдох и попробуй снова — мы это исправим!";
+            newsContainer.appendChild(errorMessage);
         }
     }
 
-    // تابع برای نمایش اخبار پیش‌فرض
     function displayDefaultNews() {
         const newsContainer = document.getElementById('news-container');
-        newsContainer.innerHTML = ''; // پاک کردن اخبار قدیمی
+        newsContainer.innerHTML = '';
 
-        defaultNews.forEach(article => {
-            const newsItem = document.createElement('div');
-            newsItem.classList.add('news-item');
+        try {
+            defaultNews.forEach(article => {
+                const newsItem = document.createElement('div');
+                newsItem.classList.add('news-item');
 
-            const newsImage = document.createElement('img');
-            newsImage.src = article.imageurl;
-            newsImage.alt = article.title;
+                const newsImage = document.createElement('img');
+                newsImage.src = article.imageurl;
+                newsImage.alt = article.title;
 
-            const newsText = document.createElement('p');
-            const publishedAt = new Date(article.published_on * 1000);
-            const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
-            newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
+                const newsText = document.createElement('p');
+                const publishedAt = new Date(article.published_on * 1000);
+                const timeAgo = Math.floor((Date.now() - publishedAt) / (1000 * 60 * 60));
+                newsText.textContent = `${article.title} - ${timeAgo} hours ago`;
 
-            newsItem.appendChild(newsImage);
-            newsItem.appendChild(newsText);
-            newsContainer.appendChild(newsItem);
-        });
+                newsItem.appendChild(newsImage);
+                newsItem.appendChild(newsText);
+                newsContainer.appendChild(newsItem);
+            });
+        } catch (error) {
+            console.error('Error displaying default news:', error);
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = currentLang === 'en' 
+                ? "Oops! Looks like something broke. Take a deep breath and try again—we’ll fix it!" 
+                : "Ой! Кажется, что-то сломалось. Сделай глубокий вдох и попробуй снова — мы это исправим!";
+            newsContainer.appendChild(errorMessage);
+        }
     }
 
     function showPage(pageId) {
@@ -783,7 +785,7 @@
     function goToHome() {
         document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
         document.getElementById('main-content').style.display = 'block';
-        fetchCryptoNews(); // بارگذاری مجدد اخبار هنگام بازگشت به صفحه اصلی
+        fetchCryptoNews();
     }
 
     function showTouchEffect(event) {
@@ -862,7 +864,8 @@
         };
     }
 
-    const debouncedMine = debounce(mine, 300);
+    // تغییر زمان debounce از 300 به 100 میلی‌ثانیه برای سرعت 3 برابر
+    const debouncedMine = debounce(mine, 100);
 
     const miningCircle = document.getElementById('miningCircle');
     miningCircle.addEventListener('click', (e) => {
@@ -949,19 +952,14 @@
     }
 
     window.onload = function() {
-        // پاک کردن localStorage در بارگذاری اولیه
-        localStorage.clear();
-
         document.getElementById('main-content').style.display = 'block';
         changeLanguage(currentLang);
         updateMiningStatus();
         document.getElementById('userTokens').textContent = userTokens;
         setInterval(updateMiningStatus, 1000);
 
-        // دریافت اخبار کریپتو
         fetchCryptoNews();
 
-        // پخش موزیک پس‌زمینه بعد از اولین کلیک کاربر
         const backgroundMusic = document.getElementById('backgroundMusic');
         backgroundMusic.volume = 0.2;
         let isMusicStarted = false;
@@ -978,7 +976,6 @@
             }
         });
 
-        // کنترل Splash Screen
         const video = document.getElementById("intro-video");
         const splash = document.getElementById("splash-screen");
         const mainContent = document.getElementById("main-content");
