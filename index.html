@@ -433,7 +433,49 @@
         .news-item p { font-size: 0.7rem; }
         .news-item img { width: 40px; height: 40px; }
     }
-    </style>
+    /* استایل‌های جدید برای پنل پست‌ها */
+    .post-item {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid #00eaff;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 0;
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+    }
+    .post-item p {
+        font-size: 0.8rem;
+        margin: 5px 0;
+        color: #fff;
+        text-shadow: 0 0 5px rgba(0, 234, 255, 0.6);
+    }
+    .comment-input {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+        width: 80%;
+        max-width: 300px;
+        font-size: 0.8rem;
+    }
+    .comment-button {
+        padding: 10px 20px;
+        background: #00eaff;
+        color: #1e1e2f;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 0.8rem;
+    }
+    .comment-button:hover {
+        background: #66eaff;
+    }
+    @media (max-width: 768px) {
+        .post-item p { font-size: 0.7rem; }
+        .comment-input { font-size: 0.7rem; }
+        .comment-button { font-size: 0.7rem; }
+    }
+    </ friskyle>
 </head>
 <body>
     <div id="splash-screen">
@@ -585,6 +627,18 @@
         </div>
     </div>
 
+    <!-- پنل جدید برای پست‌های کانال -->
+    <div class="container page-content" id="channel-posts-page">
+        <div class="back-button" onclick="goToHome()" style="position: absolute; top: 10px; left: 20px; right: auto; color: #00eaff; font-size: 24px; cursor: pointer;">
+            <i class="fas fa-home"></i>
+        </div>
+        <h1 data-lang="posts-title">Channel Posts</h1>
+        <p data-lang="posts-text">View the latest posts from our Telegram channel.</p>
+        <div class="news-section">
+            <div id="posts"></div>
+        </div>
+    </div>
+
     <div class="footer-nav">
         <a href="#" onclick="showPage('social-page'); return false;">
             <i class="fas fa-users"></i>
@@ -613,6 +667,11 @@
         <a href="#" onclick="showPage('friends-page'); return false;">
             <i class="fas fa-user-friends"></i>
             <span data-lang="friends-nav">Friends</span>
+        </a>
+        <!-- دکمه جدید برای پست‌های کانال -->
+        <a href="#" onclick="showChannelPosts(); return false;">
+            <i class="fas fa-newspaper"></i>
+            <span data-lang="posts-nav">Posts</span>
         </a>
     </div>
 
@@ -643,7 +702,11 @@
             "comments-nav": "Comments",
             "earnings-nav": "Earnings",
             "friends-nav": "Friends",
-            "news-title": "Crypto News"
+            "news-title": "Crypto News",
+            /* ترجمه‌های جدید برای پست‌ها */
+            "posts-title": "Channel Posts",
+            "posts-text": "View the latest posts from our Telegram channel.",
+            "posts-nav": "Posts"
         },
         ru: {
             title: "Crypto GEM RASA",
@@ -669,7 +732,11 @@
             "comments-nav": "Комментарии",
             "earnings-nav": "Заработок",
             "friends-nav": "Друзья",
-            "news-title": "Новости Криптовалют"
+            "news-title": "Новости Криптовалют",
+            /* ترجمه‌های جدید برای پست‌ها */
+            "posts-title": "Посты канала",
+            "posts-text": "Просматривайте последние посты из нашего Telegram-канала.",
+            "posts-nav": "Посты"
         }
     };
 
@@ -786,6 +853,64 @@
         document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
         document.getElementById('main-content').style.display = 'block';
         fetchCryptoNews();
+    }
+
+    /* تابع جدید برای نمایش پست‌های کانال */
+    function showChannelPosts() {
+        showPage('channel-posts-page');
+        fetch('http://localhost:3000/posts')
+            .then(res => res.json())
+            .then(posts => {
+                const postsDiv = document.getElementById('posts');
+                postsDiv.innerHTML = '';
+                posts.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'post-item';
+                    postDiv.innerHTML = `
+                        <p>${post.text}</p>
+                        <p><small>${new Date(post.date * 1000).toLocaleString()}</small></p>
+                        <div>
+                            ${post.comments.map(c => `<p>${c}</p>`).join('')}
+                        </div>
+                        <input class="comment-input" id="comment-${post.id}" placeholder="${currentLang === 'en' ? 'Your comment' : 'Ваш комментарий'}">
+                        <button class="comment-button" onclick="addComment(${post.id})">${currentLang === 'en' ? 'Submit Comment' : 'Отправить комментарий'}</button>
+                    `;
+                    postsDiv.appendChild(postDiv);
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching posts:', err);
+                const postsDiv = document.getElementById('posts');
+                postsDiv.innerHTML = `<p>${currentLang === 'en' ? 'Error loading posts. Please try again.' : 'Ошибка загрузки постов. Попробуйте снова.'}</p>`;
+            });
+    }
+
+    /* تابع جدید برای اضافه کردن نظر */
+    function addComment(postId) {
+        const commentInput = document.getElementById(`comment-${postId}`);
+        const comment = commentInput.value.trim();
+        if (comment) {
+            fetch('http://localhost:3000/comment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ postId, comment })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        commentInput.value = '';
+                        showChannelPosts();
+                    } else {
+                        alert(currentLang === 'en' ? 'Error: Post not found.' : 'Ошибка: Пост не найден.');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error adding comment:', err);
+                    alert(currentLang === 'en' ? 'Error adding comment. Please try again.' : 'Ошибка добавления комментария. Попробуйте снова.');
+                });
+        } else {
+            alert(currentLang === 'en' ? 'Please enter a comment.' : 'Пожалуйста, введите комментарий.');
+        }
     }
 
     function showTouchEffect(event) {
