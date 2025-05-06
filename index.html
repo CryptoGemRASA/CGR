@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Crypto GEM RASA</title>
-    <link rel="icon" type="image/png" href="https://via.placeholder.com/32"> <!-- Placeholder favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
     html, body {
@@ -477,17 +477,17 @@
     </style>
 </head>
 <body>
-    <!-- <div id="splash-screen">
+    <div id="splash-screen">
         <video id="intro-video" autoplay muted>
             <source src="splash-video.mp4" type="video/mp4">
             Your browser doesn’t support video.
         </video>
-    </div> -->
+    </div>
 
-    <!-- <audio id="backgroundMusic" loop>
+    <audio id="backgroundMusic" loop>
         <source src="background-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
-    </audio> -->
+    </audio>
 
     <div class="container" id="main-content" style="display: none;">
         <div class="language-menu">
@@ -500,7 +500,7 @@
             </div>
         </div>
         <div class="icon-wrapper">
-            <img src="https://via.placeholder.com/120" alt="Crypto GEM RASA Icon" class="icon">
+            <img src="logo.png" alt="Crypto GEM RASA Icon" class="icon">
         </div>
         <h1 data-lang="title">Crypto GEM RASA</h1>
         <p data-lang="welcome">Welcome to Crypto GEM RASA! Stay tuned for exciting updates.</p>
@@ -568,7 +568,7 @@
         <p data-lang="mining-text">Tap the circle to mine! You can mine 500 units every 8 hours.</p>
         <div class="mining-wrapper">
             <div class="mining-circle" id="miningCircle">
-                <img src="https://via.placeholder.com/120" alt="Mining Circle">
+                <img src="logo.png" alt="Mining Circle">
             </div>
             <div class="mining-info">
                 <span id="miningCount">0 / 500</span><br>
@@ -672,7 +672,7 @@
         </a>
     </div>
 
-    <!-- <audio id="clickSound" src="click-sound.mp3"></audio> -->
+    <audio id="clickSound" src="click-sound.mp3"></audio>
 <script>
     const translations = {
         en: {
@@ -852,11 +852,21 @@
 
     function showChannelPosts() {
         showPage('channel-posts-page');
-        fetch('http://localhost:3000/posts')
-            .then(res => res.json())
+        const backendUrl = 'https://swift-kings-like.loca.lt'; // Updated with your LocalTunnel URL
+        fetch(`${backendUrl}/posts`)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(posts => {
                 const postsDiv = document.getElementById('posts');
                 postsDiv.innerHTML = '';
+                if (posts.length === 0) {
+                    postsDiv.innerHTML = `<p>${currentLang === 'en' ? 'No posts available.' : 'Нет доступных постов.'}</p>`;
+                    return;
+                }
                 posts.forEach(post => {
                     const postDiv = document.createElement('div');
                     postDiv.className = 'post-item';
@@ -875,7 +885,7 @@
             .catch(err => {
                 console.error('Error fetching posts:', err);
                 const postsDiv = document.getElementById('posts');
-                postsDiv.innerHTML = `<p>${currentLang === 'en' ? 'Error loading posts. Please try again.' : 'Ошибка загрузки постов. Попробуйте снова.'}</p>`;
+                postsDiv.innerHTML = `<p>${currentLang === 'en' ? 'Error loading posts. Please check if the backend is running and accessible.' : 'Ошибка загрузки постов. Проверьте, работает ли бэкенд и доступен ли он.'}</p>`;
             });
     }
 
@@ -883,12 +893,18 @@
         const commentInput = document.getElementById(`comment-${postId}`);
         const comment = commentInput.value.trim();
         if (comment) {
-            fetch('http://localhost:3000/comment', {
+            const backendUrl = 'https://swift-kings-like.loca.lt'; // Updated with your LocalTunnel URL
+            fetch(`${backendUrl}/comment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ postId, comment })
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! Status: ${res.status}`);
+                    }
+                    return res.json();
+                })
                 .then(data => {
                     if (data.success) {
                         commentInput.value = '';
@@ -966,8 +982,9 @@
     }
 
     function playClickSound() {
-        // Temporarily disabled due to missing audio file
-        console.log("Click sound would play here if audio file were available");
+        const clickSound = document.getElementById('clickSound');
+        clickSound.currentTime = 0;
+        clickSound.play().catch(err => console.error('Error playing click sound:', err));
     }
 
     function debounce(func, wait) {
@@ -1071,16 +1088,29 @@
     }
 
     window.onload = function() {
-        document.getElementById('main-content').style.display = 'block';
+        const splashScreen = document.getElementById("splash-screen");
+        const introVideo = document.getElementById("intro-video");
+        const mainContent = document.getElementById("main-content");
+        const backgroundMusic = document.getElementById("backgroundMusic");
+
+        introVideo.onended = function() {
+            splashScreen.style.display = "none";
+            mainContent.style.display = "block";
+            backgroundMusic.play().catch(err => console.error('Error playing background music:', err));
+        };
+
+        introVideo.onerror = function() {
+            console.error('Error loading intro video');
+            splashScreen.style.display = "none";
+            mainContent.style.display = "block";
+            backgroundMusic.play().catch(err => console.error('Error playing background music:', err));
+        };
+
         changeLanguage(currentLang);
         updateMiningStatus();
         document.getElementById('userTokens').textContent = userTokens;
         setInterval(updateMiningStatus, 1000);
         fetchCryptoNews();
-
-        // Temporarily disable splash screen and background music
-        const mainContent = document.getElementById("main-content");
-        mainContent.style.display = "block";
     };
 </script>
 </body>
