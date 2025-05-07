@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto GEM RASA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcomeMessage">Crypto GEM RASA</h1>
+        <div id="userInfo"></div>
+        <div class="button-container">
+            <button onclick="showChannelPosts()">Posts</button>
+            <button onclick="showUserProfile()">Profile</button>
+        </div>
+        <div id="content"></div>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        
+        const user = tg.initDataUnsafe.user;
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const userInfo = document.getElementById('userInfo');
+        const content = document.getElementById('content');
+
+        // تنظیم backendUrl به آدرس جدید Railway
+        const backendUrl = 'https://crypto-backend.up.railway.app';
+
+        if (user) {
+            welcomeMessage.textContent = `Welcome, ${user.first_name} ${user.last_name || ''}!`;
+            userInfo.innerHTML = `
+                <p>Username: ${user.username || 'N/A'}</p>
+                <p>ID: ${user.id}</p>
+            `;
+        } else {
+            welcomeMessage.textContent = 'Welcome to Crypto GEM RASA!';
+            userInfo.innerHTML = '<p>User data not available.</p>';
+        }
+
+        function showChannelPosts() {
+            fetch(`${backendUrl}/posts`)
+                .then(response => response.json())
+                .then(posts => {
+                    let postsHTML = '<h2>Posts</h2>';
+                    posts.forEach(post => {
+                        postsHTML += `
+                            <div class="post">
+                                <p>${post.text}</p>
+                                <p><small>${new Date(post.date * 1000).toLocaleString()}</small></p>
+                                <h3>Comments:</h3>
+                                <ul>
+                                    ${post.comments.map(comment => `<li>${comment}</li>`).join('')}
+                                </ul>
+                                <input type="text" id="comment-${post.id}" placeholder="Add a comment">
+                                <button onclick="addComment(${post.id})">Comment</button>
+                            </div>
+                        `;
+                    });
+                    content.innerHTML = postsHTML;
+                })
+                .catch(error => {
+                    content.innerHTML = '<p>Error loading posts.</p>';
+                    console.error('Error:', error);
+                });
+        }
+
+        function addComment(postId) {
+            const commentInput = document.getElementById(`comment-${postId}`);
+            const comment = commentInput.value.trim();
+            if (comment) {
+                fetch(`${backendUrl}/comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ postId, comment }),
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            showChannelPosts();
+                        } else {
+                            content.innerHTML += '<p>Error adding comment.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        content.innerHTML += '<p>Error adding comment.</p>';
+                        console.error('Error:', error);
+                    });
+            }
+        }
+
+        function showUserProfile() {
+            content.innerHTML = `
+                <h2>Profile</h2>
+                <p>Name: ${user.first_name} ${user.last_name || ''}</p>
+                <p>Username: ${user.username || 'N/A'}</p>
+                <p>ID: ${user.id}</p>
+            `;
+        }
+
+        tg.expand();
+    </script>
+</body>
+</html>
