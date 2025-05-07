@@ -852,7 +852,7 @@
 
     function showChannelPosts() {
         showPage('channel-posts-page');
-        const backendUrl = 'https://crypto-backend.up.railway.app'; // تغییر از LocalTunnel به Railway
+        const backendUrl = 'https://crypto-backend-production-87f8.up.railway.app';
         fetch(`${backendUrl}/posts`)
             .then(res => {
                 if (!res.ok) {
@@ -893,7 +893,7 @@
         const commentInput = document.getElementById(`comment-${postId}`);
         const comment = commentInput.value.trim();
         if (comment) {
-            const backendUrl = 'https://crypto-backend.up.railway.app'; // تغییر از LocalTunnel به Railway
+            const backendUrl = 'https://crypto-backend-production-87f8.up.railway.app';
             fetch(`${backendUrl}/comment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
